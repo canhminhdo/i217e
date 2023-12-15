@@ -1,0 +1,11 @@
+-- set verbose on
+set trace on -- show a trace of reduction
+-- set trace whole on -- only show whole terms in the trace (simpler)
+-- select . -- cancel the current selected module
+-- select NAT  -- select NAT module
+--> echo this comment
+
+"
+The equality predicate _=_ and the keyword _=_ in equation declaration are confusing
+Using brackets for the equality predicate like eq p(N:Nat, M:Nat) = (a = b) .
+"

@@ -1,0 +1,191 @@
+
+%% bare_adv.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% See: 
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the advanced use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE Computer
+%% Society journal paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+% IEEEtran V1.7 and later provides for these CLASSINPUT macros to allow the
+% user to reprogram some IEEEtran.cls defaults if needed. These settings
+% override the internal defaults of IEEEtran.cls regardless of which class
+% options are used. Do not use these unless you have good reason to do so as
+% they can result in nonIEEE compliant documents. User beware. ;)
+%
+%\newcommand{\CLASSINPUTbaselinestretch}{1.0} % baselinestretch
+%\newcommand{\CLASSINPUTinnersidemargin}{1in} % inner side margin
+%\newcommand{\CLASSINPUToutersidemargin}{1in} % outer side margin
+%\newcommand{\CLASSINPUTtoptextmargin}{1in}   % top text margin
+%\newcommand{\CLASSINPUTbottomtextmargin}{1in}% bottom text margin
+
+%
+\documentclass[12pt, a4paper]{article}
+%\documentclass[10pt,conference,compsoc,onecolumn]{IEEEtran}
+%\def\IEEEcompsocdiamondline{\vspace{-2cm}}
+
+\usepackage{listings}
+\lstset{
+	basicstyle=\ttfamily\linespread{1.1}\selectfont,
+	breaklines=true,
+	emph={
+		sort, subsort, sorts, op, ops, eq, ceq, var, vars,
+		protecting, extending, including, rl, crl,
+		mod, is, endm, if, implies, fmod, endfm,
+		and, or, else, fi, then, not, open, red, reduce, close,
+		load, erewrite 
+	},
+	emphstyle={\color{black}\bfseries},
+%	aboveskip=0.8em,
+%	belowskip=0.8em
+}
+	
+\usepackage[linesnumbered,ruled,vlined,noend]{algorithm2e}
+\usepackage{soul}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{physics}
+\definecolor{leafgreen}{rgb}{0.01, 0.75, 0.24}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{problem}{Problem}
+%\newtheorem{proof}{Proof}
+\newcommand{\comp}{\mathrel{;}}
+\newcommand{\lmerge}{\mathrel{\llfloor}}
+
+\title{Proof Problems}
+\date{\vspace{-5ex}}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+$\forall L \in \mathtt{NatList}, \mathrm{fold*}(\mathrm{rev}(L)) = \mathrm{fold*}(L).$
+\end{problem}
+\begin{proof}
+By structural induction on $L$
+
+\begin{description}
+
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad\mathrm{fold*}(\mathrm{rev}(nil)) = \mathrm{fold*}(nil)$
+\begin{align*}
+\mathrm{fold*}(\underline{\mathrm{rev}(nil)}) &\longrightarrow \mathrm{fold*}(nil) \tag{by rev1}
+\end{align*}
+
+\item[(2) Induction case]~\\
+What to show: $\quad\mathrm{fold*}(\mathrm{rev}(x \mathrel{|} l)) = \mathrm{fold*}(x \mathrel{|} l)$\\
+Induction hypothesis: $\quad\mathrm{fold*}(\mathrm{rev}(l)) = \mathrm{fold*}(l)$\\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}.$
+\begin{align*}
+\mathrm{fold*}(\underline{\mathrm{rev}(x \mathrel{|} l)}) &\longrightarrow \underline{\mathrm{fold*}(\mathrm{rev}(l)\mathrel{@}(x \mathrel{|} nil))} \tag{by rev2} \\
+&\longrightarrow \underline{\mathrm{fold*}(\mathrm{rev}(l))} \mathrel{*} \mathrm{fold*}(x \mathrel{|} nil) \tag{by Lemma~\ref{lm1}} \\
+&\longrightarrow \mathrm{fold*}(l) \mathrel{*} \underline{\mathrm{fold*}(x \mathrel{|} nil)} \tag{by IH} \\
+&\longrightarrow \mathrm{fold*}(l) \mathrel{*} (x \mathrel{*} \underline{\mathrm{fold*}(nil)}) \tag{by fold*-2} \\
+&\longrightarrow \mathrm{fold*}(l) \mathrel{*} (\underline{x \mathrel{*} \mathrm{s}(0)}) \tag{by fold*-1} \\
+&\longrightarrow \mathrm{fold*}(l) \mathrel{*} (\underline{\mathrm{s}(0) \mathrel{*} x}) \tag{by comm*} \\
+&\longrightarrow \mathrm{fold*}(l) \mathrel{*} (\underline{(0 \mathrel{*} x)} \mathrel{+} x) \tag{by *2} \\
+&\longrightarrow \mathrm{fold*}(l) \mathrel{*} \underline{(0 \mathrel{+} x)} \tag{by *1} \\
+&\longrightarrow \underline{\mathrm{fold*}(l) \mathrel{*} x} \tag{by +1} \\
+&\longrightarrow x \mathrel{*} \mathrm{fold*}(l) \tag{by comm*}
+\end{align*}
+
+\end{description}
+\end{proof}
+
+
+\begin{lemma}
+\label{lm1}
+$\forall L1, L2 \in \mathtt{NatList}, \mathrm{fold*}(L1 \mathrel{@} L2) = \mathrm{fold*}(L1) \mathrel{*} \mathrm{fold*}(L2).$
+\end{lemma}
+\begin{proof}
+By structural induction on $L1$
+
+\begin{description}
+
+\item[(1) Base case]~\\
+What to show: $\quad \mathrm{fold*}(nil \mathrel{@} l2) = \mathrm{fold*}(nil) \mathrel{*} \mathrm{fold*}(l2)$\\
+where $l2 \in \mathtt{NatList}$.
+\begin{align*}
+\mathrm{fold*}(\underline{nil \mathrel{@} l2}) &\longrightarrow \mathrm{fold*}(l2) \tag{by @1} \\
+\underline{\mathrm{fold*}(nil)} \mathrel{*} \mathrm{fold*}(l2) &\longrightarrow \underline{\mathrm{s}(0) \mathrel{*} \mathrm{fold*}(l2)} \tag{by fold*-1} \\
+&\longrightarrow \underline{(0 \mathrel{*} \mathrm{fold*}(l2))} \mathrel{+} \mathrm{fold*}(l2) \tag{by *2} \\
+&\longrightarrow \underline{0 \mathrel{+} \mathrm{fold*}(l2)} \tag{by *1} \\
+&\longrightarrow \mathrm{fold*}(l2) \tag{by +1}
+\end{align*}
+
+\item[(2) Induction case]~\\
+What to show: $\quad  \mathrm{fold*}((e \mathrel{|} l1) \mathrel{@} l2) = \mathrm{fold*}(e \mathrel{|} l1) \mathrel{*} \mathrm{fold*}(l2)$\\
+Induction hypothesis: $\quad  \mathrm{fold*}(l1 \mathrel{@} l2) = \mathrm{fold*}(l1) \mathrel{*} \mathrm{fold*}(l2)$\\
+where $e \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.
+\begin{align*}
+\mathrm{fold*}(\underline{(e \mathrel{|} l1) \mathrel{@} l2}) &\longrightarrow \underline{\mathrm{fold*}(e \mathrel{|} (l1 \mathrel{@} l2))} \tag{by @2} \\
+&\longrightarrow e \mathrel{*} \underline{\mathrm{fold*}(l1 \mathrel{@} l2)} \tag{by fold*-2} \\
+&\longrightarrow e \mathrel{*} (\mathrm{fold*}(l1) \mathrel{*} \mathrm{fold*}(l2)) \tag{by IH} \\
+\underline{\mathrm{fold*}(e \mathrel{|} l1)} \mathrel{*} \mathrm{fold*}(l2) &\longrightarrow \underline{(e \mathrel{*} \mathrm{fold*}(l1)) \mathrel{*} \mathrm{fold*}(l2)} \tag{by fold*-2} \\
+&\longrightarrow e \mathrel{*} (\mathrm{fold*}(l1) \mathrel{*} \mathrm{fold*}(l2)) \tag{by assoc*}
+\end{align*}
+\end{description}
+
+\end{proof}
+% that's all folks
+\end{document}
+
+
