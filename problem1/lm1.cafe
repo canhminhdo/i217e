@@ -16,9 +16,10 @@ close
 
 --> induction case
 open NATLIST .
-    vars I J K : PNat .
     op x : -> PNat .
     ops l1 l2 : -> NatList .
+
+    vars I J K : PNat .
 
     -- induction hypothesis
     eq [IH] : fold*(l1 @ l2) = fold*(l1) * fold*(l2) .
@@ -27,5 +28,3 @@ open NATLIST .
     -- induction case
     red fold*((x | l1) @ l2) = fold*(x | l1) * fold*(l2) .
 close
-
-quit

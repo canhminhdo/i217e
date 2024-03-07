@@ -1,12 +1,12 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM: \forall X \in PNat: rev(mkl1(X)) = mkl2(X) .
+-- PROBLEM2: \forall X \in PNat: rev(mkl1(X)) = mkl2(X) .
 -- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 
 select NATLIST
---> START: PROBLEM
+--> PROOF: PROBLEM2
 --> base case
 open NATLIST .
     red rev(mkl1(0)) = mkl2(0) .
@@ -15,6 +15,7 @@ close
 --> induction case
 open NATLIST .
     op x : -> PNat .
+    
     vars I J : PNat .
     vars L1 : NatList .
     

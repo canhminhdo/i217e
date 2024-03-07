@@ -6,7 +6,7 @@ in ../pgm.cafe
 -- ----------------------------------------------------------------------------
 
 select NATLIST
---> START: LEMMA1
+--> PROOF: LEMMA1
 --> base case
 open NATLIST .
     op l : -> NatList .
@@ -16,10 +16,11 @@ close
 
 --> induction case
 open NATLIST .
-    vars L1 L2 L3 : NatList .
-    var I : PNat .
     op x : -> PNat .
     op l : -> NatList .
+
+    var I : PNat .
+    vars L1 L2 L3 : NatList .
 
     -- induction hypothesis
     eq [IH] : smkl2(x, I | L1) = smkl2(x, nil) @ (I | L1) .
@@ -28,5 +29,3 @@ open NATLIST .
     -- induction case
     red smkl2(s(x), l) = smkl2(s(x), nil) @ l .
 close
-
---> END: LEMMA1

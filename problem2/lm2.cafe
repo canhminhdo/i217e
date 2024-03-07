@@ -24,5 +24,3 @@ open NATLIST .
     -- induction case:
     red ((x | l1) @ l2) @ l3 = (x | l1) @ (l2 @ l3) .
 close
-
---> END: LEMMA2

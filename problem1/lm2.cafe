@@ -16,8 +16,9 @@ close
 
 --> induction case
 open PNAT .
-    vars N M K : PNat .
     ops i j k : -> PNat .
+    
+    vars N M K : PNat .
 
     -- induction hypothesis
     eq [IH] : (i * j) * k = i * (j * k) .

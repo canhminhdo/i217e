@@ -1,12 +1,12 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM: \forall L \in NatList: fold*(rev(L)) = fold*(L) .
+-- PROBLEM1: \forall L \in NatList: fold*(rev(L)) = fold*(L) .
 -- [require] LEMMA1, LEMMA8
 -- ----------------------------------------------------------------------------
 
 select NATLIST
---> START: PROBLEM
+--> PROOF: PROBLEM1
 --> base case
 open NATLIST .
     red fold*(rev(nil)) = fold*(nil) .
@@ -14,9 +14,10 @@ close
 
 --> induction case
 open NATLIST .
-    vars L1 L2 : NatList .
     op x : -> PNat .
     op l : -> NatList .
+    
+    vars L1 L2 : NatList .
 
     -- induction hypothesis
     eq [IH] : fold*(rev(l)) = fold*(l) .
@@ -28,5 +29,3 @@ open NATLIST .
     -- induction case
     red fold*(rev(x | l)) = fold*(x | l) .
 close
-
---> END: PROBLEM
