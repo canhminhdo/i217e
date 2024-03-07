@@ -1,0 +1,10 @@
+#!/bin/sh
+
+DIR=test
+cd ../ && (cafeobj -no-banner <<EOF
+in lm4.cafe
+quit
+EOF
+) | grep "(true):Bool" > $DIR/lm4.out
+diff $DIR/lm4.expected $DIR/lm4.out
+rm $DIR/lm4.out

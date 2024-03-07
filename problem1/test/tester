@@ -1,0 +1,8 @@
+#!/bin/sh
+
+./prob
+./lm1
+./lm2
+./lm3
+./lm4
+./lm5

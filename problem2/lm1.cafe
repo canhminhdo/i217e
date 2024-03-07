@@ -1,0 +1,32 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA1: \forall X \in PNat, L \in NatList: smkl2(X, L) = smkl2(X, nil) @ L .
+-- [require] LEMMA2
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> START: LEMMA1
+--> base case
+open NATLIST .
+    op l : -> NatList .
+
+    red smkl2(0, l) = smkl2(0, nil) @ l .
+close
+
+--> induction case
+open NATLIST .
+    vars L1 L2 L3 : NatList .
+    var I : PNat .
+    op x : -> PNat .
+    op l : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : smkl2(x, I | L1) = smkl2(x, nil) @ (I | L1) .
+    -- use LEMMA2 [assoc*]
+    eq [LEMMA2] : (L1 @ L2) @ L3 = L1 @ (L2 @ L3) .
+    -- induction case
+    red smkl2(s(x), l) = smkl2(s(x), nil) @ l .
+close
+
+--> END: LEMMA1

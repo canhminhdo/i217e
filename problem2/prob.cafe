@@ -1,0 +1,29 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM: \forall X \in PNat: rev(mkl1(X)) = mkl2(X) .
+-- [require] LEMMA1
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> START: PROBLEM
+--> base case
+open NATLIST .
+    red rev(mkl1(0)) = mkl2(0) .
+close
+
+--> induction case
+open NATLIST .
+    op x : -> PNat .
+    vars I J : PNat .
+    vars L1 : NatList .
+    
+    -- induction hypothesis:
+    eq rev(mkl1(x)) = mkl2(x) .
+    -- use LEMMA1
+    eq smkl2(I, J | L1) = smkl2(I, nil) @ (J | L1) .
+    -- induction case:
+    red rev(mkl1(s(x))) = mkl2(s(x)) .
+close
+--> END: PROBLEM
+

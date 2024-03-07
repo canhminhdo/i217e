@@ -1,0 +1,25 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA4 [assoc+]: \forall I J K \in PNat : (I + J) + K = I + (J + K) .
+-- associative property for _+_
+-- ----------------------------------------------------------------------------
+
+select PNAT
+--> PROOF: LEMMA4
+--> base case
+open PNAT .
+    ops j k : -> PNat .
+
+    red (0 + j) + k = 0 + (j + k) .
+close
+
+--> induction case
+open PNAT .
+    ops i j k : -> PNat .
+
+    -- induction hypothesis
+    eq [IH] : (i + j) + k = i + (j + k) .
+    -- induction step
+    red (s(i) + j) + k = s(i) + (j + k) .
+close
