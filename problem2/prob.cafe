@@ -14,17 +14,16 @@ close
 
 --> induction case
 open NATLIST .
-    op x : -> PNat .
+    op e : -> PNat .
     
     vars I J : PNat .
     vars L1 : NatList .
     
     -- induction hypothesis:
-    eq rev(mkl1(x)) = mkl2(x) .
+    eq [IH] : rev(mkl1(e)) = mkl2(e) .
     -- use LEMMA1
-    eq smkl2(I, J | L1) = smkl2(I, nil) @ (J | L1) .
+    eq [LEMMA1] : smkl2(I, J | L1) = smkl2(I, nil) @ (J | L1) .
     -- induction case:
-    red rev(mkl1(s(x))) = mkl2(s(x)) .
+    red rev(mkl1(s(e))) = mkl2(s(e)) .
 close
---> END: PROBLEM
 
