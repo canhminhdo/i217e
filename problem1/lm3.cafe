@@ -17,7 +17,6 @@ close
 --> induction case
 open PNAT .
     ops i j k : -> PNat .
-    
     vars N M K : PNat .
 
     -- induction hypothesis

@@ -1,7 +1,7 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA2 [assoc*] : \forall I J K \in PNat: (I * J) * K = I * (J * K) .
+-- LEMMA2 [assoc*]: \forall I J K \in PNat: (I * J) * K = I * (J * K) .
 -- [require] LEMMA3
 -- ----------------------------------------------------------------------------
 
@@ -17,7 +17,6 @@ close
 --> induction case
 open PNAT .
     ops i j k : -> PNat .
-    
     vars N M K : PNat .
 
     -- induction hypothesis

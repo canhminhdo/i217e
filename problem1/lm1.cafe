@@ -2,7 +2,7 @@ in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- LEMMA1: \forall L \in NatList: fold*(L1 @ L2) = fold*(L1) * fold*(L2) .
--- [require] LEMMA1
+-- [require] LEMMA2
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -16,9 +16,8 @@ close
 
 --> induction case
 open NATLIST .
-    op x : -> PNat .
+    op e : -> PNat .
     ops l1 l2 : -> NatList .
-
     vars I J K : PNat .
 
     -- induction hypothesis
@@ -26,5 +25,5 @@ open NATLIST .
     -- use LEMMA2 [assoc*]
     eq [assoc*] : (I * J) * K = I * (J * K) .
     -- induction case
-    red fold*((x | l1) @ l2) = fold*(x | l1) * fold*(l2) .
+    red fold*((e | l1) @ l2) = fold*(e | l1) * fold*(l2) .
 close

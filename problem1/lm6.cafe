@@ -1,0 +1,23 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA6: \forall I \in PNat: I + 0 = I .
+-- additive property of 0
+-- ----------------------------------------------------------------------------
+
+select PNAT
+--> PROOF: LEMMA6
+--> base case
+open PNAT .
+    red 0 + 0 = 0 + 0 .
+close
+    
+--> induction case
+open PNAT .
+    ops i : -> PNat .
+
+    -- induction hypothesis
+    eq [IH] : i + 0 = i .
+    -- induction step
+    red s(i) + 0 = s(i) .
+close

@@ -24,8 +24,8 @@ open NATLIST .
 
     -- induction hypothesis
     eq [IH] : smkl2(x, I | L1) = smkl2(x, nil) @ (I | L1) .
-    -- use LEMMA2 [assoc*]
-    eq [LEMMA2] : (L1 @ L2) @ L3 = L1 @ (L2 @ L3) .
+    -- use LEMMA2
+    eq [assoc*] : (L1 @ L2) @ L3 = L1 @ (L2 @ L3) .
     -- induction case
     red smkl2(s(x), l) = smkl2(s(x), nil) @ l .
 close
