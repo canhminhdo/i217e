@@ -14,7 +14,7 @@ close
 
 --> induction case
 open NATLIST .
-    op e : -> PNat .
+    op x : -> PNat .
     op l : -> NatList .
     vars L1 L2 : NatList .
 
@@ -23,8 +23,8 @@ open NATLIST .
     -- use LEMMA1
     eq [LEMMA1] : fold*(L1 @ L2) = fold*(L1) * fold*(L2) .
     -- use LEMMA8 [comm*]
-    eq [comm*] : e * s(0) = s(0) * e .
-    eq [comm*] : fold*(l) * e = e * fold*(l) .
+    eq [comm*] : x * s(0) = s(0) * x .
+    eq [comm*] : fold*(l) * x = x * fold*(l) .
     -- induction case
-    red fold*(rev(e | l)) = fold*(e | l) .
+    red fold*(rev(x | l)) = fold*(x | l) .
 close

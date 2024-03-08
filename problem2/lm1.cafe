@@ -16,16 +16,16 @@ close
 
 --> induction case
 open NATLIST .
-    op e : -> PNat .
+    op x : -> PNat .
     op l : -> NatList .
 
     var I : PNat .
     vars L1 L2 L3 : NatList .
 
     -- induction hypothesis
-    eq [IH] : smkl2(e, I | L1) = smkl2(e, nil) @ (I | L1) .
+    eq [IH] : smkl2(x, I | L1) = smkl2(x, nil) @ (I | L1) .
     -- use LEMMA2
     eq [assoc*] : (L1 @ L2) @ L3 = L1 @ (L2 @ L3) .
     -- induction case
-    red smkl2(s(e), l) = smkl2(s(e), nil) @ l .
+    red smkl2(s(x), l) = smkl2(s(x), nil) @ l .
 close

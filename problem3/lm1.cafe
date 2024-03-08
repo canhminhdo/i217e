@@ -14,22 +14,10 @@ close
 
 --> induction case
 open NATLIST .
-    op e : -> PNat .
+    op x : -> PNat .
 
     -- induction hypothesis
-    eq [IH] : fact(e) = fold*(mkl1(e)) .
+    eq [IH] : fact(x) = fold*(mkl1(x)) .
     -- induction case
-    red fact(s(e)) = fold*(mkl1(s(e))) .
+    red fact(s(x)) = fold*(mkl1(s(x))) .
 close
-
-eof
-
-((e * fold*(mkl1(e))) + fold*(mkl1(e))):PNat
-
-fold*(mkl1(s(e)))
--> 
-fold*(s(e) | mkl1(e))
-->
-s(e) * fold*(mkl1(e))
-
-(e * fold*(mkl1(e))) + fold*(mkl1(e))

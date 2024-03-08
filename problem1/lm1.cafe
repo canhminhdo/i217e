@@ -16,7 +16,7 @@ close
 
 --> induction case
 open NATLIST .
-    op e : -> PNat .
+    op x : -> PNat .
     ops l1 l2 : -> NatList .
     vars I J K : PNat .
 
@@ -25,5 +25,5 @@ open NATLIST .
     -- use LEMMA2 [assoc*]
     eq [assoc*] : (I * J) * K = I * (J * K) .
     -- induction case
-    red fold*((e | l1) @ l2) = fold*(e | l1) * fold*(l2) .
+    red fold*((x | l1) @ l2) = fold*(x | l1) * fold*(l2) .
 close
