@@ -180,13 +180,13 @@ where $l \in \mathtt{NatList}$.
 \item[(2) Induction case]~\\
 What to show: $\quad\rmx{smkl2}(\rmx{s}(x), l) = \rmx{smkl2}(\rmx{s}(x), nil) \rel{@} l$ \\
 Induction hypothesis: $\quad\rmx{smkl2}(x, L) = \rmx{smkl2}(x, nil) \rel{@} L$ \\
-where $x \in \mathtt{PNat}$ and $L \in \mathtt{NatList}$.
+where $x \in \mathtt{PNat}$ and $l, L \in \mathtt{NatList}$.
 \begin{align*}
 \under{\rmx{smkl2}(\rmx{s}(x), l)} 
 	&\larrow \under{\rmx{smkl2}(x,\ \rmx{s}(x) \rel{|} l)} \tag{by smkl2-2} \\
 	&\larrow \rmx{smkl2}(x,\ nil) \rel{@} (\rmx{s}(x) \rel{|} l) \tag{by IH} \\
 \under{\rmx{smkl2}(\rmx{s}(x), nil)} \rel{@} l
-	&\larrow \under{\rmx{smkl2}(x, \rmx{s}(x) \rel{|} nil)} \rel{@} l \tag{smkl2-2} \\
+	&\larrow \under{\rmx{smkl2}(x, \rmx{s}(x) \rel{|} nil)} \rel{@} l \tag{by smkl2-2} \\
 	&\larrow \under{(\rmx{smkl2}(x, nil) \rel{@} (\rmx{s}(x) \rel{|} nil)) \rel{@} l} \tag{by IH} \\
 	&\larrow \rmx{smkl2}(x, nil) \rel{@} \under{((\rmx{s}(x) \rel{|} nil) \rel{@} l)} \tag{by assoc@} \\
 	&\larrow \rmx{smkl2}(x, nil) \rel{@} (\rmx{s}(x) \rel{|} \under{(nil \rel{@} l)}) \tag{by @2} \\
