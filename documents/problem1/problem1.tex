@@ -139,16 +139,19 @@ What to show: $\quad\rmx{fold*}(\rmx{rev}(x \rel{|} l)) = \rmx{fold*}(x \rel{|} 
 Induction hypothesis: $\quad\rmx{fold*}(\rmx{rev}(l)) = \rmx{fold*}(l)$\\
 where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}.$
 \begin{align*}
-\rmx{fold*}(\under{\rmx{rev}(x \rel{|} l)}) &\larrow \under{\rmx{fold*}(\rmx{rev}(l)\rel{@}(x \rel{|} nil))} \tag{by rev2} \\
-&\larrow \under{\rmx{fold*}(\rmx{rev}(l))} \rel{*} \rmx{fold*}(x \rel{|} nil) \tag{by Lemma~\ref{lm1}} \\
-&\larrow \rmx{fold*}(l) \rel{*} \under{\rmx{fold*}(x \rel{|} nil)} \tag{by IH} \\
-&\larrow \rmx{fold*}(l) \rel{*} (x \rel{*} \under{\rmx{fold*}(nil)}) \tag{by fold*-2} \\
-&\larrow \rmx{fold*}(l) \rel{*} (\under{x \rel{*} \rmx{s}(0)}) \tag{by fold*-1} \\
-&\larrow \rmx{fold*}(l) \rel{*} (\under{\rmx{s}(0) \rel{*} x}) \tag{by comm*} \\
-&\larrow \rmx{fold*}(l) \rel{*} (\under{(0 \rel{*} x)} \rel{+} x) \tag{by *2} \\
-&\larrow \rmx{fold*}(l) \rel{*} \under{(0 \rel{+} x)} \tag{by *1} \\
-&\larrow \under{\rmx{fold*}(l) \rel{*} x} \tag{by +1} \\
-&\larrow x \rel{*} \rmx{fold*}(l) \tag{by comm*}
+\rmx{fold*}(\under{\rmx{rev}(x \rel{|} l)}) 
+	&\larrow \under{\rmx{fold*}(\rmx{rev}(l)\rel{@}(x \rel{|} nil))} \tag{by rev2} \\
+	&\larrow \under{\rmx{fold*}(\rmx{rev}(l))} \rel{*} \rmx{fold*}(x \rel{|} nil) \tag{by Lemma~\ref{lm1}} \\
+	&\larrow \rmx{fold*}(l) \rel{*} \under{\rmx{fold*}(x \rel{|} nil)} \tag{by IH} \\
+	&\larrow \rmx{fold*}(l) \rel{*} (x \rel{*} \under{\rmx{fold*}(nil)}) \tag{by fold*-2} \\
+	&\larrow \rmx{fold*}(l) \rel{*} (\under{x \rel{*} \rmx{s}(0)}) \tag{by fold*-1} \\
+	&\larrow \rmx{fold*}(l) \rel{*} (\under{\rmx{s}(0) \rel{*} x}) \tag{by comm*} \\
+	&\larrow \rmx{fold*}(l) \rel{*} (\under{(0 \rel{*} x)} \rel{+} x) \tag{by *2} \\
+	&\larrow \rmx{fold*}(l) \rel{*} \under{(0 \rel{+} x)} \tag{by *1} \\
+	&\larrow \under{\rmx{fold*}(l) \rel{*} x} \tag{by +1} \\
+	&\larrow x \rel{*} \rmx{fold*}(l) \tag{by comm*} \\
+\under{\rmx{fold*}(x \rel{|} l)} 
+	&\larrow x \rel{*} \rmx{fold*}(l) \tag{fold*-2}
 \end{align*}
 
 \end{description}
@@ -168,11 +171,13 @@ By structural induction on $L1$
 What to show: $\quad \rmx{fold*}(nil \rel{@} l2) = \rmx{fold*}(nil) \rel{*} \rmx{fold*}(l2)$\\
 where $l2 \in \mathtt{NatList}$.
 \begin{align*}
-\rmx{fold*}(\under{nil \rel{@} l2}) &\larrow \rmx{fold*}(l2) \tag{by @1} \\
-\under{\rmx{fold*}(nil)} \rel{*} \rmx{fold*}(l2) &\larrow \under{\rmx{s}(0) \rel{*} \rmx{fold*}(l2)} \tag{by fold*-1} \\
-&\larrow \under{(0 \rel{*} \rmx{fold*}(l2))} \rel{+} \rmx{fold*}(l2) \tag{by *2} \\
-&\larrow \under{0 \rel{+} \rmx{fold*}(l2)} \tag{by *1} \\
-&\larrow \rmx{fold*}(l2) \tag{by +1}
+\rmx{fold*}(\under{nil \rel{@} l2}) 
+	&\larrow \rmx{fold*}(l2) \tag{by @1} \\
+\under{\rmx{fold*}(nil)} \rel{*} \rmx{fold*}(l2) 
+	&\larrow \under{\rmx{s}(0) \rel{*} \rmx{fold*}(l2)} \tag{by fold*-1} \\
+	&\larrow \under{(0 \rel{*} \rmx{fold*}(l2))} \rel{+} \rmx{fold*}(l2) \tag{by *2} \\
+	&\larrow \under{0 \rel{+} \rmx{fold*}(l2)} \tag{by *1} \\
+	&\larrow \rmx{fold*}(l2) \tag{by +1}
 \end{align*}
 
 \item[(2) Induction case]~\\
@@ -180,11 +185,13 @@ What to show: $\quad  \rmx{fold*}((e \rel{|} l1) \rel{@} l2) = \rmx{fold*}(e \re
 Induction hypothesis: $\quad  \rmx{fold*}(l1 \rel{@} l2) = \rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)$\\
 where $e \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.
 \begin{align*}
-\rmx{fold*}(\under{(e \rel{|} l1) \rel{@} l2}) &\larrow \under{\rmx{fold*}(e \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
-&\larrow e \rel{*} \under{\rmx{fold*}(l1 \rel{@} l2)} \tag{by fold*-2} \\
-&\larrow e \rel{*} (\rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)) \tag{by IH} \\
-\under{\rmx{fold*}(e \rel{|} l1)} \rel{*} \rmx{fold*}(l2) &\larrow \under{(e \rel{*} \rmx{fold*}(l1)) \rel{*} \rmx{fold*}(l2)} \tag{by fold*-2} \\
-&\larrow e \rel{*} (\rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)) \tag{by assoc*}
+\rmx{fold*}(\under{(e \rel{|} l1) \rel{@} l2}) 
+	&\larrow \under{\rmx{fold*}(e \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
+	&\larrow e \rel{*} \under{\rmx{fold*}(l1 \rel{@} l2)} \tag{by fold*-2} \\
+	&\larrow e \rel{*} (\rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)) \tag{by IH} \\
+\under{\rmx{fold*}(e \rel{|} l1)} \rel{*} \rmx{fold*}(l2) 
+	&\larrow \under{(e \rel{*} \rmx{fold*}(l1)) \rel{*} \rmx{fold*}(l2)} \tag{by fold*-2} \\
+	&\larrow e \rel{*} (\rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)) \tag{by assoc*}
 \end{align*}
 \end{description}
 
