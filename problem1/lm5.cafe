@@ -1,7 +1,7 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA5 [comm+] : \forall I J \in PNat: I + J = J + I .
+-- LEMMA5 [comm+]: \forall I J \in PNat: I + J = J + I .
 -- commutative property of _+_
 -- [require] LEMMA6, LEMMA7
 -- ----------------------------------------------------------------------------
