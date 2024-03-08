@@ -120,10 +120,10 @@
 \maketitle
 
 \begin{problem}
-$\forall L \in \mathtt{NatList}, \rmx{fold*}(\rmx{rev}(L)) = \rmx{fold*}(L).$
+$\forall L \in \mathtt{NatList}, \rmx{fold*}(\rmx{rev}(L)) = \rmx{fold*}(L)$.
 \end{problem}
 \begin{proof}
-By structural induction on $L$
+By structural induction on $L$.
 
 \begin{description}
 
@@ -137,7 +137,7 @@ What to show: $\quad\rmx{fold*}(\rmx{rev}(nil)) = \rmx{fold*}(nil)$
 \item[(2) Induction case]~\\
 What to show: $\quad\rmx{fold*}(\rmx{rev}(x \rel{|} l)) = \rmx{fold*}(x \rel{|} l)$\\
 Induction hypothesis: $\quad\rmx{fold*}(\rmx{rev}(l)) = \rmx{fold*}(l)$\\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}.$
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
 \begin{align*}
 \rmx{fold*}(\under{\rmx{rev}(x \rel{|} l)}) 
 	&\larrow \under{\rmx{fold*}(\rmx{rev}(l)\rel{@}(x \rel{|} nil))} \tag{by rev2} \\
@@ -160,15 +160,15 @@ where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}.$
 
 \begin{lemma}
 \label{lm1}
-$\forall L1, L2 \in \mathtt{NatList}, \rmx{fold*}(L1 \rel{@} L2) = \rmx{fold*}(L1) \rel{*} \rmx{fold*}(L2).$
+$\forall L1, L2 \in \mathtt{NatList}, \rmx{fold*}(L1 \rel{@} L2) = \rmx{fold*}(L1) \rel{*} \rmx{fold*}(L2)$.
 \end{lemma}
 \begin{proof}
-By structural induction on $L1$
+By structural induction on $L1$.
 
 \begin{description}
 
 \item[(1) Base case]~\\
-What to show: $\quad \rmx{fold*}(nil \rel{@} l2) = \rmx{fold*}(nil) \rel{*} \rmx{fold*}(l2)$\\
+What to show: $\quad\rmx{fold*}(nil \rel{@} l2) = \rmx{fold*}(nil) \rel{*} \rmx{fold*}(l2)$\\
 where $l2 \in \mathtt{NatList}$.
 \begin{align*}
 \rmx{fold*}(\under{nil \rel{@} l2}) 
@@ -181,17 +181,17 @@ where $l2 \in \mathtt{NatList}$.
 \end{align*}
 
 \item[(2) Induction case]~\\
-What to show: $\quad  \rmx{fold*}((e \rel{|} l1) \rel{@} l2) = \rmx{fold*}(e \rel{|} l1) \rel{*} \rmx{fold*}(l2)$\\
-Induction hypothesis: $\quad  \rmx{fold*}(l1 \rel{@} l2) = \rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)$\\
-where $e \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.
+What to show: $\quad\rmx{fold*}((x \rel{|} l1) \rel{@} l2) = \rmx{fold*}(x \rel{|} l1) \rel{*} \rmx{fold*}(l2)$\\
+Induction hypothesis: $\quad\rmx{fold*}(l1 \rel{@} l2) = \rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)$\\
+where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.
 \begin{align*}
-\rmx{fold*}(\under{(e \rel{|} l1) \rel{@} l2}) 
-	&\larrow \under{\rmx{fold*}(e \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
-	&\larrow e \rel{*} \under{\rmx{fold*}(l1 \rel{@} l2)} \tag{by fold*-2} \\
-	&\larrow e \rel{*} (\rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)) \tag{by IH} \\
-\under{\rmx{fold*}(e \rel{|} l1)} \rel{*} \rmx{fold*}(l2) 
-	&\larrow \under{(e \rel{*} \rmx{fold*}(l1)) \rel{*} \rmx{fold*}(l2)} \tag{by fold*-2} \\
-	&\larrow e \rel{*} (\rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)) \tag{by assoc*}
+\rmx{fold*}(\under{(x \rel{|} l1) \rel{@} l2}) 
+	&\larrow \under{\rmx{fold*}(x \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
+	&\larrow x \rel{*} \under{\rmx{fold*}(l1 \rel{@} l2)} \tag{by fold*-2} \\
+	&\larrow x \rel{*} (\rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)) \tag{by IH} \\
+\under{\rmx{fold*}(x \rel{|} l1)} \rel{*} \rmx{fold*}(l2) 
+	&\larrow \under{(x \rel{*} \rmx{fold*}(l1)) \rel{*} \rmx{fold*}(l2)} \tag{by fold*-2} \\
+	&\larrow x \rel{*} (\rmx{fold*}(l1) \rel{*} \rmx{fold*}(l2)) \tag{by assoc*}
 \end{align*}
 \end{description}
 

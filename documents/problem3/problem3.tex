@@ -112,7 +112,7 @@
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
 
-\title{Problem 2}
+\title{Problem 3}
 \date{\vspace{-5ex}}
 
 \begin{document}
@@ -120,45 +120,25 @@
 \maketitle
 
 \begin{problem}
-$\forall X \in \mathtt{PNat}, \rmx{rev}(\rmx{mkl1}(X)) = \rmx{mkl2}(X)$.
+$\forall X \in \mathtt{PNat}, \rmx{fact}(X) = \rmx{fold*}(\rmx{mkl2}(X))$.
 \end{problem}
 \begin{proof}
-By structural induction on $X$.
+By a direct proof.
 
-\begin{description}
-
-\item[(1) Base case]~\\
 \noindent
-What to show: $\quad\rmx{rev}(\rmx{mkl1}(0)) = \rmx{mkl2}(0)$
+What to show: $\quad\rmx{fact}(x) = \rmx{fold*}(\rmx{mkl2}(x))$ \\
+where $x \in \mathtt{PNat}$ .
 \begin{align*}
-\rmx{rev}(\under{\rmx{mkl1}(0)}) &\larrow \under{\rmx{rev}(nil)} \tag{by mkl1-1} \\
-	&\larrow nil \tag{by rev1} \\
-\under{\rmx{mkl2}(0)} &\larrow \under{\rmx{smkl2}(0, nil)} \tag{by mkl2} \\
-	&\larrow nil \tag{by smkl2-1}
+\under{\rmx{fact}(x)}
+	&\larrow \under{\rmx{fold*}(\rmx{mkl1}(x))} \tag{by Lemma~\ref{lm1}} \\
+	&\larrow \rmx{fold*}(\under{\rmx{rev}(\rmx{mkl1}(x))}) \tag{by Problem 1} \\
+	&\larrow \rmx{fold*}(\rmx{mkl2}(x)) \tag{by Problem 2}
 \end{align*}
-
-\item[(2) Induction case]~\\
-What to show: $\quad\rmx{rev}(\rmx{mkl1}(\rmx{s}(x))) = \rmx{mkl2}(\rmx{s}(x))$ \\
-Induction hypothesis: $\quad \rmx{rev}(\rmx{mkl1}(x)) = \rmx{mkl2}(x)$ \\
-where $x \in \mathtt{PNat}$.
-\begin{align*}
-\rmx{rev}(\under{\rmx{mkl1}(\rmx{s}(x))}) 
-	&\larrow \under{\rmx{rev}(\rmx{s}(x) \rel{|} \rmx{mkl1}(x))} \tag{by mkl1-2} \\
-	&\larrow  \under{\rmx{rev}(\rmx{mkl1}(x))} \rel{@} (\rmx{s}(x) \rel{|} nil)  \tag{by rev2} \\
-	&\larrow \under{\rmx{mkl2}(x)} \rel{@} (\rmx{s}(x) \rel{|} nil)  \tag{by IH} \\
-	&\larrow \rmx{smkl2}(x, nil) \rel{@} (\rmx{s}(x) \rel{|} nil)  \tag{by mkl2} \\
-\under{\rmx{mkl2}(\rmx{s}(x))} 
-	&\larrow \under{\rmx{smkl2}(\rmx{s}(x), nil)} \tag{by mkl2} \\
-	&\larrow \under{\rmx{smkl2}(x, \rmx{s}(x) \rel{|} nil)} \tag{by smkl2-2} \\
-	&\larrow \rmx{smkl2}(x, nil) \rel{@} (\rmx{s}(x) \rel{|} nil) \tag{by Lemma~\ref{lm2}}
-\end{align*}
-
-\end{description}
 \end{proof}
 
 \begin{lemma}
-\label{lm2}
-$\forall X \in \mathtt{PNat}, L \in \mathtt{NatList}, \rmx{smkl2}(X, L) = \rmx{smkl2}(X, nill) \rel{@} L$.
+\label{lm1}
+$\forall X \in \mathtt{PNat}, \rmx{fact}(X) = \rmx{fold*}(\rmx{mkl1}(X))$.
 \end{lemma}
 \begin{proof}
 By structural induction on $X$.
@@ -167,30 +147,28 @@ By structural induction on $X$.
 
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad\rmx{smkl2}(0, l) = \rmx{smkl2}(0, nil) \rel{@} l$ \\
-where $l \in \mathtt{NatList}$.
+What to show: $\quad\rmx{fact}(0) = \rmx{fold*}(\rmx{mkl1}(0))$.
 \begin{align*}
-\under{\rmx{smkl2}(0, l)}
-	&\larrow l \tag{by smkl2-1} \\
-\under{\rmx{smkl2}(0, nil)} \rel{@} l 
-	&\larrow \under{nil \rel{@} l} \tag{by smkl2-1} \\
-	&\larrow l \tag{by @1}
+\under{\rmx{fact}(0)}
+	&\larrow \rmx{s}(0) \tag{by fact1} \\
+\rmx{fold*}(\under{\rmx{mkl1}(0)})
+	&\larrow \under{\rmx{fold*}(nil)} \tag{by mkl1-1} \\
+	&\larrow \rmx{s}(0) \tag{by fold*-1}
 \end{align*}
 
 \item[(2) Induction case]~\\
-What to show: $\quad\rmx{smkl2}(\rmx{s}(x), l) = \rmx{smkl2}(\rmx{s}(x), nil) \rel{@} l$ \\
-Induction hypothesis: $\quad\rmx{smkl2}(x, L) = \rmx{smkl2}(x, nil) \rel{@} L$ \\
-where $x \in \mathtt{PNat}$ and $l, L \in \mathtt{NatList}$.
+What to show: $\quad\rmx{fact}(\rmx{s}(x)) = \rmx{fold*}(\rmx{mkl1}(\rmx{s}(x)))$ \\
+Induction hypothesis: $\quad\rmx{fact}(x) = \rmx{fold*}(\rmx{mkl1}(x))$  \\
+where $x \in \mathtt{PNat}$.
 \begin{align*}
-\under{\rmx{smkl2}(\rmx{s}(x), l)} 
-	&\larrow \under{\rmx{smkl2}(x,\ \rmx{s}(x) \rel{|} l)} \tag{by smkl2-2} \\
-	&\larrow \rmx{smkl2}(x,\ nil) \rel{@} (\rmx{s}(x) \rel{|} l) \tag{by IH} \\
-\under{\rmx{smkl2}(\rmx{s}(x), nil)} \rel{@} l
-	&\larrow \under{\rmx{smkl2}(x, \rmx{s}(x) \rel{|} nil)} \rel{@} l \tag{by smkl2-2} \\
-	&\larrow \under{(\rmx{smkl2}(x, nil) \rel{@} (\rmx{s}(x) \rel{|} nil)) \rel{@} l} \tag{by IH} \\
-	&\larrow \rmx{smkl2}(x, nil) \rel{@} \under{((\rmx{s}(x) \rel{|} nil) \rel{@} l)} \tag{by assoc@} \\
-	&\larrow \rmx{smkl2}(x, nil) \rel{@} (\rmx{s}(x) \rel{|} \under{(nil \rel{@} l)}) \tag{by @2} \\
-	&\larrow \rmx{smkl2}(x, nil) \rel{@} (\rmx{s}(x) \rel{|} l) \tag{by @1}
+\under{\rmx{fact}(\rmx{s}(x))} 
+	&\larrow \under{\rmx{s}(x) \rel{*} \rmx{fact}(x)} \tag{by fact2} \\
+	&\larrow (x \rel{*} \under{\rmx{fact}(x)}) \rel{+} \under{\rmx{fact}(x)} \tag{by *2} \\
+	&\larrow (x \rel{*} \rmx{fold*}(\rmx{mkl1}(x))) \rel{+} \rmx{fold*}(\rmx{mkl1}(x)) \tag{by IH} \\
+\rmx{fold*}(\under{\rmx{mkl1}(\rmx{s}(x))})
+	&\larrow \under{\rmx{fold*}(\rmx{s}(x) \rel{|} \rmx{mkl1}(x))} \tag{by mkl1-2} \\
+	&\larrow \rmx{s}(x) \rel{*} \rmx{fold*}(\rmx{mkl1}(x)) \tag{by fold*-2} \\
+	&\larrow (x \rel{*} \rmx{fold*}(\rmx{mkl1}(x))) \rel{+} \rmx{fold*}(\rmx{mkl1}(x)) \tag{by *2}
 \end{align*}
 
 \end{description}

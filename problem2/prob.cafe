@@ -19,11 +19,11 @@ open NATLIST .
     vars I J : PNat .
     vars L1 : NatList .
     
-    -- induction hypothesis:
+    -- induction hypothesis
     eq [IH] : rev(mkl1(e)) = mkl2(e) .
     -- use LEMMA1
     eq [LEMMA1] : smkl2(I, J | L1) = smkl2(I, nil) @ (J | L1) .
-    -- induction case:
+    -- induction case
     red rev(mkl1(s(e))) = mkl2(s(e)) .
 close
 

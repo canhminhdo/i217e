@@ -19,8 +19,8 @@ open NATLIST .
     ops e : -> PNat .
     ops l1 l2 l3 : -> NatList .
 
-    -- induction hypothesis:
+    -- induction hypothesis
     eq [IH] : (l1 @ l2) @ l3 = l1 @ (l2 @ l3) .
-    -- induction case:
+    -- induction case
     red ((e | l1) @ l2) @ l3 = (e | l1) @ (l2 @ l3) .
 close

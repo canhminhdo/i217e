@@ -1,0 +1,35 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA1: \forall X \in PNat: fact(X) = fold*(mkl1(X)) .
+-- [require] 
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA1
+--> base case
+open NATLIST .
+    red fact(0) = fold*(mkl1(0)) .
+close
+
+--> induction case
+open NATLIST .
+    op e : -> PNat .
+
+    -- induction hypothesis
+    eq [IH] : fact(e) = fold*(mkl1(e)) .
+    -- induction case
+    red fact(s(e)) = fold*(mkl1(s(e))) .
+close
+
+eof
+
+((e * fold*(mkl1(e))) + fold*(mkl1(e))):PNat
+
+fold*(mkl1(s(e)))
+-> 
+fold*(s(e) | mkl1(e))
+->
+s(e) * fold*(mkl1(e))
+
+(e * fold*(mkl1(e))) + fold*(mkl1(e))

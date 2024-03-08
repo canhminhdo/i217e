@@ -1,0 +1,10 @@
+#!/bin/sh
+
+DIR=$PWD
+
+echo "\n--> TESTING Problem 1 <--"
+cd $DIR/problem1/test && ./tester
+echo "\n--> TESTING Problem 2 <--"
+cd $DIR/problem2/test && ./tester
+echo "\n--> TESTING Problem 3 <--"
+cd $DIR/problem3/test && ./tester
