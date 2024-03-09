@@ -8,3 +8,5 @@ echo "\n--> TESTING Problem 2 <--"
 cd $DIR/problem2/test && ./tester
 echo "\n--> TESTING Problem 3 <--"
 cd $DIR/problem3/test && ./tester
+echo "\n--> TESTING Problem 4 <--"
+cd $DIR/problem4/test && ./tester

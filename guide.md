@@ -25,3 +25,8 @@ PROBLEM3: \forall X \in PNat: fact(X) = fold*(mkl2(X)) .
     - PROLEM1
     - PROLEM2
     - LEMMA1: \forall X \in PNat: fact(X) = fold*(mkl1(X)) .
+
+PROBLEM4: \forall L \in NatList : rev(rev(L)) = L .
+    - LEMMA1: \forall L1, L2 \in NatList: rev(L1 @ L2) = rev(L2) @ rev(L1) .
+        - LEMMA2: \forall L \in NatList: L @ nil = L .
+        - PROBLEM2 - LEMMA2 [assoc@]

@@ -1,0 +1,32 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA1: \forall L1, L2 \in NatList: rev(L1 @ L2) = rev(L2) @ rev(L1) .
+-- [require] LEMMA2 PROBLEM2-LEMMA2
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA1
+--> base case
+open NATLIST .
+    op l : -> NatList .
+
+    -- use LEMMA2
+    eq [LEMMA2] : L @ nil = L .
+    red rev(nil @ l) = rev(l) @ rev(nil) .
+close
+
+--> induction case
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    vars L1 L2 L3 : NatList .
+
+    -- induction hypothesis
+    eq [IH] : rev(l1 @ l2) = rev(l2) @ rev(l1) .
+    -- use PROBLEM2 - LEMMA2 [assoc@]
+    eq [PROB2-LM2] : (L1 @ L2) @ L3 = L1 @ (L2 @ L3) .
+    -- induction case
+    red rev((x | l1) @ l2) = rev(l2) @ rev(x | l1) .
+close
