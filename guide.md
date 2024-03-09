@@ -30,3 +30,16 @@ PROBLEM4: \forall L \in NatList : rev(rev(L)) = L .
     - LEMMA1: \forall L1, L2 \in NatList: rev(L1 @ L2) = rev(L2) @ rev(L1) .
         - LEMMA2: \forall L \in NatList: L @ nil = L .
         - PROBLEM2 - LEMMA2 [assoc@]
+
+PROBLEM5: \forall L \in NatList: size(L) = size(rev(L)) .
+    - LEMMA1: \forall L1, L2 \in NatList: size(L1 @ L2) = size(L1) + size(L2) .
+        - PROBLEM1 - LEMMA4 [assoc+]
+        - PROBLEM1 - LEMMA5 [comm+]
+
+<!-- PROBLEM7: \forall L1 L2 \in NatList : min(L1 @ L2) = min(min(L1) @ min(L2)) .
+
+PROBLEM8: \forall L1 L2 \in NatList : max(L1 @ L2) = max(max(L1) @ max(L2)) .
+
+PROBLEM9: \forall L1 L2 \in NatList : diff(L, rev(L)) = [] .
+
+PROBLEM10: \forall L1 L2 \in NatList : diff(L1, L2) = diff(L2, L1) . -->

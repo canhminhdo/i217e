@@ -1,15 +1,15 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM4: \forall L \in NatList: rev(rev(L)) = L .
+-- PROBLEM5: \forall L \in NatList: size(L) = size(rev(L)) .
 -- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 
 select NATLIST
---> PROOF: PROBLEM4
+--> PROOF: PROBLEM5
 --> base case
 open NATLIST .
-    red rev(rev(nil)) = nil .
+    red size(nil) = size(rev(nil)) .
 close
 
 --> induction case
@@ -18,11 +18,11 @@ open NATLIST .
     op l : -> NatList .
 
     vars L1 L2 : NatList .
-
+    
     -- induction hypothesis
-    eq [IH] : rev(rev(l)) = l .
+    eq [IH] : size(l) = size(rev(l)) .
     -- use LEMMA1
-    eq [LEMMA1] : rev(L1 @ L2) = rev(L2) @ rev(L1) .
+    eq [LEMMA1] : size(L1 @ L2) = size(L1) + size(L2) .
     -- induction case
-    red rev(rev(x | l)) = x | l .
+    red size(x | l) = size(rev(x | l)) .
 close
