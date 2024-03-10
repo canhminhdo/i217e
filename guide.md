@@ -35,6 +35,7 @@ PROBLEM5: \forall L \in NatList: size(L) = size(rev(L)) .
     - LEMMA1: \forall L1, L2 \in NatList: size(L1 @ L2) = size(L1) + size(L2) .
         - PROBLEM1 - LEMMA4 [assoc+]
         - PROBLEM1 - LEMMA5 [comm+]
+    - LEMMA2: \forall X \in PNat: s(X) = X + s(0) .
 
 <!-- PROBLEM7: \forall L1 L2 \in NatList : min(L1 @ L2) = min(min(L1) @ min(L2)) .
 

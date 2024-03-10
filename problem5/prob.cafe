@@ -2,7 +2,7 @@ in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- PROBLEM5: \forall L \in NatList: size(L) = size(rev(L)) .
--- [require] LEMMA1
+-- [require] LEMMA1, LEMMA2
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -23,6 +23,8 @@ open NATLIST .
     eq [IH] : size(l) = size(rev(l)) .
     -- use LEMMA1
     eq [LEMMA1] : size(L1 @ L2) = size(L1) + size(L2) .
+    -- use LEMMA2
+    eq [LEMMA2] : s(size(rev(l))) = size(rev(l)) + s(0) .
     -- induction case
     red size(x | l) = size(rev(x | l)) .
 close
