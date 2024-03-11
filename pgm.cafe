@@ -35,9 +35,9 @@ mod! LIST (E :: TRIV) {
   eq [rev1] : rev(nil) = nil .
   eq [rev2] : rev(E | L1) = rev(L1) @ (E | nil) .
   eq [has1] : has(nil, E) = false .
-  eq [has2] : has(E1 | L1, E) = (E == E1) or has(L1, E) .
+  eq [has2] : has(E1 | L1, E) = (E = E1) or has(L1, E) .
   eq [drop1] : drop(nil, E) = nil .
-  eq [drop2] : drop(E1 | L1, E) = if E1 == E then drop(L1, E) else (E1 | drop(L1, E)) fi .
+  eq [drop2] : drop(E1 | L1, E) = if (E1 = E) then drop(L1, E) else (E1 | drop(L1, E)) fi .
   eq [diff1] : diff(nil, L2) = nil .
   eq [diff2] : diff(E1 | L1, L2) = if has(L2, E1) then diff(L1, L2) else E1 | diff(L1, L2) fi .
   eq if true then L1 else L2 fi = L1 .
