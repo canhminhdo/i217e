@@ -34,22 +34,26 @@ PROBLEM5: \forall L \in NatList: size(L) = size(rev(L)) .
         - PROBLEM1 - LEMMA5 [comm+]
     - LEMMA2: \forall X \in PNat: s(X) = X + s(0) .
 
-PROBLEM6: \forall L1 L2 \in NatList: diff(L, rev(L)) = nil .
+PROBLEM6: \forall X \in PNat, L \in NatList: has(L, X) = has(rev(L), X) .
+    - LEMMA1: \forall X \in PNAT, \forall L1, L2 \in NatList: has(L1 @ L2, X) = has(L1, X) or has(L2, X) .
+
+PROBLEM7: \forall L1 L2 \in NatList: diff(L, rev(L)) = nil .
     - LEMMA1: \forall L1, L2 \in NatList: diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
-        - LEMMA1
-    - LEMMA2: \forall X \in PNAT, \forall L1, L2 \in NatList: has(L1 @ L2, X) = has(L1, X) or has(L2, X) .    
+        - PROBLEM6 - LEMMA1
+    - PROBLEM6 - LEMMA1 
 
-PROBLEM7: \forall L1, L2 \in NatList: diff(L1, L2) = diff(L1, rev(L2)) .
-    - LEMMA1: \forall X \in PNat, L \in NatList: has(L, X) = has(rev(L), X) .
-        - PROBLEM6 - LEMMA2
+PROBLEM8: \forall L1, L2 \in NatList: diff(L1, L2) = diff(L1, rev(L2)) .
+    - PROBLEM6
 
-PROBLEM8: \forall L1, L2 \in NatList: diff(L1, L2) = rev(diff(rev(L1), L2)) .
+PROBLEM9: \forall L1, L2 \in NatList: diff(L1, L2) = rev(diff(rev(L1), L2)) .
     - LEMMA1: \forall L1, L2, L3 \in NatList: diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
     - PROBLEM4 - LEMMA1
     - PROBLEM4 - LEMMA2
 
-PROBLEM9: \forall X \in PNat, L \in NatList: drop(L, X) = rev(drop(rev(L), X)) .
+PROBLEM10: \forall X \in PNat, L \in NatList: drop(L, X) = rev(drop(rev(L), X)) .
     - LEMMA1 : \forall X \in PNat, L1, L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
+
+PROBLEM11: \forall X \in PNat, L \in NatList: has(drop(L, X), X) = false .
 
 <!--
 PROBLEM7: \forall L1 L2 \in NatList : min(L1 @ L2) = min(min(L1) @ min(L2)) .

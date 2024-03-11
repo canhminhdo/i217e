@@ -1,56 +1,56 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM9: \forall X \in PNat, L \in NatList: drop(L, X) = rev(drop(rev(L), X)) .
--- [require] LEMMA1
+-- PROBLEM9: \forall L1, L2 \in NatList: diff(L1, L2) = rev(diff(rev(L1), L2)) .
+-- [require] LEMMA1, PROBLEM4 - LEMMA1, PROBLEM4 - LEMMA2
 -- ----------------------------------------------------------------------------
 
 select NATLIST
 --> PROOF: PROBLEM9
 --> base case
 open NATLIST .
-    op x : -> PNat .
+    op l2 : -> NatList .
 
-    red drop(nil, x) = rev(drop(rev(nil), x)) .
+    red diff(nil, l2) = rev(diff(rev(nil), l2)) .
 close
 
 --> induction case with case splitting
 --> case 1
 open NATLIST .
-    ops x y : -> PNat .
-    ops l : -> NatList .
-
-    var I : PNat .
-    vars L1 L2 : NatList .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
     
+    vars L1 L2 L3 : NatList .
+
     -- induction hypothesis
-    eq [IH] : drop(l, x) = rev(drop(rev(l), x)) .
+    eq [IH] : diff(l1, l2) = rev(diff(rev(l1), l2)) .
     -- use LEMMA1
-    eq [LEMMA1] : drop(L1 @ L2, I) = drop(L1, I) @ drop(L2, I) .
+    eq [LEMMA1] : diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
     -- use PROBLEM4 - LEMMA2
     eq [PROB4-LM2] : L1 @ nil = L1 .
     -- case splitting
-    eq y = x .
+    eq has(l2, x) = true .
     -- induction case
-    red drop(y | l, x) = rev(drop(rev(y | l), x)) .
+    red diff(x | l1, l2) = rev(diff(rev(x | l1), l2)) .
 close
 
 --> case 2
 open NATLIST .
-    ops x y : -> PNat .
-    ops l : -> NatList .
-
-    var I : PNat .
-    vars L1 L2 : NatList .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
     
+    vars L1 L2 L3 : NatList .
+
     -- induction hypothesis
-    eq [IH] : drop(l, x) = rev(drop(rev(l), x)) .
+    eq [IH] : diff(l1, l2) = rev(diff(rev(l1), l2)) .
     -- use LEMMA1
-    eq [LEMMA1] : drop(L1 @ L2, I) = drop(L1, I) @ drop(L2, I) .
+    eq [LEMMA1] : diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
     -- use PROBLEM4 - LEMMA1
     eq [PROB4-LM1] : rev(L1 @ L2) = rev(L2) @ rev(L1) .
+    -- use PROBLEM4 - LEMMA2
+    eq [PROB4-LM2] : L1 @ nil = L1 .
     -- case splitting
-    eq (y = x) = false .
+    eq has(l2, x) = false .
     -- induction case
-    red drop(y | l, x) = rev(drop(rev(y | l), x)) .
+    red diff(x | l1, l2) = rev(diff(rev(x | l1), l2)) .
 close

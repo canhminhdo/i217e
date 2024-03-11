@@ -1,8 +1,8 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM8: \forall L1, L2 \in NatList: diff(L1, L2) = rev(diff(rev(L1), L2)) .
--- [require] LEMMA1, PROBLEM4 - LEMMA1, PROBLEM4 - LEMMA2
+-- PROBLEM8: \forall L1, L2 \in NatList: diff(L1, L2) = diff(L1, rev(L2)) .
+-- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -11,46 +11,21 @@ select NATLIST
 open NATLIST .
     op l2 : -> NatList .
 
-    red diff(nil, l2) = rev(diff(rev(nil), l2)) .
+    red diff(nil, l2) = diff(nil, rev(l2)) .
 close
 
---> induction case with case splitting
---> case 1
+--> induction case
 open NATLIST .
     op x : -> PNat .
     ops l1 l2 : -> NatList .
     
-    vars L1 L2 L3 : NatList .
+    var I : PNat .
+    var L1 : NatList .
 
     -- induction hypothesis
-    eq [IH] : diff(l1, l2) = rev(diff(rev(l1), l2)) .
-    -- use LEMMA1
-    eq [LEMMA1] : diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
-    -- use PROBLEM4 - LEMMA2
-    eq [PROB4-LM2] : L1 @ nil = L1 .
-    -- case splitting
-    eq has(l2, x) = true .
+    eq [IH] : diff(l1, l2) = diff(l1, rev(l2)) .
+    -- use PROBLEM6 as a lemma
+    eq [PROB6] : has(rev(L1), I) = has(L1, I) .
     -- induction case
-    red diff(x | l1, l2) = rev(diff(rev(x | l1), l2)) .
-close
-
---> case 2
-open NATLIST .
-    op x : -> PNat .
-    ops l1 l2 : -> NatList .
-    
-    vars L1 L2 L3 : NatList .
-
-    -- induction hypothesis
-    eq [IH] : diff(l1, l2) = rev(diff(rev(l1), l2)) .
-    -- use LEMMA1
-    eq [LEMMA1] : diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
-    -- use PROBLEM4 - LEMMA1
-    eq [PROB4-LM1] : rev(L1 @ L2) = rev(L2) @ rev(L1) .
-    -- use PROBLEM4 - LEMMA2
-    eq [PROB4-LM2] : L1 @ nil = L1 .
-    -- case splitting
-    eq has(l2, x) = false .
-    -- induction case
-    red diff(x | l1, l2) = rev(diff(rev(x | l1), l2)) .
+    red diff(x | l1, l2) = diff(x | l1, rev(l2)) .
 close

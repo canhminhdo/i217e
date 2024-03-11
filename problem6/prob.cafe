@@ -1,31 +1,31 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM6: \forall L1 L2 \in NatList : diff(L, rev(L)) = nil .
--- [require] LEMMA1, LEMMA2
+-- PROBLEM6: \forall X \in PNat, L \in NatList: has(L, X) = has(rev(L), X) .
+-- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 
 select NATLIST
 --> PROOF: PROBLEM6
 --> base case
 open NATLIST .
-    red diff(nil, rev(nil)) = nil .
+    op x : -> PNat .
+
+    red has(nil, x) = has(rev(nil), x) .
 close
 
 --> induction case
 open NATLIST .
-    op x : -> PNat .
+    ops x y : -> PNat .
     op l : -> NatList .
 
     var I : PNat .
-    vars L1 L2 L3 : NatList .
-    
+    vars L1 L2 : NatList .
+
     -- induction hypothesis
-    eq [IH] : diff(l, rev(l)) = nil .
+    eq [IH] : has(l, x) = has(rev(l), x) .
     -- use LEMMA1
-    eq [LEMMA1] : diff(l, rev(l) @ (x | nil)) = diff(diff(l, rev(l)), x | nil) .
-    -- use LEMMA2
-    eq [LEMMA2] : has(L1 @ L2, I) = has(L1, I) or has(L2, I) .
+    eq [LEMMA1] : has(L1 @ L2, I) = has(L1, I) or has(L2, I) .
     -- induction case
-    red diff(x | l, rev(x | l)) = nil .
+    red has(y | l, x) = has(rev(y | l), x) .
 close
