@@ -1,8 +1,8 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM9: \forall X \in PNat, L1, L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
--- [require]
+-- PROBLEM9: \forall X \in PNat, L \in NatList: drop(L, X) = rev(drop(rev(L), X)) .
+-- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -10,38 +10,47 @@ select NATLIST
 --> base case
 open NATLIST .
     op x : -> PNat .
-    op l2 : -> NatList .
 
-    red drop(nil @ l2, x) = drop(nil, x) @ drop(l2, x) .
+    red drop(nil, x) = rev(drop(rev(nil), x)) .
 close
 
 --> induction case with case splitting
 --> case 1
 open NATLIST .
     ops x y : -> PNat .
-    ops l1 l2 : -> NatList .
+    ops l : -> NatList .
 
     var I : PNat .
     vars L1 L2 : NatList .
     
     -- induction hypothesis
-    eq [IH] : drop(l1 @ l2, x) = drop(l1, x) @ drop(l2, x) .
+    eq [IH] : drop(l, x) = rev(drop(rev(l), x)) .
+    -- use LEMMA1
+    eq [LEMMA1] : drop(L1 @ L2, I) = drop(L1, I) @ drop(L2, I) .
+    -- use PROBLEM4 - LEMMA2
+    eq [PROB4-LM2] : L1 @ nil = L1 .
+    -- case splitting
     eq y = x .
     -- induction case
-    red drop((y | l1) @ l2, x) = drop(y | l1, x) @ drop(l2, x) .
+    red drop(y | l, x) = rev(drop(rev(y | l), x)) .
 close
 
 --> case 2
 open NATLIST .
     ops x y : -> PNat .
-    ops l1 l2 : -> NatList .
+    ops l : -> NatList .
 
     var I : PNat .
     vars L1 L2 : NatList .
     
     -- induction hypothesis
-    eq [IH] : drop(l1 @ l2, x) = drop(l1, x) @ drop(l2, x) .
+    eq [IH] : drop(l, x) = rev(drop(rev(l), x)) .
+    -- use LEMMA1
+    eq [LEMMA1] : drop(L1 @ L2, I) = drop(L1, I) @ drop(L2, I) .
+    -- use PROBLEM4 - LEMMA1
+    eq [PROB4-LM1] : rev(L1 @ L2) = rev(L2) @ rev(L1) .
+    -- case splitting
     eq (y = x) = false .
     -- induction case
-    red drop((y | l1) @ l2, x) = drop(y | l1, x) @ drop(l2, x) .
+    red drop(y | l, x) = rev(drop(rev(y | l), x)) .
 close

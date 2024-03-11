@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "\n\t--> lm1"
+DIR=test
+cd ../ && (cafeobj -no-banner <<EOF
+in lm1.cafe
+quit
+EOF
+) | grep "(true):Bool" > $DIR/lm1.out
+diff $DIR/lm1.expected $DIR/lm1.out
+rm $DIR/lm1.out
