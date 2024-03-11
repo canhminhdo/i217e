@@ -44,12 +44,15 @@ PROBLEM6: \forall L1 L2 \in NatList: diff(L, rev(L)) = nil .
 
 PROBLEM7: \forall X \in PNat, L1, L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
 
-<!--  PROBLEM7: \forall L1, L2 \in NatList: diff(L1, L2) = diff(L1, rev(L2)) .
+PROBLEM8: \forall L1, L2 \in NatList: diff(L1, L2) = diff(L1, rev(L2)) .
+    - LEMMA1: \forall X \in PNat, L \in NatList: has(L, X) = has(rev(L), X) .
+        - PROBLEM6 - LEMMA2
 
+PROBLEM9: \forall L1, L2 \in NatList: diff(L1, L2) = rev(diff(rev(L1), L2)) .
+
+<!--
 PROBLEM7: \forall L1 L2 \in NatList : min(L1 @ L2) = min(min(L1) @ min(L2)) .
 
 PROBLEM8: \forall L1 L2 \in NatList : max(L1 @ L2) = max(max(L1) @ max(L2)) .
-
-PROBLEM9: \forall L1 L2 \in NatList : diff(L, rev(L)) = [] .
 
 PROBLEM10: \forall L1 L2 \in NatList : diff(L1, L2) = diff(L2, L1) . -->

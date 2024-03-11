@@ -1,0 +1,31 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM8: \forall L1, L2 \in NatList: diff(L1, L2) = diff(L1, rev(L2)) .
+-- [require] LEMMA1
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM8
+--> base case
+open NATLIST .
+    op l2 : -> NatList .
+
+    red diff(nil, l2) = diff(nil, rev(l2)) .
+close
+
+--> induction case
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    var I : PNat .
+    var L1 : NatList .
+
+    -- induction hypothesis
+    eq [IH] : diff(l1, l2) = diff(l1, rev(l2)) .
+    -- use LEMMA1
+    eq [LEMMA1] : has(rev(L1), I) = has(L1, I) .
+    -- induction case
+    red diff(x | l1, l2) = diff(x | l1, rev(l2)) .
+close

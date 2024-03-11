@@ -1,0 +1,31 @@
+in ../pgm.cafe
+-- in ../debug.cafe
+-- ----------------------------------------------------------------------------
+-- LEMMA1: \forall X \in PNat, L \in NatList: has(L, X) = has(rev(L), X) .
+-- [require] PROBLEM6 - LEMMA2
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA1
+--> base case
+open NATLIST .
+    op x : -> PNat .
+
+    red has(nil, x) = has(rev(nil), x) .
+close
+
+--> induction case
+open NATLIST .
+    ops x y : -> PNat .
+    op l : -> NatList .
+
+    var I : PNat .
+    vars L1 L2 : NatList .
+
+    -- induction hypothesis
+    eq [IH] : has(l, x) = has(rev(l), x) .
+    -- use PROBLEM6 - LEMMA2
+    eq [PROB6-LM2] : has(L1 @ L2, I) = has(L1, I) or has(L2, I) .
+    -- induction case
+    red has(y | l, x) = has(rev(y | l), x) .
+close
