@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "--> prob10"
+echo "--> prob11"
 DIR=test
 cd ../ && (cafeobj -no-banner <<EOF
 in prob.cafe

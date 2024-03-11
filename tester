@@ -2,7 +2,7 @@
 
 DIR=$PWD
 
-echo "\n~~~~~~~~~~ TESTING ~~~~~~~~~~\n"
+echo "~~~~~~~~~~ TESTING ~~~~~~~~~~"
 cd $DIR/problem1/test && ./tester
 cd $DIR/problem2/test && ./tester
 cd $DIR/problem3/test && ./tester
@@ -13,3 +13,4 @@ cd $DIR/problem7/test && ./tester
 cd $DIR/problem8/test && ./tester
 cd $DIR/problem9/test && ./tester
 cd $DIR/problem10/test && ./tester
+cd $DIR/problem11/test && ./tester

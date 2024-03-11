@@ -1,0 +1,48 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM11: \forall X \in PNat, L \in NatList: has(drop(L, X), X) = false .
+-- [require]
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM11
+--> base case
+open NATLIST .
+    op x : -> PNat .
+
+    red has(drop(nil, x), x) = false .
+close
+
+--> induction case with case splitting
+--> case 1
+open NATLIST .
+    ops x y : -> PNat .
+    ops l : -> NatList .
+
+    var I : PNat .
+    vars L1 L2 : NatList .
+    
+    -- induction hypothesis
+    eq [IH] : has(drop(l, x), x) = false .
+    -- case splitting
+    eq y = x .
+    -- induction case
+    red has(drop(y | l, x), x) = false .
+close
+
+--> case 2
+open NATLIST .
+    ops x y : -> PNat .
+    ops l : -> NatList .
+
+    var I : PNat .
+    vars L1 L2 : NatList .
+    
+    -- induction hypothesis
+    eq [IH] : has(drop(l, x), x) = false .
+    -- case splitting
+    eq (y = x) = false .
+    -- induction case
+    red has(drop(y | l, x), x) = false .
+close

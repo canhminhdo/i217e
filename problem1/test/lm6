@@ -1,11 +1,11 @@
 #!/bin/sh
 
-echo "\n\t--> lm6"
+echo "\t--> lm6"
 DIR=test
 cd ../ && (cafeobj -no-banner <<EOF
 in lm6.cafe
 quit
 EOF
-) | grep "(true):Bool" > $DIR/lm6.out
+) 2> /dev/null | grep "(true):Bool" > $DIR/lm6.out
 diff $DIR/lm6.expected $DIR/lm6.out
 rm $DIR/lm6.out
