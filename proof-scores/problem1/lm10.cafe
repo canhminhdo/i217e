@@ -1,0 +1,30 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA10: \forall I J \in PNat: I * s(J) = I + (I * J) .
+-- [require] LEMMA4, LEMMA7
+-- ----------------------------------------------------------------------------
+
+select PNAT
+--> PROOF: LEMMA10
+--> base case
+open PNAT .
+    ops j : -> PNat .
+
+    red 0 * s(j) = 0 * (0 * j) .
+close
+    
+--> induction case
+open PNAT .
+    ops i j : -> PNat .
+    vars I J K : PNat .
+
+    -- induction hypothesis
+    eq [IH] : i * s(j) = i + (i * j) .
+    -- use LEMMA7
+    eq [LEMMA7] : I + s(J) = s(I + J) .
+    -- use LEMMA4 [assoc+]
+    eq [assoc+] : (I + J) + K = I + (J + K) .
+    -- induction step
+    red s(i) * s(j) = s(i) + (s(i) * j) .
+close

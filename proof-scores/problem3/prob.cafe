@@ -1,0 +1,22 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM3: \forall X \in PNat: fact(X) = fold*(mkl2(X)) .
+-- [require] LEMMA1
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM3
+
+open NATLIST .
+    op e : -> PNat .
+
+    -- use LEMMA1
+    eq [LEMMA1] : fact(X) = fold*(mkl1(X)) .
+    -- use PROBLEM1 as LEMMA
+    eq [PROB1] : fold*(mkl1(X)) = fold*(rev(mkl1(X))) .
+    -- use PROBLEM2 as LEMMA
+    eq [PROB2] : rev(mkl1(X)) = mkl2(X) .
+    -- induction case
+    red fact(e) = fold*(mkl2(e)) .
+close

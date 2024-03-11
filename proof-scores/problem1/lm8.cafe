@@ -1,0 +1,32 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA8 [comm*]: \forall I J \in Nat: I * J = J * I .
+-- [require] LEMMA5, LEMMA9, LEMMA10
+-- ----------------------------------------------------------------------------
+
+select PNAT
+--> PROOF: LEMMA8
+--> base case
+open PNAT .
+    ops j : -> PNat .
+
+    -- use LEMMA9
+    eq [LEMMA9] : j * 0 = 0 .
+    red 0 * j = j * 0 .
+close
+
+--> induction case
+open PNAT .
+    ops i j : -> PNat .
+    vars I J : PNat .
+
+    -- induction hypothesis
+    eq [IH] : i * j = j * i .
+    -- use LEMMA10
+    eq [LEMMA10] : I * s(J) = I + (I * J) .
+    -- use LEMMA5 
+    eq [comm+] : (j * i) + j = j + (j * i) .
+    -- induction case
+    red s(i) * j = j * s(i) .
+close

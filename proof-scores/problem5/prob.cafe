@@ -1,0 +1,30 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM5: \forall L \in NatList: size(L) = size(rev(L)) .
+-- [require] LEMMA1, LEMMA2
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM5
+--> base case
+open NATLIST .
+    red size(nil) = size(rev(nil)) .
+close
+
+--> induction case
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+
+    vars L1 L2 : NatList .
+    
+    -- induction hypothesis
+    eq [IH] : size(l) = size(rev(l)) .
+    -- use LEMMA1
+    eq [LEMMA1] : size(L1 @ L2) = size(L1) + size(L2) .
+    -- use LEMMA2
+    eq [LEMMA2] : s(size(rev(l))) = size(rev(l)) + s(0) .
+    -- induction case
+    red size(x | l) = size(rev(x | l)) .
+close

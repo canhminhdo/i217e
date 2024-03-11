@@ -1,0 +1,31 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA5 [comm+]: \forall I J \in PNat: I + J = J + I .
+-- commutative property of _+_
+-- [require] LEMMA6, LEMMA7
+-- ----------------------------------------------------------------------------
+
+select PNAT
+--> PROOF: LEMMA5
+--> base case
+open PNAT .
+    ops j : -> PNat .
+    
+    -- use LEMMA6
+    eq j + 0 = j .
+    red 0 + j = j + 0 .
+close
+
+--> induction case
+open PNAT .
+    ops i j : -> PNat .
+    vars N M : PNat .
+
+    -- induction hypothesis
+    eq [IH] : i + j = j + i .
+    -- use LEMMA7
+    eq [LEMMA7] : j + s(i) = s(j + i) . 
+    -- induction step
+    red s(i) + j = j + s(i) .
+close

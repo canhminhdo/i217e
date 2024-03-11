@@ -1,0 +1,47 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA1: \forall X \in PNat, L1, L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
+-- [require]
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA1
+--> base case
+open NATLIST .
+    op x : -> PNat .
+    op l2 : -> NatList .
+
+    red drop(nil @ l2, x) = drop(nil, x) @ drop(l2, x) .
+close
+
+--> induction case with case splitting
+--> case 1
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    var I : PNat .
+    vars L1 L2 : NatList .
+    
+    -- induction hypothesis
+    eq [IH] : drop(l1 @ l2, x) = drop(l1, x) @ drop(l2, x) .
+    eq y = x .
+    -- induction case
+    red drop((y | l1) @ l2, x) = drop(y | l1, x) @ drop(l2, x) .
+close
+
+--> case 2
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    var I : PNat .
+    vars L1 L2 : NatList .
+    
+    -- induction hypothesis
+    eq [IH] : drop(l1 @ l2, x) = drop(l1, x) @ drop(l2, x) .
+    eq (y = x) = false .
+    -- induction case
+    red drop((y | l1) @ l2, x) = drop(y | l1, x) @ drop(l2, x) .
+close

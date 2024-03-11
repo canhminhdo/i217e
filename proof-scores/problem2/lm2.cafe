@@ -1,0 +1,26 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA2 [assoc@]: \forall L1 L2 L3 \in NatList: (L1 @ L2) @ L3 = L1 @ (L2 @ L3) .
+-- [require] 
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA2
+--> base case
+open NATLIST .
+    ops l1 l2 l3 : -> NatList .
+
+    red (nil @ l2) @ l3 = nil @ (l2 @ l3) .
+close
+
+--> induction case
+open NATLIST .
+    ops x : -> PNat .
+    ops l1 l2 l3 : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : (l1 @ l2) @ l3 = l1 @ (l2 @ l3) .
+    -- induction case
+    red ((x | l1) @ l2) @ l3 = (x | l1) @ (l2 @ l3) .
+close
