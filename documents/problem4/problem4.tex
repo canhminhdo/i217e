@@ -112,7 +112,7 @@
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
 
-\title{Problem 3}
+\title{Problem 4}
 \date{\vspace{-5ex}}
 
 \begin{document}
@@ -120,55 +120,104 @@
 \maketitle
 
 \begin{problem}
-$\forall X \in \mathtt{PNat}, \rmx{fact}(X) = \rmx{fold*}(\rmx{mkl2}(X))$.
+$\forall L \in \mathtt{NatList}, \rmx{rev}(\rmx{rev}(L)) = L$.
 \end{problem}
 \begin{proof}
-By direct proof.
+By structural induction on $L$.
 
+\begin{description}
+\item[(1) Base case]~\\
 \noindent
-What to show: $\quad\rmx{fact}(x) = \rmx{fold*}(\rmx{mkl2}(x))$ \\
-where $x \in \mathtt{PNat}$ .
+What to show: $\quad\rmx{rev}(\rmx{rev}(nil)) = nil$.
 \begin{align*}
-\under{\rmx{fact}(x)}
-	&\larrow \under{\rmx{fold*}(\rmx{mkl1}(x))} \tag{by Lemma~\ref{lm1}} \\
-	&\larrow \rmx{fold*}(\under{\rmx{rev}(\rmx{mkl1}(x))}) \tag{by Problem 1} \\
-	&\larrow \rmx{fold*}(\rmx{mkl2}(x)) \tag{by Problem 2}
+\rmx{rev}(\under{\rmx{rev}(nil)})
+	&\larrow \under{\rmx{rev}(nil)} \tag{by rev1} \\
+	&\larrow nil \tag{by rev1}
 \end{align*}
+
+\item[(2) Induction case]~\\
+What to show: $\quad \rmx{rev}(\rmx{rev}(x \rel{|} l)) = x \rel{|} l$ \\
+Induction hypothesis: $\quad \rmx{rev}(\rmx{rev}(l)) = l$  \\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+\begin{align*}
+\rmx{rev}(\under{\rmx{rev}(x \rel{|} l)})
+	&\larrow \under{\rmx{rev}(\rmx{rev}(l) \rel{@} (x \rel{|} nil))} \tag{by rev2} \\
+	&\larrow \under{\rmx{rev}(x \rel{|} nil)} \rel{@} \rmx{rev}(\rmx{rev}(l)) \tag{by Lemma~\ref{lm1}} \\
+	&\larrow (\under{\rmx{rev}(nil)} \rel{@} (x \rel{|} nil)) \rel{@} \rmx{rev}(\rmx{rev}(l)) \tag{by rev2} \\
+	&\larrow \under{(nil \rel{@} (x \rel{|} nil))} \rel{@} \rmx{rev}(\rmx{rev}(l)) \tag{by rev1} \\
+	&\larrow \under{(x \rel{|} nil) \rel{@} \rmx{rev}(\rmx{rev}(l))} \tag{by @1} \\
+	&\larrow x \rel{|} (nil \rel{@} \rmx{rev}(\rmx{rev}(l))) \tag{by @2} \\
+	&\larrow x \rel{|} \under{\rmx{rev}(\rmx{rev}(l))} \tag{by @1} \\
+	&\larrow x \rel{|} l \tag{by IH}
+\end{align*}
+
+\end{description}
+
 \end{proof}
+
 
 \begin{lemma}
 \label{lm1}
-$\forall X \in \mathtt{PNat}, \rmx{fact}(X) = \rmx{fold*}(\rmx{mkl1}(X))$.
+$\forall L1, L2 \in \mathtt{NatList}, \rmx{rev}(L1 \rel{@} L2) = \rmx{rev}(L2) \rel{@} \rmx{rev}(L1)$.
 \end{lemma}
 \begin{proof}
-By structural induction on $X$.
+By structural induction on $L1$.
 
 \begin{description}
 
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad\rmx{fact}(0) = \rmx{fold*}(\rmx{mkl1}(0))$.
+What to show: $\quad \rmx{rev}(nil \rel{@} l2) = \rmx{rev}(l2) \rel{@} \rmx{rev}(nil)$.
 \begin{align*}
-\under{\rmx{fact}(0)}
-	&\larrow \rmx{s}(0) \tag{by fact1} \\
-\rmx{fold*}(\under{\rmx{mkl1}(0)})
-	&\larrow \under{\rmx{fold*}(nil)} \tag{by mkl1-1} \\
-	&\larrow \rmx{s}(0) \tag{by fold*-1}
+\under{\rmx{rev}(nil \rel{@} l2)}
+	&\larrow \rmx{rev}(l2) \tag{by @1} \\
+\rmx{rev}(l2) \rel{@} \under{\rmx{rev}(nil)}
+	&\larrow \under{\rmx{rev}(l2) \rel{@} nil} \tag{by rev1} \\
+	&\larrow \rmx{rev}(l2) \tag{by Lemma~\ref{lm2}}
 \end{align*}
 
 \item[(2) Induction case]~\\
-What to show: $\quad\rmx{fact}(\rmx{s}(x)) = \rmx{fold*}(\rmx{mkl1}(\rmx{s}(x)))$ \\
-Induction hypothesis: $\quad\rmx{fact}(x) = \rmx{fold*}(\rmx{mkl1}(x))$  \\
-where $x \in \mathtt{PNat}$.
+What to show: $\quad \rmx{rev}((x \rel{|} l1) \rel{@} l2) = \rmx{rev}(l2) \rel{@} \rmx{rev}(x \rel{|} l1)$ \\
+Induction hypothesis: $\quad \rmx{rev}(l1 \rel{@} l2) = \rmx{rev}(l2) \rel{@} \rmx{rev}(l1)$  \\
+where $x \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
 \begin{align*}
-\under{\rmx{fact}(\rmx{s}(x))} 
-	&\larrow \under{\rmx{s}(x) \rel{*} \rmx{fact}(x)} \tag{by fact2} \\
-	&\larrow (x \rel{*} \under{\rmx{fact}(x)}) \rel{+} \under{\rmx{fact}(x)} \tag{by *2} \\
-	&\larrow (x \rel{*} \rmx{fold*}(\rmx{mkl1}(x))) \rel{+} \rmx{fold*}(\rmx{mkl1}(x)) \tag{by IH} \\
-\rmx{fold*}(\under{\rmx{mkl1}(\rmx{s}(x))})
-	&\larrow \under{\rmx{fold*}(\rmx{s}(x) \rel{|} \rmx{mkl1}(x))} \tag{by mkl1-2} \\
-	&\larrow \rmx{s}(x) \rel{*} \rmx{fold*}(\rmx{mkl1}(x)) \tag{by fold*-2} \\
-	&\larrow (x \rel{*} \rmx{fold*}(\rmx{mkl1}(x))) \rel{+} \rmx{fold*}(\rmx{mkl1}(x)) \tag{by *2}
+\rmx{rev}(\under{(x \rel{|} l1) \rel{@} l2}) 
+	&\larrow \under{\rmx{rev}(x \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
+	&\larrow \under{\rmx{rev}(l1 \rel{@} l2)} \rel{@} (x \rel{|} nil) \tag{by rev2} \\
+	&\larrow \under{(\rmx{rev}(l2) \rel{@} \rmx{rev}(l1)) \rel{@} (x \rel{|} nil)} \tag{by IH} \\
+	&\larrow \rmx{rev}(l2) \rel{@} (\rmx{rev}(l1) \rel{@} (x \rel{|} nil)) \tag{by Lemma 2 in Problem 2} \\
+\rmx{rev}(l2) \rel{@} \under{\rmx{rev}(x \rel{|} l1)}
+	&\larrow \rmx{rev}(l2) \rel{@} (\rmx{rev}(l1) \rel{@} (x \rel{|} nil)) \tag{by rev2}
+\end{align*}
+
+\end{description}
+\end{proof}
+
+\begin{lemma}
+\label{lm2}
+$\forall L \in \mathtt{NatList}, L \rel{@} nil = L$.
+\end{lemma}
+\begin{proof}
+By structural induction on $L$.
+
+\begin{description}
+
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad nil \rel{@} nil = nil$.
+\begin{align*}
+\under{nil \rel{@} nil}
+	&\larrow nil \tag{by @1}
+\end{align*}
+
+\item[(2) Induction case]~\\
+What to show: $\quad (x \rel{|} l) \rel{@} nil = x \rel{|} l$ \\
+Induction hypothesis: $\quad l \rel{@} nil = l$  \\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+\begin{align*}
+\under{(x \rel{|} l) \rel{@} nil}
+	&\larrow x \rel{|} \under{(l \rel{@} nil)} \tag{by @2} \\
+	&\larrow x \rel{|} l \tag{by IH}
 \end{align*}
 
 \end{description}

@@ -54,10 +54,3 @@ PROBLEM10: \forall X \in PNat, L \in NatList: drop(L, X) = rev(drop(rev(L), X)) 
     - LEMMA1 : \forall X \in PNat, L1, L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
 
 PROBLEM11: \forall X \in PNat, L \in NatList: has(drop(L, X), X) = false .
-
-<!--
-PROBLEM7: \forall L1 L2 \in NatList : min(L1 @ L2) = min(min(L1) @ min(L2)) .
-
-PROBLEM8: \forall L1 L2 \in NatList : max(L1 @ L2) = max(max(L1) @ max(L2)) .
-
-PROBLEM10: \forall L1 L2 \in NatList : diff(L1, L2) = diff(L2, L1) . -->
