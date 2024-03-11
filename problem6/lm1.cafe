@@ -1,0 +1,31 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA1: \forall L1, L2 \in NatList: diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
+-- [require] LEMMA2
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA1
+--> base case
+open NATLIST .
+    ops l2 l3 : -> NatList .
+
+    red diff(nil, l2 @ l3) = diff(diff(nil, l2), l3) .
+close
+
+--> induction case
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 l3 : -> NatList .
+
+    vars L1 L2 L3 : NatList .
+    var I : PNat .
+
+    -- induction hypothesis
+    eq [IH] : diff(l1, L2 @ L3) = diff(diff(l1, L2), L3) .
+    -- use LEMMA2
+    eq [LEMMA2] : has(L1 @ L2, I) = has(L1, I) or has(L2, I) .
+    -- induction case
+    red diff(l1, l2 @ l3) = diff(diff(l1, l2), l3) .
+close

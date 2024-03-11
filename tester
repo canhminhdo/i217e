@@ -8,3 +8,4 @@ cd $DIR/problem2/test && ./tester
 cd $DIR/problem3/test && ./tester
 cd $DIR/problem4/test && ./tester
 cd $DIR/problem5/test && ./tester
+cd $DIR/problem6/test && ./tester

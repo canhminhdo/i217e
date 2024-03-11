@@ -1,0 +1,87 @@
+in ../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA2: \forall X \in PNAT, \forall L1, L2 \in NatList: has(L1 @ L2, X) = has(L1, X) or has(L2, X) .
+-- [require]
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA2
+--> base case with case splitting
+--> case 1
+open NATLIST .
+    op x : -> PNat .
+    op l2 : -> NatList .
+    -- case splitting
+    eq has(l2, x) = true .
+    -- base case
+    red has(nil @ l2, x) = has(nil, x) or has(l2, x) .
+close
+
+--> case 2
+open NATLIST .
+    op x : -> PNat .
+    op l2 : -> NatList .
+    -- case splitting
+    eq has(l2, x) = false .
+    -- base case
+    red has(nil @ l2, x) = has(nil, x) or has(l2, x) .
+close
+
+--> induction case with case splitting
+--> case 1
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : has(l1 @ l2, x) = has(l1, x) or has(l2, x) .
+    -- case splitting
+    eq x = y .
+    -- induction case
+    red has((y | l1) @ l2, x) = has(y | l1, x) or has(l2, x) .
+close
+
+--> case 2.1
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : has(l1 @ l2, x) = has(l1, x) or has(l2, x) .
+    -- case splitting
+    eq (x = y) = false .
+    eq has(l1, x) = true .
+    -- induction case
+    red has((y | l1) @ l2, x) = has(y | l1, x) or has(l2, x) .
+close
+
+--> case 2.2.1
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : has(l1 @ l2, x) = has(l1, x) or has(l2, x) .
+    -- case splitting
+    eq (x = y) = false .
+    eq has(l1, x) = false .
+    eq has(l2, x) = true .
+    -- induction case
+    red has((y | l1) @ l2, x) = has(y | l1, x) or has(l2, x) .
+close
+
+--> case 2.2.2
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : has(l1 @ l2, x) = has(l1, x) or has(l2, x) .
+    -- case splitting
+    eq (x = y) = false .
+    eq has(l1, x) = false .
+    eq has(l2, x) = false .
+    -- induction case
+    red has((y | l1) @ l2, x) = has(y | l1, x) or has(l2, x) .
+close
