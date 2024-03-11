@@ -1,56 +1,47 @@
 in ../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM9: \forall L1, L2 \in NatList: diff(L1, L2) = rev(diff(rev(L1), L2)) .
--- [require] LEMMA1, PROBLEM4 - LEMMA1, PROBLEM4 - LEMMA2
+-- PROBLEM9: \forall X \in PNat, L1, L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
+-- [require]
 -- ----------------------------------------------------------------------------
 
 select NATLIST
 --> PROOF: PROBLEM9
 --> base case
 open NATLIST .
+    op x : -> PNat .
     op l2 : -> NatList .
 
-    red diff(nil, l2) = rev(diff(rev(nil), l2)) .
+    red drop(nil @ l2, x) = drop(nil, x) @ drop(l2, x) .
 close
 
 --> induction case with case splitting
 --> case 1
 open NATLIST .
-    op x : -> PNat .
+    ops x y : -> PNat .
     ops l1 l2 : -> NatList .
-    
-    vars L1 L2 L3 : NatList .
 
+    var I : PNat .
+    vars L1 L2 : NatList .
+    
     -- induction hypothesis
-    eq [IH] : diff(l1, l2) = rev(diff(rev(l1), l2)) .
-    -- use LEMMA1
-    eq [LEMMA1] : diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
-    -- use PROBLEM4 - LEMMA2
-    eq [PROB4-LM2] : L1 @ nil = L1 .
-    -- case splitting
-    eq has(l2, x) = true .
+    eq [IH] : drop(l1 @ l2, x) = drop(l1, x) @ drop(l2, x) .
+    eq y = x .
     -- induction case
-    red diff(x | l1, l2) = rev(diff(rev(x | l1), l2)) .
+    red drop((y | l1) @ l2, x) = drop(y | l1, x) @ drop(l2, x) .
 close
 
 --> case 2
 open NATLIST .
-    op x : -> PNat .
+    ops x y : -> PNat .
     ops l1 l2 : -> NatList .
-    
-    vars L1 L2 L3 : NatList .
 
+    var I : PNat .
+    vars L1 L2 : NatList .
+    
     -- induction hypothesis
-    eq [IH] : diff(l1, l2) = rev(diff(rev(l1), l2)) .
-    -- use LEMMA1
-    eq [LEMMA1] : diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
-    -- use PROBLEM4 - LEMMA1
-    eq [PROB4-LM1] : rev(L1 @ L2) = rev(L2) @ rev(L1) .
-    -- use PROBLEM4 - LEMMA2
-    eq [PROB4-LM2] : L1 @ nil = L1 .
-    -- case splitting
-    eq has(l2, x) = false .
+    eq [IH] : drop(l1 @ l2, x) = drop(l1, x) @ drop(l2, x) .
+    eq (y = x) = false .
     -- induction case
-    red diff(x | l1, l2) = rev(diff(rev(x | l1), l2)) .
+    red drop((y | l1) @ l2, x) = drop(y | l1, x) @ drop(l2, x) .
 close
