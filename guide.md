@@ -49,6 +49,9 @@ PROBLEM8: \forall L1, L2 \in NatList: diff(L1, L2) = diff(L1, rev(L2)) .
         - PROBLEM6 - LEMMA2
 
 PROBLEM9: \forall L1, L2 \in NatList: diff(L1, L2) = rev(diff(rev(L1), L2)) .
+    - LEMMA1: \forall L1, L2, L3 \in NatList: diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
+    - PROBLEM4 - LEMMA1
+    - PROBLEM4 - LEMMA2
 
 <!--
 PROBLEM7: \forall L1 L2 \in NatList : min(L1 @ L2) = min(min(L1) @ min(L2)) .
