@@ -5,9 +5,9 @@ This repository contains the problems and their proofs for the [i217e Functional
 ## Instructions
 The formal specification for natural numbers and lists of natural numbers are specified in the `pgm.cafe` file. Based on the specification, we have prepared several problems. Students are supposed to provide their proofs by wirting proof scores. Additionally, students also need to prepare a document to show each step of their proof, detailing the rewriting process.
 
-For each problem, we have provided its proof in two formats: 
-- proof scores
-- a detailed document
+For each problem, we have provided its proof in two formats:
+- proof scores,
+- a detailed document.
 
 For instance, students can refer the proof scores and accompanying document for problem 1 in the `proof-scores/problem1` and `problems/problem1` directories, respectively.
 
@@ -16,7 +16,7 @@ To test proof scores for each problem, students can navigate to `test` directory
 ```console
 cd proof-scores/<problem-name>/test && ./tester
 ```
-where `<problem-name>` is replaced by the name of a problem, such as `problem1`. Moreover, students can evaluate all tests for entire proof scores at once by executing `tester` scirpt at `proof-scores` directory.
+where `<problem-name>` is replaced by the name of a problem, such as `problem1`. Moreover, students can evaluate all tests for entire proof scores at once by executing `tester` scirpt at `proof-scores` directory as follows:
 
 ```console
 cd proof-scores && ./tester
