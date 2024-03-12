@@ -26,6 +26,7 @@ open NATLIST .
     
     -- induction hypothesis
     eq [IH] : drop(l1 @ l2, x) = drop(l1, x) @ drop(l2, x) .
+    -- use case splitting
     eq y = x .
     -- induction case
     red drop((y | l1) @ l2, x) = drop(y | l1, x) @ drop(l2, x) .
@@ -41,6 +42,7 @@ open NATLIST .
     
     -- induction hypothesis
     eq [IH] : drop(l1 @ l2, x) = drop(l1, x) @ drop(l2, x) .
+    -- use case splitting
     eq (y = x) = false .
     -- induction case
     red drop((y | l1) @ l2, x) = drop(y | l1, x) @ drop(l2, x) .

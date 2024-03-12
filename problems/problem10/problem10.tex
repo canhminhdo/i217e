@@ -1,0 +1,255 @@
+
+%% bare_adv.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% See: 
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the advanced use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE Computer
+%% Society journal paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+% IEEEtran V1.7 and later provides for these CLASSINPUT macros to allow the
+% user to reprogram some IEEEtran.cls defaults if needed. These settings
+% override the internal defaults of IEEEtran.cls regardless of which class
+% options are used. Do not use these unless you have good reason to do so as
+% they can result in nonIEEE compliant documents. User beware. ;)
+%
+%\newcommand{\CLASSINPUTbaselinestretch}{1.0} % baselinestretch
+%\newcommand{\CLASSINPUTinnersidemargin}{1in} % inner side margin
+%\newcommand{\CLASSINPUToutersidemargin}{1in} % outer side margin
+%\newcommand{\CLASSINPUTtoptextmargin}{1in}   % top text margin
+%\newcommand{\CLASSINPUTbottomtextmargin}{1in}% bottom text margin
+
+%
+\documentclass[12pt, a4paper]{article}
+%\documentclass[10pt,conference,compsoc,onecolumn]{IEEEtran}
+%\def\IEEEcompsocdiamondline{\vspace{-2cm}}
+
+\usepackage{listings}
+\lstset{
+	basicstyle=\ttfamily\linespread{1.1}\selectfont,
+	breaklines=true,
+	emph={
+		sort, subsort, sorts, op, ops, eq, ceq, var, vars,
+		protecting, extending, including, rl, crl,
+		mod, is, endm, if, implies, fmod, endfm,
+		and, or, else, fi, then, not, open, red, reduce, close,
+		load, erewrite 
+	},
+	emphstyle={\color{black}\bfseries},
+%	aboveskip=0.8em,
+%	belowskip=0.8em
+}
+	
+\usepackage[linesnumbered,ruled,vlined,noend]{algorithm2e}
+\usepackage{soul}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{physics}
+\definecolor{leafgreen}{rgb}{0.01, 0.75, 0.24}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{problem}{Problem}
+%\newtheorem{proof}{Proof}
+\newcommand{\comp}{\mathrel{;}}
+\newcommand{\lmerge}{\mathrel{\llfloor}}
+\newcommand{\rel}[1]{\mathrel{#1}}
+\newcommand{\rmx}[1]{\mathrm{#1}}
+\newcommand{\larrow}{\longrightarrow}
+\newcommand{\under}{\underline}
+
+\title{Problem 10}
+\date{\vspace{-5ex}}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+$\forall X \in \mathtt{PNat}, L1, L2 \in \mathtt{NatList}, \rmx{drop}(L, X) = \rmx{rev}(\rmx{drop}(\rmx{rev}(L), X))$.
+\end{problem}
+\begin{proof}
+By structural induction on $L$.
+
+\begin{description}
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad \rmx{drop}(nil, x) = \rmx{rev}(\rmx{drop}(\rmx{rev}(nil), x))$ \\
+where $x \in \mathtt{PNat}$.
+\begin{align*}
+\under{\rmx{drop}(nil, x)}
+	&\larrow nil \tag{by drop1} \\
+\rmx{rev}(\rmx{drop}(\under{\rmx{rev}(nil)}, x))
+	&\larrow \rmx{rev}(\under{\rmx{drop}(nil, x)}) \tag{by rev1} \\
+	&\larrow \under{\rmx{rev}(nil)} \tag{by drop1} \\
+	&\larrow nil \tag{by rev1} \\
+\end{align*}
+
+\item[(2) Induction case]~\\
+What to show: $\quad \rmx{drop}(y \rel{|} l, x) = \rmx{rev}(\rmx{drop}(\rmx{rev}(y \rel{|} l), x))$ \\
+Induction hypothesis: $\quad \rmx{drop}(l, x) = \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x))$  \\
+where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$. \\
+We use case splitting for our proofs as follows: \\
+\textbf{Case 1}: $y = x$
+\begin{align*}
+%%% LHS
+\rmx{drop}(\under{y} \rel{|} l, x)
+	&\larrow \under{\rmx{drop}(x \rel{|} l, x)} \tag{by case splitting} \\
+	&\larrow\ \rel{\rmx{if}} \under{(x = x)} \rel{\rmx{then}} \rmx{drop}(l, x) \rel{\rmx{else}} (x \rel{|} \rmx{drop}(l, x)) \rel{\rmx{fi}} \tag{by drop2} \\
+	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{drop}(l, x) \rel{\rmx{else}} (x \rel{|} \rmx{drop}(l, x)) \rel{\rmx{fi}}} \tag{by equality} \\
+	&\larrow \under{\rmx{drop}(l, x)} \tag{by if1} \\
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)) \tag{by IH} \\
+%%% RHS
+\rmx{rev}(\rmx{drop}(\rmx{rev}(\under{y} \rel{|} l), x))
+	&\larrow \rmx{rev}(\rmx{drop}(\under{\rmx{rev}(x \rel{|} l)}, x)) \tag{by case splitting} \\
+	&\larrow \rmx{rev}(\under{\rmx{drop}(\rmx{rev}(l) \rel{@} (x \rel{|} nil), x)}) \tag{by case splitting} \\
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \under{\rmx{drop}(x \rel{|} nil, x)}) \tag{by Lemma~\ref{lm1}} \\
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \\
+	&\quad \quad (\rel{\rmx{if}} \under{(x = x)} \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (x \rel{|} \rmx{drop}(nil, x)) \rel{\rmx{fi}})) \tag{by drop2} \\
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \\
+	&\quad \quad \under{(\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (x \rel{|} \rmx{drop}(nil, x)) \rel{\rmx{fi}})}) \tag{by equality} \\
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \under{\rmx{drop}(nil, x)}) \tag{by if1} \\
+	&\larrow \rmx{rev}(\under{\rmx{drop}(\rmx{rev}(l), x) \rel{@} nil}) \tag{by drop1} \\
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)) \tag{by Lemma 2 from Problem 4} \\
+\end{align*}
+
+\textbf{Case 2}: $(y = x) = false$
+\begin{align*}
+%%% LHS
+\under{\rmx{drop}(y \rel{|} l, x)}
+	&\larrow\ \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} \rmx{drop}(l, x) \rel{\rmx{else}} (y \rel{|} \rmx{drop}(l, x)) \rel{\rmx{fi}} \tag{by drop2} \\
+	&\larrow \under{\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{drop}(l, x) \rel{\rmx{else}} (y \rel{|} \rmx{drop}(l, x)) \rel{\rmx{fi}}} \tag{by case splitting} \\
+	&\larrow y \rel{|} \under{\rmx{drop}(l, x)} \tag{by if2} \\
+	&\larrow y \rel{|} \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)) \tag{by IH} \\
+%%% RHS
+\rmx{rev}(\rmx{drop}(\under{\rmx{rev}(y \rel{|} l)}, x))
+	&\larrow \rmx{rev}(\under{\rmx{drop}(\rmx{rev}(l) \rel{@} (y \rel{|} nil), x)}) \tag{by rev2} \\
+	%%%
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \under{\rmx{drop}((y \rel{|} nil), x)}) \tag{by Lemma~\ref{lm1}} \\
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \\
+	&\quad \quad \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (y \rel{|} \rmx{drop}(nil, x)) \rel{\rmx{fi}}) \tag{by drop2} \\
+	%%%
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \\
+	&\quad \quad \under{\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (y \rel{|} \rmx{drop}(nil, x)) \rel{\rmx{fi}}}) \tag{by case splitting} \\
+	%%%
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} (y \rel{|} \under{\rmx{drop}(nil, x)})) \tag{by if2} \\
+	%%%
+	&\larrow \under{\rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} (y \rel{|} nil))} \tag{by drop1} \\
+	%%%
+	&\larrow \under{\rmx{rev}(y \rel{|} nil)} \rel{@} \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)) \tag{by Lemma 1 from Problem 4} \\
+	%%%
+	&\larrow (\under{\rmx{rev}(nil)} \rel{@} (y \rel{|} nil)) \rel{@} \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)) \tag{by rev2} \\
+	%%%
+	&\larrow \under{(nil \rel{@} (y \rel{|} nil))} \rel{@} \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)) \tag{by rev1} \\
+	%%%
+	&\larrow \under{(y \rel{|} nil) \rel{@} \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x))} \tag{by @1} \\
+	%%%
+	&\larrow y \rel{|} \under{(nil \rel{@} \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)))} \tag{by @2} \\
+	%%%
+	&\larrow y \rel{|} \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)) \tag{by @1}
+\end{align*}
+
+\end{description}
+
+\end{proof}
+
+
+\begin{lemma}
+\label{lm1}
+$\forall X \in \mathtt{PNat}, L1, L2 \in \mathtt{NatList}, \rmx{drop}(L1 \rel{@} L2, X) = \rmx{drop}(L1, X) \rel{@} \rmx{drop}(L2, X)$.
+\end{lemma}
+\begin{proof}
+By structural induction on $L1$.
+
+\begin{description}
+
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad \rmx{drop}(nil \rel{@} l2, x) = \rmx{drop}(nil, x) \rel{@} \rmx{drop}(l2, x)$ \\
+where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
+\begin{align*}
+\rmx{drop}(\under{nil \rel{@} l2}, x)
+	&\larrow \rmx{drop}(l2, x) \tag{by @1} \\
+%%%
+\under{\rmx{drop}(nil, x)} \rel{@} \rmx{drop}(l2, x)
+	&\larrow \under{nil \rel{@} \rmx{drop}(l2, x)} \tag{by drop1} \\
+	&\larrow \rmx{drop}(l2, x) \tag{by @1} \\
+\end{align*}
+
+\item[(2) Induction case]~\\
+What to show: $\quad \rmx{drop}((y \rel{|} l1) \rel{@} l2, x) = \rmx{drop}((y \rel{|} l1), x) \rel{@} \rmx{drop}(l2, x)$ \\
+Induction hypothesis: $\quad \rmx{drop}(l1 \rel{@} l2, x) = \rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x)$ \\
+where $x, y \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
+
+We use case splitting for our proofs as follows: \\
+\textbf{Case 1}: $y = x$
+\begin{align*}
+%%% LHS
+%%% DOING HERE
+\rmx{drop}((y \rel{|} l1) \rel{@} l2, x)
+	&\larrow  \tag{by } \\
+	%%%
+%%% RHS
+\rmx{drop}((y \rel{|} l1), x) \rel{@} \rmx{drop}(l2, x)
+	&\larrow \tag{by diff2} \\
+	%%%
+\end{align*}
+
+\end{description}
+\end{proof}
+
+\end{document}
