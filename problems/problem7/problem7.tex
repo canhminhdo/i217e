@@ -131,9 +131,8 @@ By structural induction on $L$.
 What to show: $\quad \rmx{diff}(nil, \rmx{rev}(nil)) = nil$.
 \begin{align*}
 \under{\rmx{diff}(nil, \rmx{rev}(nil))}
-	&\larrow nil \tag{by diff1} \\
+	&\larrow nil \tag{by diff1}
 \end{align*}
-
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{diff}(x \rel{|} l, \rmx{rev}(x \rel{|} l)) = nil$ \\
 Induction hypothesis: $\quad \rmx{diff}(l, \rmx{rev}(l)) = nil$  \\
@@ -203,7 +202,7 @@ Induction hypothesis: $\quad \rmx{diff}(l1, l2 \rel{@} l3) = \rmx{diff}(\rmx{dif
 where $x\in \mathtt{PNat}$, and $l1, l2, l3 \in \mathtt{NatList}$.
 
 We use case splitting for our proofs as follows: \\
-$\rmx{Case 1:}\ \rmx{has}(l2, x) = true$
+\textbf{Case 1}: $\rmx{has}(l2, x) = true$
 \begin{align*}
 \under{\rmx{diff}(x \rel{|} l1, l2 \rel{@} l3)}
 	&\larrow\ \rel{\rmx{if}} \under{\rmx{has}(l2 \rel{@} l3, x)} \rel{\rmx{then}} \rmx{diff}(l1,l2 \rel{@} l3) \\
@@ -226,7 +225,7 @@ $\rmx{Case 1:}\ \rmx{has}(l2, x) = true$
 	&\larrow \rmx{diff}(\rmx{diff}(l1, l2), l3) \tag{by if1}
 \end{align*}
 
-$\rmx{Case 2:}\ \rmx{has}(l2, x) = false$
+\textbf{Case 2}: $\rmx{has}(l2, x) = false$
 \begin{align*}
 \under{\rmx{diff}(x \rel{|} l1, l2 \rel{@} l3)}
 	&\larrow\ \rel{\rmx{if}} \under{\rmx{has}(l2 \rel{@} l3, x)} \rel{\rmx{then}} \rmx{diff}(l1,l2 \rel{@} l3) \\
