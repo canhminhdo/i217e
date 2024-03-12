@@ -1,0 +1,231 @@
+
+%% bare_adv.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% See: 
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the advanced use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE Computer
+%% Society journal paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+% IEEEtran V1.7 and later provides for these CLASSINPUT macros to allow the
+% user to reprogram some IEEEtran.cls defaults if needed. These settings
+% override the internal defaults of IEEEtran.cls regardless of which class
+% options are used. Do not use these unless you have good reason to do so as
+% they can result in nonIEEE compliant documents. User beware. ;)
+%
+%\newcommand{\CLASSINPUTbaselinestretch}{1.0} % baselinestretch
+%\newcommand{\CLASSINPUTinnersidemargin}{1in} % inner side margin
+%\newcommand{\CLASSINPUToutersidemargin}{1in} % outer side margin
+%\newcommand{\CLASSINPUTtoptextmargin}{1in}   % top text margin
+%\newcommand{\CLASSINPUTbottomtextmargin}{1in}% bottom text margin
+
+%
+\documentclass[12pt, a4paper]{article}
+%\documentclass[10pt,conference,compsoc,onecolumn]{IEEEtran}
+%\def\IEEEcompsocdiamondline{\vspace{-2cm}}
+
+\usepackage{listings}
+\lstset{
+	basicstyle=\ttfamily\linespread{1.1}\selectfont,
+	breaklines=true,
+	emph={
+		sort, subsort, sorts, op, ops, eq, ceq, var, vars,
+		protecting, extending, including, rl, crl,
+		mod, is, endm, if, implies, fmod, endfm,
+		and, or, else, fi, then, not, open, red, reduce, close,
+		load, erewrite 
+	},
+	emphstyle={\color{black}\bfseries},
+%	aboveskip=0.8em,
+%	belowskip=0.8em
+}
+	
+\usepackage[linesnumbered,ruled,vlined,noend]{algorithm2e}
+\usepackage{soul}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{physics}
+\definecolor{leafgreen}{rgb}{0.01, 0.75, 0.24}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{problem}{Problem}
+%\newtheorem{proof}{Proof}
+\newcommand{\comp}{\mathrel{;}}
+\newcommand{\lmerge}{\mathrel{\llfloor}}
+\newcommand{\rel}[1]{\mathrel{#1}}
+\newcommand{\rmx}[1]{\mathrm{#1}}
+\newcommand{\larrow}{\longrightarrow}
+\newcommand{\under}{\underline}
+
+\title{Problem 5}
+\date{\vspace{-5ex}}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+$\forall L \in \mathtt{NatList}, \rmx{size}(L) = \rmx{size}(\rmx{rev}(L))$.
+\end{problem}
+\begin{proof}
+By structural induction on $L$.
+
+\begin{description}
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad \rmx{size}(nil) = \rmx{size}(\rmx{rev}(nil))$.
+\begin{align*}
+\under{\rmx{size}(nil)}
+	&\larrow 0 \tag{by size1} \\
+\rmx{size}(\under{\rmx{rev}(nil)})
+	&\larrow \under{\rmx{size}(nil)} \tag{by rev1} \\
+	&\larrow nil \tag{by size1}
+\end{align*}
+
+\item[(2) Induction case]~\\
+What to show: $\quad \rmx{size}(x \rel{|} l) = \rmx{size}(\rmx{rev}(x \rel{|} l))$ \\
+Induction hypothesis: $\quad \rmx{size}(l) = \rmx{size}(\rmx{rev}(l))$  \\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+\begin{align*}
+\under{\rmx{size}(x \rel{|} l)}
+	&\larrow \rmx{s}(\under{\rmx{size}(l)}) \tag{by size2} \\
+	&\larrow \under{\rmx{s}(\rmx{size}(\rmx{rev}(l)))} \tag{by IH} \\
+	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \rmx{s}(0) \tag{by Lemma~\ref{lm2}} \\
+\rmx{size}(\under{\rmx{rev}(x \rel{|} l)})
+	&\larrow \under{\rmx{size}(\rmx{rev}(l) \rel{@} (x \rel{|} nil))} \tag{by rev2} \\
+	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \under{\rmx{size}(x \rel{|} nil)} \tag{by Lemma~\ref{lm1}} \\
+	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \rmx{s}(\under{\rmx{size}(nil)}) \tag{by size2} \\
+	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \rmx{s}(0) \tag{by size1}
+\end{align*}
+
+\end{description}
+
+\end{proof}
+
+
+%LEMMA1: \forall L1, L2 \in NatList: size(L1 @ L2) = size(L1) + size(L2) .
+\begin{lemma}
+\label{lm1}
+$\forall L1, L2 \in \mathtt{NatList}, \rmx{size}(L1 \rel{@} L2) = \rmx{size}(L1) \rel{+} \rmx{size}(L1)$.
+\end{lemma}
+\begin{proof}
+By structural induction on $L1$.
+
+\begin{description}
+
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad \rmx{size}(nil \rel{@} l2) = \rmx{size}(nil) \rel{+} \rmx{size}(l2)$ \\
+where $l2 \in \mathtt{NatList}$.
+\begin{align*}
+\rmx{size}(\under{nil \rel{@} l2})
+	&\larrow \rmx{size}(l2) \tag{by @1} \\
+\under{\rmx{size}(nil)} \rel{@} \rmx{size}(l2)
+	&\larrow \under{0 \rel{+} \rmx{size}(l2)} \tag{by size1} \\
+	&\larrow \rmx{size}(l2) \tag{by +1}
+\end{align*}
+
+\item[(2) Induction case]~\\
+What to show: $\quad \rmx{size}((x \rel{|} l1) \rel{@} l2) = \rmx{size}(x \rel{|} l1) \rel{+} \rmx{size}(l2)$ \\
+Induction hypothesis: $\quad \rmx{size}(l1 \rel{@} l2) = \rmx{size}(l1) \rel{+} \rmx{size}(l2)$  \\
+where $x \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
+\begin{align*}
+\rmx{size}(\under{(x \rel{|} l1) \rel{@} l2})
+	&\larrow \under{\rmx{size}(x \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
+	&\larrow \rmx{s}(\under{\rmx{size}(l1 \rel{@} l2)}) \tag{by size2} \\
+	&\larrow \rmx{s}(\rmx{size}(l1) \rel{+} \rmx{size}(l2)) \tag{by IH} \\
+\under{\rmx{size}(x \rel{|} l1)} \rel{+} \rmx{size}(l2)
+	&\larrow \under{\rmx{s}(\rmx{size}(l1)) \rel{+} \rmx{size}(l2)} \tag{by size2} \\
+	&\larrow \rmx{s}(\rmx{size}(l1) \rel{+} \rmx{size}(l2)) \tag{by +2}
+\end{align*}
+
+\end{description}
+\end{proof}
+
+%LEMMA2: \forall X \in PNat: s(X) = X + s(0) .
+\begin{lemma}
+\label{lm2}
+$\forall X \in \mathtt{PNat}, \rmx{s}(X) = X \rel{+} \rmx{s}(0)$.
+\end{lemma}
+\begin{proof}
+By structural induction on $X$.
+
+\begin{description}
+
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad \rmx{s}(0) = 0 \rel{+} \rmx{s}(0)$.
+\begin{align*}
+\under{0 \rel{+} \rmx{s}(0)}
+	&\larrow \rmx{s}(0) \tag{by +1}
+\end{align*}
+
+\item[(2) Induction case]~\\
+What to show: $\quad \rmx{s}(\rmx{s}(x)) = \rmx{s}(x) \rel{+} \rmx{s}(0)$ \\
+Induction hypothesis: $\quad \rmx{s}(x) = x \rel{+} \rmx{s}(0)$  \\
+where $x \in \mathtt{PNat}$.
+\begin{align*}
+\under{\rmx{s}(x) \rel{+} \rmx{s}(0)}
+	&\larrow \rmx{s}(\under{\rmx{s}(x) \rel{+} 0}) \tag{by Lemma 7 from Problem 1} \\
+	&\larrow \rmx{s}(\rmx{s}(x)) \tag{by Lemma 6 from Problem 1}
+\end{align*}
+
+\end{description}
+\end{proof}
+
+\end{document}

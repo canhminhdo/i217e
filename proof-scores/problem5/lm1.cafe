@@ -2,7 +2,7 @@ in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- LEMMA1: \forall L1, L2 \in NatList: size(L1 @ L2) = size(L1) + size(L2) .
--- [require] PROBLEM1 - LEMMA4 [assoc+], PROBLEM1 - LEMMA5 [comm+]
+-- [require]
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -19,14 +19,8 @@ open NATLIST .
     op x : -> PNat .
     ops l1 l2 : -> NatList .
 
-    vars I J K : PNat .
-
     -- induction hypothesis
     eq [IH] : size(l1 @ l2) = size(l1) + size(l2) .
-    -- use PROBLEM1 - LEMMA4 [assoc+]
-    eq [PROB1-LM4] : (I + J) + K = I + (J + K) .
-    -- use PROBLEM1 - LEMMA5 [comm+]
-    eq [PROB1-LM5] : size(l2) + I = I + size(l2) .
     -- induction case
     red size((x | l1) @ l2) = size(x | l1) + size(l2) .
 close
