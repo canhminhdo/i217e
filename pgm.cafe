@@ -60,6 +60,6 @@ mod! NATLIST {
   eq [smkl2-2] : smkl2(s(X),L) = smkl2(X,s(X) | L) .
   eq [fold*-1] : fold*(nil) = s(0) .
   eq [fold*-2] : fold*(X | L) = X * fold*(L) .
-  eq [size-1] : size(nil) = 0 .
-  eq [size-2] : size(X | L) = s(size(L)) .
+  eq [size1] : size(nil) = 0 .
+  eq [size2] : size(X | L) = s(size(L)) .
 }
