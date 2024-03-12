@@ -120,7 +120,7 @@
 \maketitle
 
 \begin{problem}
-$\forall X \in \mathtt{PNat}, L1, L2 \in \mathtt{NatList}, \rmx{drop}(L, X) = \rmx{rev}(\rmx{drop}(\rmx{rev}(L), X))$.
+$\forall X \in \mathtt{PNat}, L \in \mathtt{NatList}, \rmx{drop}(L, X) = \rmx{rev}(\rmx{drop}(\rmx{rev}(L), X))$.
 \end{problem}
 \begin{proof}
 By structural induction on $L$.
@@ -156,7 +156,7 @@ We use case splitting for our proofs as follows: \\
 %%% RHS
 \rmx{rev}(\rmx{drop}(\rmx{rev}(\under{y} \rel{|} l), x))
 	&\larrow \rmx{rev}(\rmx{drop}(\under{\rmx{rev}(x \rel{|} l)}, x)) \tag{by case splitting} \\
-	&\larrow \rmx{rev}(\under{\rmx{drop}(\rmx{rev}(l) \rel{@} (x \rel{|} nil), x)}) \tag{by case splitting} \\
+	&\larrow \rmx{rev}(\under{\rmx{drop}(\rmx{rev}(l) \rel{@} (x \rel{|} nil), x)}) \tag{by rev2} \\
 	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \under{\rmx{drop}(x \rel{|} nil, x)}) \tag{by Lemma~\ref{lm1}} \\
 	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \\
 	&\quad \quad (\rel{\rmx{if}} \under{(x = x)} \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (x \rel{|} \rmx{drop}(nil, x)) \rel{\rmx{fi}})) \tag{by drop2} \\
@@ -231,7 +231,7 @@ where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
 \end{align*}
 
 \item[(2) Induction case]~\\
-What to show: $\quad \rmx{drop}((y \rel{|} l1) \rel{@} l2, x) = \rmx{drop}((y \rel{|} l1), x) \rel{@} \rmx{drop}(l2, x)$ \\
+What to show: $\quad \rmx{drop}((y \rel{|} l1) \rel{@} l2, x) = \rmx{drop}(y \rel{|} l1, x) \rel{@} \rmx{drop}(l2, x)$ \\
 Induction hypothesis: $\quad \rmx{drop}(l1 \rel{@} l2, x) = \rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x)$ \\
 where $x, y \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
 
@@ -239,16 +239,52 @@ We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $y = x$
 \begin{align*}
 %%% LHS
-%%% DOING HERE
-\rmx{drop}((y \rel{|} l1) \rel{@} l2, x)
-	&\larrow  \tag{by } \\
-	%%%
+\rmx{drop}((\under{y} \rel{|} l1) \rel{@} l2, x)
+	&\larrow \rmx{drop}(\under{(x \rel{|} l1) \rel{@} l2}, x) \tag{by case splitting} \\
+	&\larrow \under{\rmx{drop}(x \rel{|} (l1 \rel{@} l2), x)} \tag{by @2} \\
+	&\larrow\ \rel{\rmx{if}} \under{(x = x)} \rel{\rmx{then}} \rmx{drop}(l1 \rel{@} l2, x) \\
+	&\quad \quad \rel{\rmx{else}} (x \rel{|} \rmx{drop}(l1 \rel{@} l2, x)) \rel{\rmx{fi}} \tag{by drop2} \\
+	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{drop}(l1 \rel{@} l2, x)} \\
+	&\quad \quad \under{\rel{\rmx{else}} (x \rel{|} \rmx{drop}(l1 \rel{@} l2, x)) \rel{\rmx{fi}}} \tag{by equality} \\
+	&\larrow \under{\rmx{drop}(l1 \rel{@} l2, x)} \tag{by if1} \\
+	&\larrow \rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x) \tag{by IH} \\
 %%% RHS
-\rmx{drop}((y \rel{|} l1), x) \rel{@} \rmx{drop}(l2, x)
-	&\larrow \tag{by diff2} \\
+\rmx{drop}(\under{y} \rel{|} l1, x) \rel{@} \rmx{drop}(l2, x)
+	&\larrow \under{\rmx{drop}(x \rel{|} l1, x)} \rel{@} \rmx{drop}(l2, x) \tag{by case splitting} \\
+	%%%
+	&\larrow \rel{\rmx{if}} \under{(x = x)} \rel{\rmx{then}} \rmx{drop}(l1, x) \rel{\rmx{else}} (x \rel{|} \rmx{drop}(l1, x)) \rel{\rmx{fi}} \\
+	&\quad \quad \rel{@} \rmx{drop}(l2, x) \tag{by drop2} \\
+	%%%
+	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{drop}(l1, x) \rel{\rmx{else}} (x \rel{|} \rmx{drop}(l1, x)) \rel{\rmx{fi}}} \\
+	&\quad \quad \rel{@} \rmx{drop}(l2, x) \tag{by equality} \\
+	%%%
+	&\larrow \rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x) \tag{by if1} \\
 	%%%
 \end{align*}
 
+\textbf{Case 2}: $(y = x) = false$
+\begin{align*}
+%%% LHS
+\rmx{drop}((y \rel{|} l1) \rel{@} l2, x)
+	&\larrow \under{\rmx{drop}(y \rel{|} (l1 \rel{@} l2), x)} \tag{by @2} \\
+	&\larrow\ \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} \rmx{drop}(l1 \rel{@} l2, x) \\
+	&\quad \quad \rel{\rmx{else}} (y \rel{|} \rmx{drop}(l1 \rel{@} l2, x)) \rel{\rmx{fi}} \tag{by drop2} \\
+	&\larrow \under{\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{drop}(l1 \rel{@} l2, x)} \\
+	&\quad \quad \under{\rel{\rmx{else}} (y \rel{|} \rmx{drop}(l1 \rel{@} l2, x)) \rel{\rmx{fi}}} \tag{by case splitting} \\
+	&\larrow y \rel{|} \under{\rmx{drop}(l1 \rel{@} l2, x)} \tag{by if2} \\
+	&\larrow y \rel{|} \rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x) \tag{by IH} \\
+%%% RHS
+\rmx{drop}(y \rel{|} l1, x) \rel{@} \rmx{drop}(l2, x)
+	&\larrow \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} \rmx{drop}(l1, x) \rel{\rmx{else}} (y \rel{|} \rmx{drop}(l1, x)) \rel{\rmx{fi}} \\
+	&\quad \quad \rel{@} \rmx{drop}(l2, x) \tag{by drop2} \\
+	%%%
+	&\larrow \under{\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{drop}(l1, x) \rel{\rmx{else}} (y \rel{|} \rmx{drop}(l1, x)) \rel{\rmx{fi}}} \\
+	&\quad \quad \rel{@} \rmx{drop}(l2, x) \tag{by case splitting} \\
+	%%%
+	&\larrow \under{(y \rel{|} \rmx{drop}(l1, x)) \rel{@} \rmx{drop}(l2, x)} \tag{by if2} \\
+	%%%
+	&\larrow y \rel{|} (\rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x) \tag{by @2}
+\end{align*}
 \end{description}
 \end{proof}
 
