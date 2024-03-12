@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA1: \forall L1, L2 \in NatList: rev(L1 @ L2) = rev(L2) @ rev(L1) .
+-- LEMMA1: \forall L1 L2 \in NatList: rev(L1 @ L2) = rev(L2) @ rev(L1) .
 -- [require] LEMMA2 PROBLEM2-LEMMA2
 -- ----------------------------------------------------------------------------
 

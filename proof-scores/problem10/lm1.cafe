@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA1: \forall X \in PNat, L1, L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
+-- LEMMA1: \forall X \in PNat, L1 L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
 -- [require]
 -- ----------------------------------------------------------------------------
 

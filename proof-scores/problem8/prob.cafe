@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM8: \forall L1, L2 \in NatList: diff(L1, L2) = diff(L1, rev(L2)) .
+-- PROBLEM8: \forall L1 L2 \in NatList: diff(L1, L2) = diff(L1, rev(L2)) .
 -- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 
