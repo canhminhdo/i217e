@@ -112,7 +112,7 @@
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
 
-\title{Problem 5}
+\title{Problem 6}
 \date{\vspace{-5ex}}
 
 \begin{document}
@@ -120,7 +120,7 @@
 \maketitle
 
 \begin{problem}
-$\forall L \in \mathtt{NatList}, \rmx{size}(L) = \rmx{size}(\rmx{rev}(L))$.
+$\forall X \in \mathtt{PNat}, L \in \mathtt{NatList}, \rmx{has}(L, X) = \rmx{has}(\rmx{rev}(L), X)$.
 \end{problem}
 \begin{proof}
 By structural induction on $L$.
@@ -128,29 +128,31 @@ By structural induction on $L$.
 \begin{description}
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad \rmx{size}(nil) = \rmx{size}(\rmx{rev}(nil))$.
+What to show: $\quad \rmx{has}(nil, x) = \rmx{has}(\rmx{rev}(nil), x)$ \\
+where $x \in \mathtt{PNat}$ .
 \begin{align*}
-\under{\rmx{size}(nil)}
-	&\larrow 0 \tag{by size1} \\
-\rmx{size}(\under{\rmx{rev}(nil)})
-	&\larrow \under{\rmx{size}(nil)} \tag{by rev1} \\
-	&\larrow nil \tag{by size1}
+\under{\rmx{has}(nil, x)}
+	&\larrow false \tag{by has1} \\
+\rmx{has}(\under{\rmx{rev}(nil)}, x)
+	&\larrow \under{\rmx{has}(nil, x)} \tag{by rev1} \\
+	&\larrow false \tag{by has1}
 \end{align*}
 
 \item[(2) Induction case]~\\
-What to show: $\quad \rmx{size}(x \rel{|} l) = \rmx{size}(\rmx{rev}(x \rel{|} l))$ \\
-Induction hypothesis: $\quad \rmx{size}(l) = \rmx{size}(\rmx{rev}(l))$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+What to show: $\quad \rmx{has}(y \rel{|} l, x) = \rmx{has}(\rmx{rev}(y \rel{|} l), x)$ \\
+Induction hypothesis: $\quad \rmx{has}(l, x) = \rmx{has}(\rmx{rev}(l), x)$  \\
+where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
 \begin{align*}
-\under{\rmx{size}(x \rel{|} l)}
-	&\larrow \rmx{s}(\under{\rmx{size}(l)}) \tag{by size2} \\
-	&\larrow \under{\rmx{s}(\rmx{size}(\rmx{rev}(l)))} \tag{by IH} \\
-	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \rmx{s}(0) \tag{by Lemma~\ref{lm2}} \\
-\rmx{size}(\under{\rmx{rev}(x \rel{|} l)})
-	&\larrow \under{\rmx{size}(\rmx{rev}(l) \rel{@} (x \rel{|} nil))} \tag{by rev2} \\
-	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \under{\rmx{size}(x \rel{|} nil)} \tag{by Lemma~\ref{lm1}} \\
-	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \rmx{s}(\under{\rmx{size}(nil)}) \tag{by size2} \\
-	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \rmx{s}(0) \tag{by size1}
+\under{\rmx{has}(y \rel{|} l, x)}
+	&\larrow (x = y) \rel{\rmx{or}} \under{\rmx{has}(l, x)}  \tag{by has2} \\
+	&\larrow (x = y) \rel{\rmx{or}} \rmx{has}(\rmx{rev}(l), x)  \tag{by IH} \\
+\rmx{has}(\under{\rmx{rev}(y \rel{|} l)}, x)
+	&\larrow \under{\rmx{has}(\rmx{rev}(l) \rel{@} (y \rel{|} nil)), x)} \tag{by } \\
+	&\larrow \rmx{has}(\rmx{rev}(l), x) \rel{\rmx{or}} \under{\rmx{has}(y \rel{|} nil, x)} \tag{by Lemma~\ref{lm1}} \\
+	&\larrow \rmx{has}(\rmx{rev}(l), x) \rel{\rmx{or}} ((x = y) \rel{\rmx{or}} \under{\rmx{has}(nil, x)}) \tag{by has2} \\
+	&\larrow \rmx{has}(\rmx{rev}(l), x) \rel{\rmx{or}} \under{((x = y) \rel{\rmx{or}} false)} \tag{by has1} \\
+	&\larrow \rmx{has}(\rmx{rev}(l), x) \rel{\rmx{or}} (x = y) \tag{by or} \\
+	&\larrow (x = y) \rel{\rmx{or}} \rmx{has}(\rmx{rev}(l), x) \tag{by comm-or}
 \end{align*}
 
 \end{description}
@@ -158,9 +160,10 @@ where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
 \end{proof}
 
 
+%LEMMA1: \forall X \in PNAT, \forall L1, L2 \in NatList: has(L1 @ L2, X) = has(L1, X) or has(L2, X) .
 \begin{lemma}
 \label{lm1}
-$\forall L1, L2 \in \mathtt{NatList}, \rmx{size}(L1 \rel{@} L2) = \rmx{size}(L1) \rel{+} \rmx{size}(L1)$.
+$\forall X \in \mathtt{PNat}, L1, L2 \in \mathtt{NatList}, \rmx{has}(L1 \rel{@} L2, X) = \rmx{has}(L1, X) \rel{\rmx{or}} \rmx{has}(L2, X)$.
 \end{lemma}
 \begin{proof}
 By structural induction on $L1$.
@@ -169,59 +172,28 @@ By structural induction on $L1$.
 
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad \rmx{size}(nil \rel{@} l2) = \rmx{size}(nil) \rel{+} \rmx{size}(l2)$ \\
-where $l2 \in \mathtt{NatList}$.
+What to show: $\quad \rmx{has}(nil \rel{@} l2, x) = (\rmx{has}(nil, x) \rel{\rmx{or}} \rmx{has}(l2, x))$ \\
+where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
 \begin{align*}
-\rmx{size}(\under{nil \rel{@} l2})
-	&\larrow \rmx{size}(l2) \tag{by @1} \\
-\under{\rmx{size}(nil)} \rel{@} \rmx{size}(l2)
-	&\larrow \under{0 \rel{+} \rmx{size}(l2)} \tag{by size1} \\
-	&\larrow \rmx{size}(l2) \tag{by +1}
+\rmx{has}(\under{nil \rel{@} l2}, x)
+	&\larrow \rmx{has}(l2, x) \tag{by @1} \\
+\under{\rmx{has}(nil, x)} \rel{\rmx{or}} \rmx{has}(l2, x)
+	&\larrow \under{false \rel{\rmx{or}} \rmx{has}(l2, x)} \tag{by has1} \\
+	&\larrow \rmx{has}(l2, x) \tag{by or}
 \end{align*}
 
 \item[(2) Induction case]~\\
-What to show: $\quad \rmx{size}((x \rel{|} l1) \rel{@} l2) = \rmx{size}(x \rel{|} l1) \rel{+} \rmx{size}(l2)$ \\
-Induction hypothesis: $\quad \rmx{size}(l1 \rel{@} l2) = \rmx{size}(l1) \rel{+} \rmx{size}(l2)$  \\
-where $x \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
+What to show: $\quad \rmx{has}((y \rel{|} l1) \rel{@} l2, x) = (\rmx{has}(y \rel{|} l1, x) \rel{\rmx{or}} \rmx{has}(l2, x))$ \\
+Induction hypothesis: $\quad \rmx{has}(l1 \rel{@} l2, x) = (\rmx{has}(l1, x) \rel{\rmx{or}} \rmx{has}(l2, x))$  \\
+where $x, y \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
 \begin{align*}
-\rmx{size}(\under{(x \rel{|} l1) \rel{@} l2})
-	&\larrow \under{\rmx{size}(x \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
-	&\larrow \rmx{s}(\under{\rmx{size}(l1 \rel{@} l2)}) \tag{by size2} \\
-	&\larrow \rmx{s}(\rmx{size}(l1) \rel{+} \rmx{size}(l2)) \tag{by IH} \\
-\under{\rmx{size}(x \rel{|} l1)} \rel{+} \rmx{size}(l2)
-	&\larrow \under{\rmx{s}(\rmx{size}(l1)) \rel{+} \rmx{size}(l2)} \tag{by size2} \\
-	&\larrow \rmx{s}(\rmx{size}(l1) \rel{+} \rmx{size}(l2)) \tag{by +2}
-\end{align*}
-
-\end{description}
-\end{proof}
-
-
-\begin{lemma}
-\label{lm2}
-$\forall X \in \mathtt{PNat}, \rmx{s}(X) = X \rel{+} \rmx{s}(0)$.
-\end{lemma}
-\begin{proof}
-By structural induction on $X$.
-
-\begin{description}
-
-\item[(1) Base case]~\\
-\noindent
-What to show: $\quad \rmx{s}(0) = 0 \rel{+} \rmx{s}(0)$.
-\begin{align*}
-\under{0 \rel{+} \rmx{s}(0)}
-	&\larrow \rmx{s}(0) \tag{by +1}
-\end{align*}
-
-\item[(2) Induction case]~\\
-What to show: $\quad \rmx{s}(\rmx{s}(x)) = \rmx{s}(x) \rel{+} \rmx{s}(0)$ \\
-Induction hypothesis: $\quad \rmx{s}(x) = x \rel{+} \rmx{s}(0)$  \\
-where $x \in \mathtt{PNat}$.
-\begin{align*}
-\under{\rmx{s}(x) \rel{+} \rmx{s}(0)}
-	&\larrow \rmx{s}(\under{\rmx{s}(x) \rel{+} 0}) \tag{by Lemma 7 from Problem 1} \\
-	&\larrow \rmx{s}(\rmx{s}(x)) \tag{by Lemma 6 from Problem 1}
+\rmx{has}(\under{(y \rel{|} l1) \rel{@} l2}, x)
+	&\larrow \under{\rmx{has}(y \rel{|} (l1 \rel{@} l2), x)} \tag{by @2} \\
+	&\larrow (x = y) \rel{\rmx{or}} \under{\rmx{has}(l1 \rel{@} l2, x)} \tag{by has2} \\
+	&\larrow (x = y) \rel{\rmx{or}} (\rmx{has}(l1, x) \rel{\rmx{or}} \rmx{has}(l2, x)) \tag{by IH} \\
+\under{\rmx{has}(y \rel{|} l1, x)} \rel{\rmx{or}} \rmx{has}(l2, x)
+	&\larrow \under{((x = y) \rel{\rmx{or}} \rmx{has}(l1, x)) \rel{\rmx{or}} \rmx{has}(l2, x)} \tag{by has2} \\
+	&\larrow (x = y) \rel{\rmx{or}} (\rmx{has}(l1, x) \rel{\rmx{or}} \rmx{has}(l2, x)) \tag{by assoc-or}
 \end{align*}
 
 \end{description}
