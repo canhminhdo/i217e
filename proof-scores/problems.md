@@ -35,8 +35,8 @@ PROBLEM5: \forall L \in NatList: size(L) = size(rev(L)) .
 PROBLEM6: \forall X \in PNat, L \in NatList: has(L, X) = has(rev(L), X) .
     - LEMMA1: \forall X \in PNAT, \forall L1, L2 \in NatList: has(L1 @ L2, X) = (has(L1, X) or has(L2, X)) .
 
-PROBLEM7: \forall L1 L2 \in NatList: diff(L, rev(L)) = nil .
-    - LEMMA1: \forall L1, L2 \in NatList: diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
+PROBLEM7: \forall L \in NatList: diff(L, rev(L)) = nil .
+    - LEMMA1: \forall L1, L2, L3 \in NatList: diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
         - PROBLEM6 - LEMMA1
     - PROBLEM6 - LEMMA1 
 

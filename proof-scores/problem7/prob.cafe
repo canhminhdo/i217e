@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM7: \forall L1 L2 \in NatList : diff(L, rev(L)) = nil .
+-- PROBLEM7: \forall L \in NatList : diff(L, rev(L)) = nil .
 -- [require] LEMMA1, LEMMA2
 -- ----------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ open NATLIST .
     -- use LEMMA1
     eq [LEMMA1] : diff(l, rev(l) @ (x | nil)) = diff(diff(l, rev(l)), x | nil) .
     -- use PROBLEM6 - LEMMA1
-    eq [PROB6-LM1] : has(L1 @ L2, I) = has(L1, I) or has(L2, I) .
+    eq [PROB6-LM1] : has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
     -- induction case
     red diff(x | l, rev(x | l)) = nil .
 close

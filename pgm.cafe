@@ -40,8 +40,8 @@ mod! LIST (E :: TRIV) {
   eq [drop2] : drop(E1 | L1, E) = if (E1 = E) then drop(L1, E) else (E1 | drop(L1, E)) fi .
   eq [diff1] : diff(nil, L2) = nil .
   eq [diff2] : diff(E1 | L1, L2) = if has(L2, E1) then diff(L1, L2) else E1 | diff(L1, L2) fi .
-  eq if true then L1 else L2 fi = L1 .
-  eq if false then L1 else L2 fi = L2 .
+  eq [if1] : if true then L1 else L2 fi = L1 .
+  eq [if2] : if false then L1 else L2 fi = L2 .
 }
 
 mod! NATLIST {
