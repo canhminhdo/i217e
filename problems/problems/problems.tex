@@ -112,46 +112,68 @@
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
 
-\title{Problem 8}
+\title{Problems}
 \date{\vspace{-5ex}}
 
 \begin{document}
 
 \maketitle
 
+%%% Problem 1
+\begin{problem}
+$\forall L \in \mathtt{NatList}, \rmx{fold*}(\rmx{rev}(L)) = \rmx{fold*}(L)$.
+\end{problem}
+
+%%% Problem 2
+\begin{problem}
+$\forall X \in \mathtt{PNat}, \rmx{rev}(\rmx{mkl1}(X)) = \rmx{mkl2}(X)$.
+\end{problem}
+
+%%% Problem 3
+\begin{problem}
+$\forall X \in \mathtt{PNat}, \rmx{fact}(X) = \rmx{fold*}(\rmx{mkl2}(X))$.
+\end{problem}
+
+%%% Problem 4
+\begin{problem}
+$\forall L \in \mathtt{NatList}, \rmx{rev}(\rmx{rev}(L)) = L$.
+\end{problem}
+
+%%% Problem 5
+\begin{problem}
+$\forall L \in \mathtt{NatList}, \rmx{size}(L) = \rmx{size}(\rmx{rev}(L))$.
+\end{problem}
+
+%%% Problem 6
+\begin{problem}
+$\forall X \in \mathtt{PNat}, L \in \mathtt{NatList}, \rmx{has}(L, X) = \rmx{has}(\rmx{rev}(L), X)$.
+\end{problem}
+
+%%% Problem 7
+\begin{problem}
+$\forall L \in \mathtt{NatList}, \rmx{diff}(L, \rmx{rev}(L)) = nil$.
+\end{problem}
+
+%%% Problem 8
 \begin{problem}
 $\forall L1, L2 \in \mathtt{NatList}, \rmx{diff}(L1, L2) = \rmx{diff}(L1, \rmx{rev}(L2))$
 \end{problem}
-\begin{proof}
-By structural induction on $L1$.
 
-\begin{description}
-\item[(1) Base case]~\\
-\noindent
-What to show: $\quad \rmx{diff}(nil, l2) = \rmx{diff}(nil, \rmx{rev}(l2))$. \\
-where $l2 \in \mathtt{NatList}$.
-\begin{align*}
-\under{\rmx{diff}(nil, l2)}
-	&\larrow nil \tag{by diff1} \\
-\under{\rmx{diff}(nil, \rmx{rev}(l2))}
-	&\larrow nil \tag{by diff1}
-\end{align*}
-\item[(2) Induction case]~\\
-What to show: $\quad \rmx{diff}(x \rel{|} l1, l2) = \rmx{diff}(x \rel{|} l1, \rmx{rev}(l2))$ \\
-Induction hypothesis: $\quad \rmx{diff}(l1, l2) = \rmx{diff}(l1, \rmx{rev}(l2))$  \\
-where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.
-\begin{align*}
-\under{\rmx{diff}(x \rel{|} l1, l2)}
-	&\larrow\ \rel{\rmx{if}} \rmx{has}(l2, x) \rel{\rmx{then}} \under{\rmx{diff}(l1, l2)} \rel{\rmx{else}} (x \rel{|} \under{\rmx{diff}(l1, l2))} \rel{\rmx{fi}} \tag{by diff2} \\
-	&\larrow\ \rel{\rmx{if}} \rmx{has}(l2, x) \rel{\rmx{then}} \rmx{diff}(l1, \rmx{rev}(l2)) \rel{\rmx{else}} (x \rel{|} \rmx{diff}(l1, \rmx{rev}(l2))) \rel{\rmx{fi}} \tag{by IH} \\
-	%%%
-\rmx{diff}(nil, \rmx{rev}(l2))
-	&\larrow\ \rel{\rmx{if}} \under{\rmx{has}(\rmx{rev}(l2), x)} \rel{\rmx{then}} \rmx{diff}(l1, \rmx{rev}(l2)) \rel{\rmx{else}} (x \rel{|} \rmx{diff}(l1, \rmx{rev}(l2))) \rel{\rmx{fi}} \tag{by diff2} \\
-	&\larrow\ \rel{\rmx{if}} \rmx{has}(l2, x) \rel{\rmx{then}} \rmx{diff}(l1, \rmx{rev}(l2)) \rel{\rmx{else}} (x \rel{|} \rmx{diff}(l1, \rmx{rev}(l2))) \rel{\rmx{fi}} \tag{by Problem 6}
-\end{align*}
+%%% Problem 9
+\begin{problem}
+$\forall L1, L2 \in \mathtt{NatList}, \rmx{diff}(L1, L2) = \rmx{rev}(\rmx{diff}(\rmx{rev}(L1), L2))$.
+\end{problem}
 
-\end{description}
+%%% Problem 10
+\begin{problem}
+$\forall X \in \mathtt{PNat}, L \in \mathtt{NatList}, \rmx{drop}(L, X) = \rmx{rev}(\rmx{drop}(\rmx{rev}(L), X))$.
+\end{problem}
 
-\end{proof}
+%%% Problem 11
+\begin{problem}
+$\forall X \in \mathtt{PNat}, L \in \mathtt{NatList}, \rmx{has}(\rmx{drop}(L, X), X) = false$.
+\end{problem}
 
 \end{document}
+
+
