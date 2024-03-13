@@ -2,10 +2,6 @@
 
 echo "--> prob6"
 DIR=test
-cd ../ && (cafeobj -no-banner <<EOF
-in prob.cafe
-quit
-EOF
-) 2> /dev/null | grep "(true):Bool" > $DIR/prob.out
+cd ../ && cafeobj -batch prob.cafe | grep "(true):Bool" > $DIR/prob.out
 diff $DIR/prob.expected $DIR/prob.out
 rm $DIR/prob.out

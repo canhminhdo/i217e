@@ -14,3 +14,4 @@ cd $DIR/problem8/test && ./tester
 cd $DIR/problem9/test && ./tester
 cd $DIR/problem10/test && ./tester
 cd $DIR/problem11/test && ./tester
+echo "DONE!"

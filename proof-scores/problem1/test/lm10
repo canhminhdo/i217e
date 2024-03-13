@@ -2,10 +2,6 @@
 
 echo "\t--> lm10"
 DIR=test
-cd ../ && (cafeobj -no-banner <<EOF
-in lm10.cafe
-quit
-EOF
-) 2> /dev/null | grep "(true):Bool" > $DIR/lm10.out
+cd ../ && cafeobj -batch lm10.cafe | grep "(true):Bool" > $DIR/lm10.out
 diff $DIR/lm10.expected $DIR/lm10.out
 rm $DIR/lm10.out
