@@ -11,12 +11,7 @@ For each problem, we have provided its proof in two formats:
 
 For instance, students can refer the proof scores and accompanying document for problem 1 in the `proof-scores/problem1` and `problems/problem1` directories, respectively.
 
-To test proof scores for each problem, students can navigate to `test` directory under each problem folder for proof scores and execute `tester` script as follow:
-
-```console
-cd proof-scores/<problem-name>/test && ./tester
-```
-where `<problem-name>` is replaced by the name of a problem, such as `problem1`. Moreover, students can evaluate all tests for entire proof scores at once by executing `tester` scirpt at `proof-scores` directory as follows:
+To test proof scores for all problems, students can execute `tester` scirpt at `proof-scores` directory as follows:
 
 ```console
 cd proof-scores && ./tester
