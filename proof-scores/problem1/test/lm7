@@ -1,7 +1,0 @@
-#!/bin/sh
-
-echo "\t--> lm7"
-DIR=test
-cd ../ && cafeobj -batch lm7.cafe | grep "(true):Bool" > $DIR/lm7.out
-diff $DIR/lm7.expected $DIR/lm7.out
-rm $DIR/lm7.out

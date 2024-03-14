@@ -1,3 +1,14 @@
 #!/bin/sh
 
-./prob
+DIR="test"
+cd .. && ((ls | grep prob | sort -V) && (ls | grep lm | sort -V)) | while read -r FILE; do
+    NAME=`echo $FILE | cut -d '.' -f1`
+    if [[ "$NAME" =~ ^prob.*$ ]]; then
+        echo "--> $NAME"
+    else
+        echo "\t--> $NAME"
+    fi
+    cafeobj -batch $FILE | grep "(true):Bool" > "$DIR/$NAME.out"
+    diff "$DIR/$NAME.expected" "$DIR/$NAME.out"
+    rm "$DIR/$NAME.out"
+done
