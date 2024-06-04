@@ -52,3 +52,6 @@ PROBLEM10: \forall X \in PNat, L \in NatList: drop(L, X) = rev(drop(rev(L), X)) 
     - LEMMA1 : \forall X \in PNat, L1 L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
 
 PROBLEM11: \forall X \in PNat, L \in NatList: has(drop(L, X), X) = false .
+
+PROBLEM12: \forall L \in NatList: sum(L) = sum(rev(L)) .
+    - LEMMA1: \forall L1 L2 \in NatList: sum(L1 @ L2) = sum(L1) + sum(L2) .

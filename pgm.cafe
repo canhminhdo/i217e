@@ -51,6 +51,7 @@ mod! NATLIST {
   op smkl2 : PNat NatList -> NatList .
   op fold* : NatList -> PNat .
   op size : NatList -> PNat .
+  op sum : NatList -> PNat .
   var X : PNat .
   var L : NatList  .
   eq [mkl1-1] : mkl1(0) = nil .
@@ -62,4 +63,6 @@ mod! NATLIST {
   eq [fold*-2] : fold*(X | L) = X * fold*(L) .
   eq [size1] : size(nil) = 0 .
   eq [size2] : size(X | L) = s(size(L)) .
+  eq [sum1] : sum(nil) = 0 .
+  eq [sum2] : sum(X | L) = X + sum(L) .
 }

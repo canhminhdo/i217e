@@ -3,7 +3,7 @@
 echo "~~~~~~~~~~ TESTING ~~~~~~~~~~"
 DIR="test"
 BASEDIR=$PWD
-ls | grep "^problem[0-9]" | sort -V | while read -r PROB; do
+ls | grep "^problem[1-9]" | sort -V | while read -r PROB; do
     cd $BASEDIR/$PROB && ((ls | grep prob | sort -V) && (ls | grep lm | sort -V)) | while read -r FILE; do
         NAME=`echo $FILE | cut -d '.' -f1`
         if [[ "$NAME" =~ ^prob.*$ ]]; then

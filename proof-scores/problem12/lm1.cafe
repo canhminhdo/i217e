@@ -1,0 +1,30 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA1: \forall L1 L2 \in NatList: sum(L1 @ L2) = sum(L1) + sum(L2) .
+-- [require] PROBLEM1-LEMMA4
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA1
+--> base case
+open NATLIST .
+    op l : -> NatList .
+
+    red sum(nil @ l) = sum(nil) + sum(l) .
+close
+
+--> induction case
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    vars I J K : PNat .
+
+    -- induction hypothesis
+    eq [IH] : sum(l1 @ l2) = sum(l1) + sum(l2) .
+    -- use PROBLEM1 - LEMMA4
+    eq [PROB1-LM4] : I + (J + K) = (I + J) + K .
+    -- induction case
+    red sum((x | l1) @ l2) = sum(x | l1) + sum(l2) .
+close

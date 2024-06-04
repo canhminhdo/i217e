@@ -1,0 +1,35 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM12: \forall L \in NatList: sum(L) = sum(rev(L)) .
+-- [require] PROBLEM1-LEMMA5, PROBLEM1-LEMMA6, LEMMA11
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM12
+--> base case
+open NATLIST .
+    op nil : -> PNat .
+
+    red sum(nil) = sum(rev(nil)) .
+close
+
+--> induction case
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    var I : PNat .
+    vars L1 L2 : NatList .
+
+    -- induction hypothesis
+    eq [IH] : sum(l) = sum(rev(l)) .
+    -- use PROBLEM1 - LEMMA5
+    eq [PROB1-LM5] : x + sum(rev(l)) = sum(rev(l)) + x .
+    -- use PROBLEM1 - LEMMA6
+    eq I + 0 = I .
+    -- use LEMMA1
+    eq sum(L1 @ L2) = sum(L1) + sum(L2) .
+    -- induction case
+    red sum(x | l) = sum(rev(x | l)) .
+close
