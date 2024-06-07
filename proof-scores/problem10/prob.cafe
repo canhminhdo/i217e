@@ -30,7 +30,7 @@ open NATLIST .
     -- use PROBLEM4 - LEMMA2
     eq [PROB4-LM2] : L1 @ nil = L1 .
     -- case splitting
-    eq y = x .
+    eq (y = x) = true .
     -- induction case
     red drop(y | l, x) = rev(drop(rev(y | l), x)) .
 close

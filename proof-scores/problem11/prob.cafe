@@ -26,7 +26,7 @@ open NATLIST .
     -- induction hypothesis
     eq [IH] : has(drop(l, x), x) = false .
     -- case splitting
-    eq y = x .
+    eq (y = x) = true .
     -- induction case
     red has(drop(y | l, x), x) = false .
 close

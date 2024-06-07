@@ -2,7 +2,7 @@ in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- LEMMA7: \forall I J \in PNat: I + S(J) = S(I + J) .
--- [require] LEMMA6
+-- [require] 
 -- ----------------------------------------------------------------------------
 
 select PNAT
@@ -11,11 +11,9 @@ select PNAT
 open PNAT .
     ops j : -> PNat .
 
-    -- use LEMMA6
-    eq j + 0 = j .
-    red 0 + s(j) = s(j + 0) .
+    red 0 + s(j) = s(0 + j) .
 close
-    
+
 --> induction case
 open PNAT .
     ops i j : -> PNat .

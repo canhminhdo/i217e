@@ -20,7 +20,6 @@ close
 --> induction case
 open PNAT .
     ops i j : -> PNat .
-    vars N M : PNat .
 
     -- induction hypothesis
     eq [IH] : i + j = j + i .

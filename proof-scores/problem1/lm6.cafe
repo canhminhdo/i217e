@@ -9,7 +9,7 @@ select PNAT
 --> PROOF: LEMMA6
 --> base case
 open PNAT .
-    red 0 + 0 = 0 + 0 .
+    red 0 + 0 = 0 .
 close
     
 --> induction case
