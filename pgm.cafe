@@ -4,7 +4,12 @@ mod! PNAT principal-sort PNat {
   op s : PNat -> PNat {constr} .
   op _+_ : PNat PNat -> PNat .
   op _*_ : PNat PNat -> PNat .
+  op _<_ : PNat PNat -> Bool .
+  op _>_ : PNat PNat -> Bool .
   op fact : PNat -> PNat .
+  op min : PNat PNat -> PNat .
+  op max : PNat PNat -> PNat .
+  op if_then_else_fi : Bool PNat PNat -> PNat .
   vars X Y Z : PNat . 
   eq (0 = s(Y)) = false .
   eq (s(X) = s(Y)) = (X = Y) .
@@ -12,8 +17,18 @@ mod! PNAT principal-sort PNat {
   eq [+2] : s(X) + Y = s(X + Y) .
   eq [*1] : 0 * Y = 0 .
   eq [*2] : s(X) * Y = (X * Y) + Y .
+  eq [<1] : X < 0 = false .
+  eq [<1] : 0 < s(X) = true .
+  eq [<3] : s(X) < s(Y) = X < Y .
+  eq [>1] : 0 > X = false .
+  eq [>2] : s(X) > 0 = true .
+  eq [>3] : s(X) > s(Y) = X > Y .
   eq [fact1] : fact(0) = s(0) .
   eq [fact2] : fact(s(X)) = s(X) * fact(X) .
+  eq [min] : min(X, Y) = if X < Y then X else Y fi .
+  eq [max] : max(X, Y) = if X > Y then X else Y fi .
+  eq [if-true] : if true then X else Y fi = X .
+  eq [if-false] : if false then X else Y fi = Y .
 }
 
 mod! LIST (E :: TRIV) {
@@ -52,6 +67,8 @@ mod! NATLIST {
   op fold* : NatList -> PNat .
   op size : NatList -> PNat .
   op sum : NatList -> PNat .
+  op min : NatList -> PNat .
+  op max : NatList -> PNat .
   var X : PNat .
   var L : NatList  .
   eq [mkl1-1] : mkl1(0) = nil .
@@ -65,4 +82,8 @@ mod! NATLIST {
   eq [size2] : size(X | L) = s(size(L)) .
   eq [sum1] : sum(nil) = 0 .
   eq [sum2] : sum(X | L) = X + sum(L) .
+  eq [min1] : min(nil) = 0 .
+  eq [min2] : min(X | L) = if (size(L) > 0) then min(X, min(L)) else X fi .
+  eq [max1] : max(nil) = 0 .
+  eq [max2] : max(X | L) = max(X, max(L)) .
 }

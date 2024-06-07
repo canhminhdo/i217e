@@ -1,0 +1,126 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM13: \forall L1 L2 \in NATLIST: max(L1 @ L2) = max(max(L1), max(L2)) .
+-- [require] LEMMA1, LEMMA2
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM13
+--> base case
+open NATLIST .
+    op l2 : -> NatList .
+
+    red max(nil @ l2) = max(max(nil), max(l2)) .
+close
+
+--> induction case
+--> case 1.1.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
+    -- case spliting
+    eq (max(l1) > max(l2)) = true .
+    eq (x > max(l1)) = true .
+    eq (x > max(l2)) = true .
+    -- induction case
+    red max((x | l1) @ l2) = max(max(x | l1), max(l2)) .
+close
+
+--> case 1.1.2
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
+    -- case spliting
+    eq (max(l1) > max(l2)) = true .
+    eq (x > max(l1)) = true .
+    eq (x > max(l2)) = false .
+    -- induction case: using LEMMA1 as antecedent
+    red 
+        (((x > max(l1)) and (max(l1) > max(l2))) implies (x > max(l2))) implies
+        (max((x | l1) @ l2) = max(max(x | l1), max(l2))) .
+close
+
+--> case 1.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
+    -- case spliting
+    eq (max(l1) > max(l2)) = true .
+    eq (x > max(l1)) = true .
+    eq (x > max(l2)) = true .
+    -- induction case
+    red max((x | l1) @ l2) = max(max(x | l1), max(l2)) .
+close
+
+--> case 1.2.2
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
+    -- case spliting
+    eq (max(l1) > max(l2)) = true .
+    eq (x > max(l1)) = true .
+    eq (x > max(l2)) = false .
+    -- induction case: using LEMMA1 as antecedent
+    red 
+        (((x > max(l1)) and (max(l1) > max(l2))) implies (x > max(l2))) implies
+        (max((x | l1) @ l2) = max(max(x | l1), max(l2))) .
+close
+
+--> case 2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
+    -- case spliting
+    eq (max(l1) > max(l2)) = false .
+    eq (x > max(l1)) = true .
+    -- induction case
+    red max((x | l1) @ l2) = max(max(x | l1), max(l2)) .
+close
+
+--> case 2.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
+    -- case spliting
+    eq (max(l1) > max(l2)) = false .
+    eq (x > max(l1)) = false .
+    eq (x > max(l2)) = true .
+    -- induction case: using LEMMA2 as antecedent
+    red 
+        (((not (x > max(l1))) and (not (max(l1) > max(l2)))) implies (not (x > max(l2)))) implies
+        (max((x | l1) @ l2) = max(max(x | l1), max(l2))) .
+close
+
+--> case 2.2.2
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
+    -- case spliting
+    eq (max(l1) > max(l2)) = false .
+    eq (x > max(l1)) = false .
+    eq (x > max(l2)) = false .
+    -- induction case
+    red max((x | l1) @ l2) = max(max(x | l1), max(l2)) .
+close

@@ -1,0 +1,21 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA2: \forall I \in NAT: (not (I > 0)) implies (I = 0) .
+-- [require] 
+-- ----------------------------------------------------------------------------
+
+select PNAT
+--> PROOF: LEMMA2
+--> base case
+open PNAT .
+    red (not (0 > 0)) implies (0 = 0) .
+close
+
+--> induction case
+open PNAT .
+    op i : -> PNat .    
+    
+    -- induction case
+    red (not (s(i) > 0)) implies (s(i) = 0) .
+close
