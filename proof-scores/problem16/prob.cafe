@@ -1,0 +1,49 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM16: \forall L1 L2 \in NatList: min(L1 @ L2) = min(L2 @ L1) .
+-- [require]
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM16
+--> base case
+open NATLIST .
+    ops l1 l2 : -> NatList .
+
+    -- use PROBLEM4 - LEMMA2
+    eq L @ nil = L .
+    red min(nil @ l2) = min(l2 @ nil) .
+close
+
+--> induction case
+--> case 1
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- use PROBLEM4 - LEMMA2
+    eq L @ nil = L .
+    -- induction case for l1
+        -- base case for l2
+    red min((x | l1) @ nil) = min(nil @ (x | l1)) .
+close
+
+--> case 2
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    vars L1 L2 : NatList .
+
+    -- eq ((size(l1) + size(l2)) > 0) = true .
+    -- use PROBLEM5 - LEMMA1
+    -- eq size(L1 @ L2) = size(L1) + size(L2) .
+    eq min((x | l1) @ (y | l2)) = min(min(x | l1), min(y | l2)) .
+    eq min((y | l2) @ (x | l1)) = min(min(y | l2), min(x | l1)) .
+    eq min(min(x | l1), min(y | l2)) = min(min(y | l2), min(x | l1)) .
+    eq min(l1 @ l2) = min(l2 @ l1) .
+    -- induction case for l1
+        -- induction case for l2
+    red min((x | l1) @ (y | l2)) = min((y | l2) @ (x | l1)) .
+close

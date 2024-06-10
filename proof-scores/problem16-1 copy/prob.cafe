@@ -1,0 +1,147 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM13: \forall L \in NatList: min(L) = min(rev(L)) .
+-- [require] 
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM13
+--> base case
+open NATLIST .
+    op nil : -> PNat .
+
+    red min(nil) = min(rev(nil)) .
+close
+
+
+--> induction case
+--> case 1.1.1
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : min(l) = min(rev(l)) .
+    -- case splitting
+    eq (size(l) > 0) = true .
+    eq (x < min(rev(l))) = true .
+    eq (min(rev(l)) < x) = true .
+    -- use LEMMA1
+    eq min(rev(l) @ (x | nil)) = min(min(rev(l)), min(x | nil)) .
+    -- induction case: using LEMMA2 as antecedent
+    red 
+        ((x < min(rev(l))) implies (not (min(rev(l)) < x))) implies
+        (min(x | l) = min(rev(x | l))) .
+close
+
+--> case 1.1.2
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : min(l) = min(rev(l)) .
+    -- case splitting
+    eq (size(l) > 0) = true .
+    eq (x < min(rev(l))) = true .
+    eq (min(rev(l)) < x) = false .
+    -- use PROBLEM5 as a lemma
+    eq size(rev(l)) = size(l) .
+    -- use LEMMA1
+    eq min(rev(l) @ (x | nil)) = min(min(rev(l)), min(x | nil)) .
+    -- induction case
+    red min(x | l) = min(rev(x | l)) .
+close
+
+--> case 1.2.1
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : min(l) = min(rev(l)) .
+    -- case splitting
+    eq (size(l) > 0) = true .
+    eq (x < min(rev(l))) = false .
+    eq (min(rev(l)) < x) = true .
+    -- use PROBLEM5 as a lemma
+    eq size(rev(l)) = size(l) .
+    -- use LEMMA1
+    eq min(rev(l) @ (x | nil)) = min(min(rev(l)), min(x | nil)) .
+    -- induction case
+    red min(x | l) = min(rev(x | l)) .
+close
+
+--> case 1.2.2.1
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : min(l) = min(rev(l)) .
+    -- case splitting
+    eq (size(l) > 0) = true .
+    eq (x < min(rev(l))) = false .
+    eq (min(rev(l)) < x) = false .
+    eq min(rev(l)) = x .
+    -- use PROBLEM5 as a lemma
+    eq size(rev(l)) = size(l) .
+    -- use LEMMA1
+    eq min(rev(l) @ (x | nil)) = min(min(rev(l)), min(x | nil)) .
+    -- induction case
+    red 
+        min(x | l) = min(rev(x | l)) .
+close
+
+--> case 1.2.2.2
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : min(l) = min(rev(l)) .
+    -- case splitting
+    eq (size(l) > 0) = true .
+    eq (x < min(rev(l))) = false .
+    eq (min(rev(l)) < x) = false .
+    eq (min(rev(l)) = x) = false .
+    -- use PROBLEM5 as a lemma
+    eq size(rev(l)) = size(l) .
+    -- use LEMMA1
+    eq min(rev(l) @ (x | nil)) = min(min(rev(l)), min(x | nil)) .
+    -- induction case: using LEMMA3 as antecedent
+    red 
+        ((not (min(rev(l)) = x)) implies ((min(rev(l)) < x) or (x < min(rev(l))))) implies
+        (min(x | l) = min(rev(x | l))) .
+close
+
+--> case 2.1
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : min(l) = min(rev(l)) .
+    -- case splitting
+    eq (size(l) > 0) = false .
+    eq l = nil .
+    -- induction case
+    red min(x | l) = min(rev(x | l)) .
+close
+
+--> case 2.2
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : min(l) = min(rev(l)) .
+    -- case splitting
+    eq (size(l) > 0) = false .
+    eq (l = nil) = false .
+    -- induction case
+    red 
+        ((not (l = nil)) implies (size(l) > 0)) implies
+        (min(x | l) = min(rev(x | l))) .
+close

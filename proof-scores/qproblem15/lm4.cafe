@@ -1,0 +1,312 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA4: forall L1, L2 \in NATLIST: (size(L1) > 0 and size(L2) > 0) implies (min(L1 @ L2) = min(min(L1), min(L2))) .
+-- [require] 
+-- eq min(rev(l) @ (x | nil)) = min(min(rev(l)), min(x | nil)) .
+-- ----------------------------------------------------------------------------
+
+
+select NATLIST
+--> PROOF: LEMMA4
+--> base case
+open NATLIST .
+    op l2 : -> NatList .
+    red ((size(nil) > 0) and (size(l2) > 0)) implies (min(nil @ l2) = min(min(nil), min(l2))) .
+close
+
+--> induction case
+--> case 1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- case spliting
+    eq (size(l2) > 0) = false .
+    -- induction case
+    red ((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2))) .
+close
+
+--> case 2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq l1 = nil .
+    -- induction case
+    red ((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2))) .
+close
+
+--> case 2.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = false .
+    -- induction case: using LEMMA1 as the antecedent
+    red 
+        ((not (l1 = nil)) implies (size(l1) > 0)) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = false .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    -- induction case: using LEMMA1 as the antecedent
+    red 
+        (((size(l1) > 0) and (size(l2) > 0)) implies (size(l1) + size(l2) > 0)) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.1.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    eq [IH] : (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) = true .
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = true .
+    eq (x < min(l1)) = false .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red 
+        (((size(l1) > 0) and (size(l2) > 0) and (x < min(l1 @ l2))) implies ((x < min(l1)) and (x < min(l2)))) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.1.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    eq [IH] : (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) = true .
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = true .
+    eq (x < min(l1)) = true .
+    eq (x < min(l2)) = false .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red 
+        (((size(l1) > 0) and (size(l2) > 0) and (x < min(l1 @ l2))) implies ((x < min(l1)) and (x < min(l2)))) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.1.2.2
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    eq [IH] : (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) = true .
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = true .
+    eq (x < min(l1)) = true .
+    eq (x < min(l2)) = true .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red 
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.2.1.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    eq [IH] : (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) = true .
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = false .
+    eq (x < min(l1)) = true .
+    eq (x < min(l2)) = true .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red 
+        (((size(l1) > 0) and (size(l2) > 0) and (x < min(l1)) and (x < min(l2))) implies (x < min(l1 @ l2))) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.2.1.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- eq [IH] : (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) = true .
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = false .
+    eq (x < min(l1)) = true .
+    eq (x < min(l2)) = false .
+    eq (min(l1 @ l2) = if (min(l1) < min(l2)) then min(l1) else min(l2) fi) = false .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red  
+        (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.2.1.2.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- eq [IH] : (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) = true .
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = false .
+    eq (x < min(l1)) = true .
+    eq (x < min(l2)) = false .
+    eq min(l1 @ l2) = if (min(l1) < min(l2)) then min(l1) else min(l2) fi .
+    eq (min(l1) < min(l2)) = false .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red  
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.2.1.2.2.2
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- eq [IH] : (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) = true .
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = false .
+    eq (x < min(l1)) = true .
+    eq (x < min(l2)) = false .
+    eq min(l1 @ l2) = if (min(l1) < min(l2)) then min(l1) else min(l2) fi .
+    eq (min(l1) < min(l2)) = true .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red  
+        (((x < min(l1)) and (min(l1) < min(l2))) implies (x < min(l2))) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.2.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = false .
+    eq (x < min(l1)) = false .
+    eq (min(l1 @ l2) = if (min(l1) < min(l2)) then min(l1) else min(l2) fi) = false .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red 
+        (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.2.2.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = false .
+    eq (x < min(l1)) = false .
+    eq min(l1 @ l2) = if (min(l1) < min(l2)) then min(l1) else min(l2) fi .
+    eq (min(l1) < min(l2)) = true .
+    -- eq (x < min(l2)) = false .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red 
+        (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.2.2.2.2.1
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = false .
+    eq (x < min(l1)) = false .
+    eq min(l1 @ l2) = if (min(l1) < min(l2)) then min(l1) else min(l2) fi .
+    eq (min(l1) < min(l2)) = false .
+    eq (x < min(l2)) = false .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red 
+        (((size(l1) > 0) and (size(l2) > 0)) implies (min(l1 @ l2) = min(min(l1), min(l2)))) implies
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+--> case 2.2.2.2.2.2.2.2.2
+open NATLIST .
+    op x : -> PNat .
+    ops l1 l2 : -> NatList .
+
+    -- case spliting
+    eq (size(l2) > 0) = true .
+    eq (l1 = nil) = false .
+    eq (size(l1) > 0) = true .
+    eq ((size(l1) + size(l2)) > 0) = true .
+    eq (x < min(l1 @ l2)) = false .
+    eq (x < min(l1)) = false .
+    eq (min(l1 @ l2) = if (min(l1) < min(l2)) then min(l1) else min(l2) fi) = true .
+    eq (min(l1) < min(l2)) = false .
+    eq (x < min(l2)) = true .
+
+    eq (x = min(l2)) = false .
+    -- use PROBLEM5 - LEMMA1
+    eq [PROB5-LM1] : size(l1 @ l2) = size(l1) + size(l2) .
+    red 
+        (((size(x | l1) > 0) and (size(l2) > 0)) implies (min((x | l1) @ l2) = min(min(x | l1), min(l2)))) .
+close
+
+eof
+(if (x < (if (min(l1) < min(l2)) then min(l1) else min(l2) fi)) then x else (if (min(l1) < min(l2)) then min(l1) else min(l2) fi) fi) = (if (min(l1) < min(l2)) then min(l1) else min(l2) fi)):Bool

@@ -1,0 +1,22 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA4: \forall L \in NatList: (not (L = nil)) implies (size(L) > 0) .
+-- [require] 
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA4
+--> base case
+open NATLIST .
+    red (not (nil = nil)) implies (size(nil) > 0) .
+close
+
+--> induction case
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+
+    -- induction case
+    red (not ((x | l) = nil)) implies (size(x | l) > 0) .
+close
