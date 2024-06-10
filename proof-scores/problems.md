@@ -55,3 +55,8 @@ PROBLEM11: \forall X \in PNat, L \in NatList: has(drop(L, X), X) = false .
 
 PROBLEM12: \forall L \in NatList: sum(L) = sum(rev(L)) .
     - LEMMA1: \forall L1 L2 \in NatList: sum(L1 @ L2) = sum(L1) + sum(L2) .
+
+PROBLEM13: \forall X \in PNat, L \in NatList: count(L, X) = count(rev(L), X) .
+    - LEMMA1: \forall X \in PNat \forall L1 L2 \in NatList: count(L1 @ L2) = count(L1, X) + count(L2, X) .
+    - PROBLEM1 - LEMMA5
+    - PROBLEM1 - LEMMA6

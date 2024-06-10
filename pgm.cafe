@@ -67,9 +67,8 @@ mod! NATLIST {
   op fold* : NatList -> PNat .
   op size : NatList -> PNat .
   op sum : NatList -> PNat .
-  op min : NatList -> PNat .
-  op max : NatList -> PNat .
-  var X : PNat .
+  op count : NatList PNat -> PNat .
+  vars X Y : PNat .
   var L : NatList  .
   eq [mkl1-1] : mkl1(0) = nil .
   eq [mkl1-2] : mkl1(s(X)) = s(X) | mkl1(X) .
@@ -82,8 +81,6 @@ mod! NATLIST {
   eq [size2] : size(X | L) = s(size(L)) .
   eq [sum1] : sum(nil) = 0 .
   eq [sum2] : sum(X | L) = X + sum(L) .
-  eq [min1] : min(nil) = 0 .
-  eq [min2] : min(X | L) = if (size(L) > 0) then min(X, min(L)) else X fi .
-  eq [max1] : max(nil) = 0 .
-  eq [max2] : max(X | L) = max(X, max(L)) .
+  eq [cnt1] : count(nil, Y) = 0 .
+  eq [cnt2] : count(X | L, Y) = if (X = Y) then s(count(L, Y)) else count(L, Y) fi .
 }

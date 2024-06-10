@@ -1,126 +1,56 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM13: \forall L1 L2 \in NATLIST: max(L1 @ L2) = max(max(L1), max(L2)) .
--- [require] LEMMA1, LEMMA2
+-- PROBLEM13: \forall I \in Nat, L \in NatList: count(L, I) = count(rev(L), I) .
+-- [require] LEMMA1, PROBLEM1 - LEMMA6
 -- ----------------------------------------------------------------------------
 
 select NATLIST
 --> PROOF: PROBLEM13
 --> base case
 open NATLIST .
-    op l2 : -> NatList .
+    var I : PNat .
 
-    red max(nil @ l2) = max(max(nil), max(l2)) .
+    red count(nil, I) = count(rev(nil), I) .
 close
 
 --> induction case
---> case 1.1.1
+--> case 1
 open NATLIST .
-    op x : -> PNat .
-    ops l1 l2 : -> NatList .
+    ops x y : -> PNat .
+    op l : -> NatList .
     
+    var I : PNat .
+    vars L1 L2 : NatList .
+
     -- induction hypothesis
-    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
-    -- case spliting
-    eq (max(l1) > max(l2)) = true .
-    eq (x > max(l1)) = true .
-    eq (x > max(l2)) = true .
+    eq [IH] : count(l, y) = count(rev(l), y) .
+    -- case splitting
+    eq x = y .
+    -- use LEMMA1
+    eq count(L1 @ L2, I) = count(L1, I) + count(L2, I) .
+    -- use PROBLEM1 - LEMMA5
+    eq count(rev(l),y) + s(0) = s(0) + count(rev(l),y) .
     -- induction case
-    red max((x | l1) @ l2) = max(max(x | l1), max(l2)) .
+    red count((x | l), y) = count(rev(x | l), y) .
 close
 
---> case 1.1.2
+--> case 2
 open NATLIST .
-    op x : -> PNat .
-    ops l1 l2 : -> NatList .
+    ops x y : -> PNat .
+    op l : -> NatList .
     
-    -- induction hypothesis
-    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
-    -- case spliting
-    eq (max(l1) > max(l2)) = true .
-    eq (x > max(l1)) = true .
-    eq (x > max(l2)) = false .
-    -- induction case: using LEMMA1 as antecedent
-    red 
-        (((x > max(l1)) and (max(l1) > max(l2))) implies (x > max(l2))) implies
-        (max((x | l1) @ l2) = max(max(x | l1), max(l2))) .
-close
+    var I : PNat .
+    vars L1 L2 : NatList .
 
---> case 1.2.1
-open NATLIST .
-    op x : -> PNat .
-    ops l1 l2 : -> NatList .
-    
     -- induction hypothesis
-    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
-    -- case spliting
-    eq (max(l1) > max(l2)) = true .
-    eq (x > max(l1)) = true .
-    eq (x > max(l2)) = true .
+    eq [IH] : count(l, y) = count(rev(l), y) .
+    -- case splitting
+    eq (x = y) = false .
+    -- use LEMMA1
+    eq count(L1 @ L2, I) = count(L1, I) + count(L2, I) .
+    -- use PROBLEM1 - LEMMA6
+    eq I + 0 = I .
     -- induction case
-    red max((x | l1) @ l2) = max(max(x | l1), max(l2)) .
-close
-
---> case 1.2.2
-open NATLIST .
-    op x : -> PNat .
-    ops l1 l2 : -> NatList .
-    
-    -- induction hypothesis
-    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
-    -- case spliting
-    eq (max(l1) > max(l2)) = true .
-    eq (x > max(l1)) = true .
-    eq (x > max(l2)) = false .
-    -- induction case: using LEMMA1 as antecedent
-    red 
-        (((x > max(l1)) and (max(l1) > max(l2))) implies (x > max(l2))) implies
-        (max((x | l1) @ l2) = max(max(x | l1), max(l2))) .
-close
-
---> case 2.1
-open NATLIST .
-    op x : -> PNat .
-    ops l1 l2 : -> NatList .
-    
-    -- induction hypothesis
-    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
-    -- case spliting
-    eq (max(l1) > max(l2)) = false .
-    eq (x > max(l1)) = true .
-    -- induction case
-    red max((x | l1) @ l2) = max(max(x | l1), max(l2)) .
-close
-
---> case 2.2.1
-open NATLIST .
-    op x : -> PNat .
-    ops l1 l2 : -> NatList .
-    
-    -- induction hypothesis
-    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
-    -- case spliting
-    eq (max(l1) > max(l2)) = false .
-    eq (x > max(l1)) = false .
-    eq (x > max(l2)) = true .
-    -- induction case: using LEMMA2 as antecedent
-    red 
-        (((not (x > max(l1))) and (not (max(l1) > max(l2)))) implies (not (x > max(l2)))) implies
-        (max((x | l1) @ l2) = max(max(x | l1), max(l2))) .
-close
-
---> case 2.2.2
-open NATLIST .
-    op x : -> PNat .
-    ops l1 l2 : -> NatList .
-    
-    -- induction hypothesis
-    eq [IH] : max(l1 @ l2) = max(max(l1), max(l2)) .
-    -- case spliting
-    eq (max(l1) > max(l2)) = false .
-    eq (x > max(l1)) = false .
-    eq (x > max(l2)) = false .
-    -- induction case
-    red max((x | l1) @ l2) = max(max(x | l1), max(l2)) .
+    red count((x | l), y) = count(rev(x | l), y) .
 close
