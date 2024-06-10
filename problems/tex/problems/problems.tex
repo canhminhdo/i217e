@@ -184,6 +184,27 @@ $\forall L \in \mathtt{NatList} \colon \rmx{sum}(L) = \rmx{sum}(\rmx{rev}(L))$.
 $\forall X \in \mathtt{Nat}, L \in \mathtt{NatList} \colon \rmx{count}(L, X) = \rmx{count}(\rmx{rev}(L), X)$.
 \end{problem}
 
+%%% Problem 14
+\begin{problem}
+$\forall X \in \mathtt{Nat}, \forall L1, L2 \in \mathtt{NatList} \colon \rmx{diff}(L1, X \mid L2) = \rmx{drop}(\rmx{diff}(L1, L2), X)$.
+\end{problem}
+
+%%% Problem 15
+\begin{problem}
+$\forall L \in \mathtt{NatList} \colon \rmx{diff}(\rmx{rev}(L), L) = nil$.
+\end{problem}
+
+%%% Problem 16
+\begin{problem}
+$\forall L \in \mathtt{NatList} \colon \rmx{setEqual}(L, \rmx{rev}(L)) = \rmx{true}$.
+\end{problem}
+
+%%% Problem 17
+\begin{problem}
+$\forall L \in \mathtt{NatList} \colon \rmx{rmDup}(L) = \rmx{rev}(\rmx{rmDup}(\rmx{rev}(L)))$.
+\end{problem}
+
+
 %%%% Problem 13
 %\begin{problem}
 %$\forall L1, L2 \in \mathtt{NatList} \colon \rmx{max}(L1 \rel{@} L2) = \rmx{max}(\rmx{max}(L1), \rmx{max}(L2))$.

@@ -40,6 +40,8 @@ mod! LIST (E :: TRIV) {
   op has : List Elt.E -> Bool .
   op drop : List Elt.E -> List .
   op diff : List List -> List .
+  op setEqual : List List -> Bool .
+  op rmDup : List -> List .
   op if_then_else_fi : Bool List List -> List .
   vars E E1 E2 : Elt.E .
   vars L1 L2 L3 : List .
@@ -55,6 +57,9 @@ mod! LIST (E :: TRIV) {
   eq [drop2] : drop(E1 | L1, E) = if (E1 = E) then drop(L1, E) else (E1 | drop(L1, E)) fi .
   eq [diff1] : diff(nil, L2) = nil .
   eq [diff2] : diff(E1 | L1, L2) = if has(L2, E1) then diff(L1, L2) else E1 | diff(L1, L2) fi .
+  eq [setEqual] : setEqual(L1, L2) = if (diff(L1, L2) = nil) and diff(L2, L1) = nil then true else false fi .
+  eq [rmDup1] : rmDup(E1 | L1) = if has(L1, E1) then rmDup(L1) else (E1 | rmDup(L1)) fi .
+  eq [rmDup2] : rmDup(nil) = nil .
   eq [if1] : if true then L1 else L2 fi = L1 .
   eq [if2] : if false then L1 else L2 fi = L2 .
 }

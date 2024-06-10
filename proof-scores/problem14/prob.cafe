@@ -1,0 +1,43 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM14: \forall X \in PNat \forall L1 L2 \in NatList: diff(L1, X | L2) = drop(diff(L1, L2), X) .
+-- [require]
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM14
+--> base case
+open NATLIST .
+    op x : -> PNat .
+    op l2 : -> NatList .
+    
+    red diff(nil, x | l2) = drop(diff(nil, l2), x) .
+close
+
+--> induction case
+--> case 1
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : diff(l1, x | l2) = drop(diff(l1, l2), x) .
+    -- case splitting
+    eq has(l2, y) = true .
+    -- induction case
+    red diff(y | l1, x | l2) = drop(diff(y | l1, l2), x) .
+close
+
+--> case 2
+open NATLIST .
+    ops x y : -> PNat .
+    ops l1 l2 : -> NatList .
+    
+    -- induction hypothesis
+    eq [IH] : diff(l1, x | l2) = drop(diff(l1, l2), x) .
+    -- case splitting
+    eq has(l2, y) = false .
+    -- induction case
+    red diff(y | l1, x | l2) = drop(diff(y | l1, l2), x) .
+close

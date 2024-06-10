@@ -1,0 +1,31 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM15: \forall L \in NatList : diff(rev(L), L) = nil .
+-- [require] PROBLEM9 - LEMMA1, PROBLEM14
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM15
+--> base case
+open NATLIST .
+    red diff(rev(nil), nil) = nil .
+close
+
+--> induction case
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+
+    var I : PNat .
+    vars L1 L2 L3 : NatList .
+    
+    -- induction hypothesis
+    eq [IH] : diff(rev(l), l) = nil .
+    -- use PROBLEM9 - LEMMA1
+    eq diff((rev(l) @ (x | nil)), x | l) = diff(rev(l), x | l) @ diff(x | nil, x | l) .
+    -- use PROBLEM14 as a lemma
+    eq diff(rev(l), x | l) = drop(diff(rev(l), l), x) .
+    -- induction case
+    red diff(rev(x | l), x | l) = nil .
+close
