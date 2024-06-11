@@ -2,7 +2,7 @@ in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- PROBLEM13: \forall I \in Nat, L \in NatList: count(L, I) = count(rev(L), I) .
--- [require] LEMMA1, PROBLEM1 - LEMMA6
+-- [require] LEMMA1, PROBLEM1 - LEMMA5, PROBLEM1 - LEMMA6
 -- ----------------------------------------------------------------------------
 
 select NATLIST

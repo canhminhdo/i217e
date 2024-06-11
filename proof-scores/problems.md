@@ -60,3 +60,20 @@ PROBLEM13: \forall X \in PNat, L \in NatList: count(L, X) = count(rev(L), X) .
     - LEMMA1: \forall X \in PNat \forall L1 L2 \in NatList: count(L1 @ L2) = count(L1, X) + count(L2, X) .
     - PROBLEM1 - LEMMA5
     - PROBLEM1 - LEMMA6
+
+PROBLEM14: \forall X \in PNat \forall L1 L2 \in NatList: diff(L1, X | L2) = drop(diff(L1, L2), X) .
+
+PROBLEM15: \forall L \in NatList : diff(rev(L), L) = nil .
+    - PROBLEM9 - LEMMA1
+    - PROBLEM14
+
+PROBLEM16: \forall L \in NatList: setEqual(L, rev(L)) = true .
+    - PROBLEM9 - LEMMA1
+    - PROBLEM7 - LEMMA1
+    - PROBLEM4 - LEMMA2
+    - PROBLEM6 - LEMMA1
+    - PROBLEM7
+    - PROBLEM14
+    - PROBLEM15
+
+PROBLEM17: \forall L \in NatList: rmDup(L) = rev(rmDup(rev(L))) .
