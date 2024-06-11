@@ -76,4 +76,8 @@ PROBLEM16: \forall L \in NatList: setEqual(L, rev(L)) = true .
     - PROBLEM14
     - PROBLEM15
 
-PROBLEM17: \forall L \in NatList: rmDup(L) = rev(rmDup(rev(L))) .
+PROBLEM17: \forall L \in NatList: rmDup(rmDup(L)) = rmDup(L) .
+    - LEMMA1
+        - LEMMA2
+
+PROBLEM18: \forall L \in NatList: setEqual(L, rmDup(L)) = true .

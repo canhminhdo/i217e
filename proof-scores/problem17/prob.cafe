@@ -1,0 +1,42 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM17: \forall L \in NatList: rmDup(rmDup(L))) = rmDup(L) .
+-- [require] LEMMA1
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM17
+--> base case
+open NATLIST .
+    red rmDup(rmDup(nil)) = rmDup(nil) .
+close
+
+--> induction case
+--> case 1
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : rmDup(rmDup(l)) = rmDup(l) .
+    -- case splitting
+    eq has(l, x) = true .
+    -- induction case
+    red rmDup(rmDup(x | l)) = rmDup(x | l) .
+close
+
+--> case 2
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : rmDup(rmDup(l)) = rmDup(l) .
+    -- case splitting
+    eq has(l, x) = false .
+    -- use LEMMA1
+    eq has(rmDup(l), x) = has(l, x) .
+    -- induction case
+    red rmDup(rmDup(x | l)) = rmDup(x | l) .
+close

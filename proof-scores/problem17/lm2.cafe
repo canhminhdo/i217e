@@ -1,0 +1,38 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA2: \forall X Y \in PNat, L \in NatList: ((not has(L, X)) and has(L, Y)) implies not (X = Y) .
+-- [require]
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA2
+--> base case
+open NATLIST .
+    ops x y : -> PNat .
+
+    red ((not has(nil, x)) and has(nil, y)) implies (not (x = y)) .
+close
+
+--> induction case
+--> case 1
+open NATLIST .
+    ops x y z : -> PNat .
+    op l : -> NatList .
+
+    -- case splitting
+    eq x = y .
+    -- induction case
+    red ((not has(z | l, x)) and has(z | l, y)) implies (not (x = y)) .
+close
+
+--> case 2
+open NATLIST .
+    ops x y z : -> PNat .
+    op l : -> NatList .
+
+    -- case splitting
+    eq (x = y) = false .
+    -- induction case
+    red ((not has(z | l, x)) and has(z | l, y)) implies (not (x = y)) .
+close
