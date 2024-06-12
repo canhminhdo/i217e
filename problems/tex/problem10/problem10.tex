@@ -143,7 +143,7 @@ where $x \in \mathtt{PNat}$.
 What to show: $\quad \rmx{drop}(y \rel{|} l, x) = \rmx{rev}(\rmx{drop}(\rmx{rev}(y \rel{|} l), x))$ \\
 Induction hypothesis: $\quad \rmx{drop}(l, x) = \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x))$  \\
 where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$. \\
-We use case splitting for our proofs as follows: \\
+We use case splitting for our proofs as follows:\\
 \textbf{Case 1}: $y = x$
 \begin{align*}
 %%% LHS
@@ -265,7 +265,7 @@ We use case splitting for our proofs as follows: \\
 \textbf{Case 2}: $(y = x) = false$
 \begin{align*}
 %%% LHS
-\rmx{drop}((y \rel{|} l1) \rel{@} l2, x)
+\rmx{drop}(\under{(y \rel{|} l1) \rel{@} l2}, x)
 	&\larrow \under{\rmx{drop}(y \rel{|} (l1 \rel{@} l2), x)} \tag{by @2} \\
 	&\larrow\ \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} \rmx{drop}(l1 \rel{@} l2, x) \\
 	&\quad \quad \rel{\rmx{else}} (y \rel{|} \rmx{drop}(l1 \rel{@} l2, x)) \rel{\rmx{fi}} \tag{by drop2} \\
@@ -274,7 +274,7 @@ We use case splitting for our proofs as follows: \\
 	&\larrow y \rel{|} \under{\rmx{drop}(l1 \rel{@} l2, x)} \tag{by if2} \\
 	&\larrow y \rel{|} \rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x) \tag{by IH} \\
 %%% RHS
-\rmx{drop}(y \rel{|} l1, x) \rel{@} \rmx{drop}(l2, x)
+\under{\rmx{drop}(y \rel{|} l1, x)} \rel{@} \rmx{drop}(l2, x)
 	&\larrow \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} \rmx{drop}(l1, x) \rel{\rmx{else}} (y \rel{|} \rmx{drop}(l1, x)) \rel{\rmx{fi}} \\
 	&\quad \quad \rel{@} \rmx{drop}(l2, x) \tag{by drop2} \\
 	%%%
