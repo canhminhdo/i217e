@@ -77,7 +77,14 @@ PROBLEM16: \forall L \in NatList: setEqual(L, rev(L)) = true .
     - PROBLEM15
 
 PROBLEM17: \forall L \in NatList: rmDup(rmDup(L)) = rmDup(L) .
-    - LEMMA1
-        - LEMMA2
+    - LEMMA1: \forall X \in PNat, L \in NatList: has(L, X) = has(rmDup(L), X) .
+        - LEMMA2: \forall X Y \in PNat, L \in NatList: ((not has(L, X)) and has(L, Y)) implies not (X = Y) .
 
 PROBLEM18: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
+    - LEMMA1: \forall L \in NatList: diff(rmDup(L), L) = nil .
+        - PROBLEM14
+    - LEMMA2: \forall L \in NatList: diff(L, rmDup(L)) = nil .
+        - PROBLEM14
+        - PROBLEM17 - LEMMA1
+    - PROBLEM14
+    - PROBLEM17 - LEMMA1

@@ -1,0 +1,44 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- LEMMA1: \forall L \in NatList: diff(rmDup(L), L) = nil .
+-- [require] PROBLEM14
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: LEMMA1
+--> base case
+open NATLIST .
+    red diff(rmDup(nil), nil) = nil .
+close
+
+--> induction case
+--> case 1
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : diff(rmDup(l), l) = nil .
+    -- case splitting
+    eq has(l, x) = true .
+    -- use PROBELM14 as a lemma
+    eq diff(rmDup(l), x | l) = drop(diff(rmDup(l), l), x) .
+    -- induction case
+    red diff(rmDup(x | l), x | l) = nil .
+close
+
+--> case 2
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : diff(rmDup(l), l) = nil .
+    -- case splitting
+    eq has(l, x) = false .
+    -- use PROBELM14 as a lemma
+    eq diff(rmDup(l), x | l) = drop(diff(rmDup(l), l), x) .
+    -- induction case
+    red diff(rmDup(x | l), x | l) = nil .
+close

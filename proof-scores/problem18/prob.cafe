@@ -1,0 +1,62 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM18: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
+-- [require] LEMMA1, LEMMA2, PROBLEM14, PROBLEM17 - LEMMA1
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM18
+--> base case
+open NATLIST .
+    red setEqual(nil, rmDup(nil)) = true .
+close
+
+--> induction case
+--> case 1
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    var I : PNat .
+    vars L1 L2 : NatList .
+
+    -- induction hypothesis
+    eq [IH] : setEqual(l, rmDup(l)) = true .
+    -- case splitting
+    eq has(l, x) = true .
+    -- use PROBLEM14 as a lemma
+    eq diff (L1, I | L2) = drop(diff (L1, L2), I ) .
+    -- use LEMMA1
+    eq diff(rmDup(l),l) = nil .
+    -- use LEMMA2
+    eq diff(l,rmDup(l)) = nil .
+    -- use PROBLEM17 - LEMMA1
+    eq has(rmDup(l), x) = has(l, x) .
+    -- induction case
+    red setEqual(x | l, rmDup(x | l)) = true .
+close
+
+--> case 2
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    var I : PNat .
+    vars L1 L2 : NatList .
+
+    -- induction hypothesis
+    eq [IH] : setEqual(l, rmDup(l)) = true .
+    -- case splitting
+    eq has(l, x) = false .
+    -- use PROBLEM14 as a lemma
+    eq diff (L1, I | L2) = drop(diff (L1, L2), I ) .
+    -- use LEMMA1
+    eq diff(rmDup(l),l) = nil .
+    -- use LEMMA2
+    eq diff(l,rmDup(l)) = nil .
+    -- use PROBLEM17 - LEMMA1
+    eq has(rmDup(l), x) = has(l, x) .
+    -- induction case
+    red setEqual(x | l, rmDup(x | l)) = true .
+close
