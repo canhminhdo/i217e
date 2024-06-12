@@ -27,8 +27,8 @@ mod! PNAT principal-sort PNat {
   eq [fact2] : fact(s(X)) = s(X) * fact(X) .
   eq [min] : min(X, Y) = if X < Y then X else Y fi .
   eq [max] : max(X, Y) = if X > Y then X else Y fi .
-  eq [if-true] : if true then X else Y fi = X .
-  eq [if-false] : if false then X else Y fi = Y .
+  eq [if1] : if true then X else Y fi = X .
+  eq [if2] : if false then X else Y fi = Y .
 }
 
 mod! LIST (E :: TRIV) {
