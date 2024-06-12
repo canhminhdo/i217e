@@ -112,7 +112,7 @@
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
 
-\title{Problem 5}
+\title{Problem 12}
 \date{\vspace{-5ex}}
 
 \begin{document}
@@ -120,7 +120,7 @@
 \maketitle
 
 \begin{problem}
-$\forall L \in \mathtt{NatList}, \rmx{size}(L) = \rmx{size}(\rmx{rev}(L))$.
+$\forall L \in \mathtt{NatList}, \rmx{sum}(L) = \rmx{sum}(\rmx{rev}(L))$.
 \end{problem}
 \begin{proof}
 By structural induction on $L$.
@@ -128,104 +128,72 @@ By structural induction on $L$.
 \begin{description}
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad \rmx{size}(nil) = \rmx{size}(\rmx{rev}(nil))$.
+What to show: $\quad \rmx{sum}(nil) = \rmx{sum}(\rmx{rev}(nil))$.
 \begin{align*}
-\under{\rmx{size}(nil)}
-	&\larrow 0 \tag{by size1} \\
-\rmx{size}(\under{\rmx{rev}(nil)})
-	&\larrow \under{\rmx{size}(nil)} \tag{by rev1} \\
-	&\larrow nil \tag{by size1}
+\under{\rmx{sum}(nil)} &\larrow 0 \tag{by sum1} \\
+\rmx{sum}(\under{\rmx{rev}(nil)})
+	&\larrow \under{\rmx{sum}(nil)} \tag{by rev1} \\
+	&\larrow 0 \tag{by sum1}
 \end{align*}
 
 \item[(2) Induction case]~\\
-What to show: $\quad \rmx{size}(x \rel{|} l) = \rmx{size}(\rmx{rev}(x \rel{|} l))$ \\
-Induction hypothesis: $\quad \rmx{size}(l) = \rmx{size}(\rmx{rev}(l))$  \\
+What to show: $\quad \rmx{sum}(x \mid l) = \rmx{sum}(\rmx{rev}(x \mid l))$ \\
+Induction hypothesis: $\quad \rmx{sum}(l) = \rmx{sum}(\rmx{rev}(l))$  \\
 where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
 \begin{align*}
-\under{\rmx{size}(x \rel{|} l)}
-	&\larrow \rmx{s}(\under{\rmx{size}(l)}) \tag{by size2} \\
-	&\larrow \under{\rmx{s}(\rmx{size}(\rmx{rev}(l)))} \tag{by IH} \\
-	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \rmx{s}(0) \tag{by Lemma~\ref{lm2}} \\
-\rmx{size}(\under{\rmx{rev}(x \rel{|} l)})
-	&\larrow \under{\rmx{size}(\rmx{rev}(l) \rel{@} (x \rel{|} nil))} \tag{by rev2} \\
-	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \under{\rmx{size}(x \rel{|} nil)} \tag{by Lemma~\ref{lm1}} \\
-	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \rmx{s}(\under{\rmx{size}(nil)}) \tag{by size2} \\
-	&\larrow \rmx{size}(\rmx{rev}(l)) \rel{+} \rmx{s}(0) \tag{by size1}
+%%% LHS
+\under{\rmx{sum(x \mid l)}}
+	&\larrow x + \rmx{sum}(l) \tag{by sum2} \\
+	&\larrow \under{x + \rmx{sum}(\rmx{rev}(l))} \tag{by IH} \\
+	&\larrow \rmx{sum}(\rmx{rev}(l)) + x \tag{by comm+} \\
+\rmx{sum}(\under{\rmx{rev}(x \mid l)})
+	&\larrow \under{\rmx{sum}(\rmx{rev}(l) \rel{@} (x \mid nil))} \tag{by rev2} \\
+	&\larrow \rmx{sum}(\rmx{rev}(l)) + \under{\rel{sum}(x \mid nil)} \tag{by Lemma~\ref{lm1}} \\
+	&\larrow \rmx{sum}(\rmx{rev}(l)) + (x + \under{\rel{sum}(nil)}) \tag{by sum2} \\
+	&\larrow \rmx{sum}(\rmx{rev}(l)) + (\under{x + 0}) \tag{by sum1} \\
+	&\larrow \rmx{sum}(\rmx{rev}(l)) + (\under{0 + x}) \tag{by comm+} \\
+	&\larrow \rmx{sum}(\rmx{rev}(l)) + x \tag{by +1}
 \end{align*}
-
 \end{description}
 
 \end{proof}
 
-
 \begin{lemma}
 \label{lm1}
-$\forall L1, L2 \in \mathtt{NatList}, \rmx{size}(L1 \rel{@} L2) = \rmx{size}(L1) \rel{+} \rmx{size}(L1)$.
+$\forall L1, L2 \in \mathtt{NatList}, \rmx{sum}(L1 \rel{@} L2) = \rmx{sum}(L1) + \rmx{sum}(L2)$.
 \end{lemma}
 \begin{proof}
 By structural induction on $L1$.
 
 \begin{description}
-
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad \rmx{size}(nil \rel{@} l2) = \rmx{size}(nil) \rel{+} \rmx{size}(l2)$ \\
-where $l2 \in \mathtt{NatList}$.
+What to show: $\quad \rmx{sum}(nil \rel{@} l2) = \rmx{sum}(nil) + \rmx{sum}(l2)$ \\
+where $l2 \in \mathtt{NatList}$. \\
 \begin{align*}
-\rmx{size}(\under{nil \rel{@} l2})
-	&\larrow \rmx{size}(l2) \tag{by @1} \\
-\under{\rmx{size}(nil)} \rel{@} \rmx{size}(l2)
-	&\larrow \under{0 \rel{+} \rmx{size}(l2)} \tag{by size1} \\
-	&\larrow \rmx{size}(l2) \tag{by +1}
+%%% LHS
+\rmx{sum}(\under{nil \rel{@} l2}) 
+	&\larrow \rmx{sum}(l2)  \tag{by @1} \\
+%%% RHS
+\under{\rmx{sum}(nil)} + \rmx{sum}(l2)
+	&\larrow \under{0 + \rmx{sum}(l2)} \tag{by sum1} \\
+	&\larrow 0 \tag{by +1} \\
 \end{align*}
 
 \item[(2) Induction case]~\\
-What to show: $\quad \rmx{size}((x \rel{|} l1) \rel{@} l2) = \rmx{size}(x \rel{|} l1) \rel{+} \rmx{size}(l2)$ \\
-Induction hypothesis: $\quad \rmx{size}(l1 \rel{@} l2) = \rmx{size}(l1) \rel{+} \rmx{size}(l2)$  \\
-where $x \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
+What to show: $\quad \rmx{sum}((x \mid l1) \rel{@} l2) = \rmx{sum}(x \mid l1) + \rmx{sum}(l2)$ \\
+Induction hypothesis: $\quad \rmx{sum}(l1 \rel{@} l2) = \rmx{sum}(l1) + \rmx{sum}(l2)$  \\
+where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$. \\
 \begin{align*}
-\rmx{size}(\under{(x \rel{|} l1) \rel{@} l2})
-	&\larrow \under{\rmx{size}(x \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
-	&\larrow \rmx{s}(\under{\rmx{size}(l1 \rel{@} l2)}) \tag{by size2} \\
-	&\larrow \rmx{s}(\rmx{size}(l1) \rel{+} \rmx{size}(l2)) \tag{by IH} \\
-\under{\rmx{size}(x \rel{|} l1)} \rel{+} \rmx{size}(l2)
-	&\larrow \under{\rmx{s}(\rmx{size}(l1)) \rel{+} \rmx{size}(l2)} \tag{by size2} \\
-	&\larrow \rmx{s}(\rmx{size}(l1) \rel{+} \rmx{size}(l2)) \tag{by +2}
+%%% LHS
+\rmx{sum}(\under{(x \mid l)) \rel{@} l2})
+	&\larrow \under{\rmx{sum}(x \mid (l1 \rel{@} l2))} \tag{by @2} \\
+	&\larrow x + \under{\rmx{sum}(l1 \rel{@} l2)} \tag{by sum2} \\
+	&\larrow \under{x + (\rmx{sum}(l1) + \rmx{sum}(l2))} \tag{by IH} \\
+	&\larrow (x + \rmx{sum}(l1)) + \rmx{sum}(l2) \tag{by assoc+} \\
+\under{\rmx{sum}(x \mid l1)} + \rmx{sum}(l2)
+	&\larrow (x + \rmx{sum}(l1)) + \rmx{sum}(l2) \tag{by sum2}
 \end{align*}
-
-\end{description}
-\end{proof}
-
-
-\begin{lemma}
-\label{lm2}
-$\forall X \in \mathtt{PNat}, \rmx{s}(X) = X \rel{+} \rmx{s}(0)$.
-\end{lemma}
-\begin{proof}
-By structural induction on $X$.
-
-\begin{description}
-
-\item[(1) Base case]~\\
-\noindent
-What to show: $\quad \rmx{s}(0) = 0 \rel{+} \rmx{s}(0)$.
-\begin{align*}
-\under{0 \rel{+} \rmx{s}(0)}
-	&\larrow \rmx{s}(0) \tag{by +1}
-\end{align*}
-
-\item[(2) Induction case]~\\
-What to show: $\quad \rmx{s}(\rmx{s}(x)) = \rmx{s}(x) \rel{+} \rmx{s}(0)$ \\
-Induction hypothesis: $\quad \rmx{s}(x) = x \rel{+} \rmx{s}(0)$  \\
-where $x \in \mathtt{PNat}$.
-\begin{align*}
-\under{\rmx{s}(x) \rel{+} \rmx{s}(0)}
-	&\larrow \rmx{s}(\under{x + s(0)}) \tag{by +2} \\
-	&\larrow \rmx{s}(\under{s(0) + x}) \tag{by comm+} \\
-	&\larrow \rmx{s}(s(\under{0 + x})) \tag{by +2} \\
-	&\larrow \rmx{s}(\rmx{s}(x)) \tag{by +1}
-\end{align*}
-
 \end{description}
 \end{proof}
 

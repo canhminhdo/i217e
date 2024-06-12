@@ -1,8 +1,8 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM13: \forall I \in Nat, L \in NatList: count(L, I) = count(rev(L), I) .
--- [require] LEMMA1, PROBLEM1 - LEMMA5, PROBLEM1 - LEMMA6
+-- PROBLEM13: \forall I \in PNat, L \in NatList: count(L, I) = count(rev(L), I) .
+-- [require] LEMMA1, PROBLEM1 - LEMMA5
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -30,7 +30,7 @@ open NATLIST .
     -- use LEMMA1
     eq count(L1 @ L2, I) = count(L1, I) + count(L2, I) .
     -- use PROBLEM1 - LEMMA5
-    eq count(rev(l),y) + s(0) = s(0) + count(rev(l),y) .
+    eq [comm+] : count(rev(l),y) + s(0) = s(0) + count(rev(l),y) .
     -- induction case
     red count((x | l), y) = count(rev(x | l), y) .
 close
@@ -49,8 +49,8 @@ open NATLIST .
     eq (x = y) = false .
     -- use LEMMA1
     eq count(L1 @ L2, I) = count(L1, I) + count(L2, I) .
-    -- use PROBLEM1 - LEMMA6
-    eq I + 0 = I .
+    -- use PROBLEM1 - LEMMA5
+    eq [comm+] : I + 0 = 0 + I .
     -- induction case
     red count((x | l), y) = count(rev(x | l), y) .
 close

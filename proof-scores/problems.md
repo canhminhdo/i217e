@@ -31,6 +31,7 @@ PROBLEM4: \forall L \in NatList : rev(rev(L)) = L .
 PROBLEM5: \forall L \in NatList: size(L) = size(rev(L)) .
     - LEMMA1: \forall L1 L2 \in NatList: size(L1 @ L2) = size(L1) + size(L2) .
     - LEMMA2: \forall X \in PNat: s(X) = X + s(0) .
+        - PROBLEM1 - LEMMA5
 
 PROBLEM6: \forall X \in PNat, L \in NatList: has(L, X) = has(rev(L), X) .
     - LEMMA1: \forall X \in PNAT, \forall L1 L2 \in NatList: has(L1 @ L2, X) = (has(L1, X) or has(L2, X)) .
@@ -55,11 +56,11 @@ PROBLEM11: \forall X \in PNat, L \in NatList: has(drop(L, X), X) = false .
 
 PROBLEM12: \forall L \in NatList: sum(L) = sum(rev(L)) .
     - LEMMA1: \forall L1 L2 \in NatList: sum(L1 @ L2) = sum(L1) + sum(L2) .
+    - PROBLEM1 - LEMMA5
 
 PROBLEM13: \forall X \in PNat, L \in NatList: count(L, X) = count(rev(L), X) .
     - LEMMA1: \forall X \in PNat \forall L1 L2 \in NatList: count(L1 @ L2) = count(L1, X) + count(L2, X) .
     - PROBLEM1 - LEMMA5
-    - PROBLEM1 - LEMMA6
 
 PROBLEM14: \forall X \in PNat \forall L1 L2 \in NatList: diff(L1, X | L2) = drop(diff(L1, L2), X) .
 

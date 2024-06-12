@@ -2,7 +2,7 @@ in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- PROBLEM12: \forall L \in NatList: sum(L) = sum(rev(L)) .
--- [require] PROBLEM1-LEMMA5, PROBLEM1-LEMMA6, LEMMA11
+-- [require] PROBLEM1-LEMMA5, LEMMA1
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -10,7 +10,7 @@ select NATLIST
 --> base case
 open NATLIST .
     op nil : -> PNat .
-
+    -- base case
     red sum(nil) = sum(rev(nil)) .
 close
 
@@ -25,9 +25,8 @@ open NATLIST .
     -- induction hypothesis
     eq [IH] : sum(l) = sum(rev(l)) .
     -- use PROBLEM1 - LEMMA5
-    eq [PROB1-LM5] : x + sum(rev(l)) = sum(rev(l)) + x .
-    -- use PROBLEM1 - LEMMA6
-    eq I + 0 = I .
+    eq [comm+] : x + sum(rev(l)) = sum(rev(l)) + x .
+    eq [comm+] : I + 0 = 0 + I .
     -- use LEMMA1
     eq sum(L1 @ L2) = sum(L1) + sum(L2) .
     -- induction case

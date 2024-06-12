@@ -2,7 +2,7 @@ in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- LEMMA2: \forall X \in PNat: s(X) = X + s(0) .
--- [require] PROBLEM1 - LEMMA6, PROBLEM1 - LEMMA7
+-- [require] PROBLEM1 - LEMMA5
 -- ----------------------------------------------------------------------------
 
 select PNAT
@@ -20,10 +20,8 @@ open PNAT .
 
     -- induction hypothesis
     eq [IH :nonexec] : s(x) = x + s(0) .
-    -- use PROBLEM1 - LEMMA6
-    eq [PROB1-LM6] : I + 0 = I .
-    -- use PROBLEM1 - LEMMA7
-    eq [PROB1-LM7] : I + s(J) = s(I + J) .
+    -- use PROBLEM1 - LEMMA5
+    eq [comm+] : x + s(0) = s(0) + x .
     -- induction case
     red s(s(x)) = s(x) + s(0) .
 close
