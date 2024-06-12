@@ -11,7 +11,7 @@ select NATLIST
 open NATLIST .
     op x : -> PNat .
     op l2 : -> NatList .
-    
+    -- base case
     red diff(nil, x | l2) = drop(diff(nil, l2), x) .
 close
 

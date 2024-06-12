@@ -9,6 +9,7 @@ select NATLIST
 --> PROOF: PROBLEM17
 --> base case
 open NATLIST .
+    -- base case
     red rmDup(rmDup(nil)) = rmDup(nil) .
 close
 
@@ -31,12 +32,15 @@ open NATLIST .
     op x : -> PNat .
     op l : -> NatList .
 
+    var I : PNat .
+    var L1 : NatList .
+    
     -- induction hypothesis
     eq [IH] : rmDup(rmDup(l)) = rmDup(l) .
     -- case splitting
     eq has(l, x) = false .
     -- use LEMMA1
-    eq has(rmDup(l), x) = has(l, x) .
+    eq has(rmDup(L1), I) = has(L1, I) .
     -- induction case
     red rmDup(rmDup(x | l)) = rmDup(x | l) .
 close

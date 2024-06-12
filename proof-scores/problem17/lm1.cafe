@@ -10,7 +10,7 @@ select NATLIST
 --> base case
 open NATLIST .
     op x : -> PNat .
-
+    -- base case
     red has(nil, x) = has(rmDup(nil), x) .
 close
 

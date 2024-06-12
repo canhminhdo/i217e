@@ -9,6 +9,7 @@ select NATLIST
 --> PROOF: PROBLEM19
 --> base case
 open NATLIST .
+    -- base case
     red diff(nil, nil) = nil .
 close
 

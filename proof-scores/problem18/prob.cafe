@@ -9,6 +9,7 @@ select NATLIST
 --> PROOF: PROBLEM18
 --> base case
 open NATLIST .
+    -- base case
     red setEqual(nil, rmDup(nil)) = true .
 close
 
@@ -28,11 +29,11 @@ open NATLIST .
     -- use PROBLEM14 as a lemma
     eq diff (L1, I | L2) = drop(diff (L1, L2), I ) .
     -- use LEMMA1
-    eq diff(rmDup(l),l) = nil .
+    eq diff(rmDup(L1), L1) = nil .
     -- use LEMMA2
-    eq diff(l,rmDup(l)) = nil .
+    eq diff(L1, rmDup(L1)) = nil .
     -- use PROBLEM17 - LEMMA1
-    eq has(rmDup(l), x) = has(l, x) .
+    eq has(rmDup(L1), I) = has(L1, I) .
     -- induction case
     red setEqual(x | l, rmDup(x | l)) = true .
 close
@@ -52,11 +53,11 @@ open NATLIST .
     -- use PROBLEM14 as a lemma
     eq diff (L1, I | L2) = drop(diff (L1, L2), I ) .
     -- use LEMMA1
-    eq diff(rmDup(l),l) = nil .
+    eq diff(rmDup(L1), L1) = nil .
     -- use LEMMA2
-    eq diff(l,rmDup(l)) = nil .
+    eq diff(L1, rmDup(L1)) = nil .
     -- use PROBLEM17 - LEMMA1
-    eq has(rmDup(l), x) = has(l, x) .
+    eq has(rmDup(L1), I) = has(L1, I) .
     -- induction case
     red setEqual(x | l, rmDup(x | l)) = true .
 close

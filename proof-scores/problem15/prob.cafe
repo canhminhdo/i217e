@@ -9,10 +9,12 @@ select NATLIST
 --> PROOF: PROBLEM15
 --> base case
 open NATLIST .
+    -- base case
     red diff(rev(nil), nil) = nil .
 close
 
 --> induction case
+--> case 1
 open NATLIST .
     op x : -> PNat .
     op l : -> NatList .
@@ -22,10 +24,32 @@ open NATLIST .
     
     -- induction hypothesis
     eq [IH] : diff(rev(l), l) = nil .
+    -- case splitting
+    eq has(l, x) = true .
     -- use PROBLEM9 - LEMMA1
-    eq diff((rev(l) @ (x | nil)), x | l) = diff(rev(l), x | l) @ diff(x | nil, x | l) .
+    eq diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
     -- use PROBLEM14 as a lemma
-    eq diff(rev(l), x | l) = drop(diff(rev(l), l), x) .
+    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
+    -- induction case
+    red diff(rev(x | l), x | l) = nil .
+close
+
+--> case 2
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+
+    var I : PNat .
+    vars L1 L2 L3 : NatList .
+    
+    -- induction hypothesis
+    eq [IH] : diff(rev(l), l) = nil .
+    -- case splitting
+    eq has(l, x) = false .
+    -- use PROBLEM9 - LEMMA1
+    eq diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
+    -- use PROBLEM14 as a lemma
+    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
     -- induction case
     red diff(rev(x | l), x | l) = nil .
 close

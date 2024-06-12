@@ -10,7 +10,7 @@ select NATLIST
 --> base case
 open NATLIST .
     var I : PNat .
-
+    -- base case
     red count(nil, I) = count(rev(nil), I) .
 close
 

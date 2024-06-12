@@ -10,7 +10,7 @@ select NATLIST
 --> base case
 open NATLIST .
     ops x y : -> PNat .
-
+    -- base case
     red ((not has(nil, x)) and has(nil, y)) implies (not (x = y)) .
 close
 

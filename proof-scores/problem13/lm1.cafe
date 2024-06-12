@@ -9,9 +9,9 @@ select NATLIST
 --> PROOF: LEMMA1
 --> base case
 open NATLIST .
-    ops l1 l2 : -> NatList .
     op y : -> PNat .
-
+    ops l1 l2 : -> NatList .
+    -- base case
     red count(nil @ l2, y) = (count(nil, y) + count(l2, y)) .
 close
 

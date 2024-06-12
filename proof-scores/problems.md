@@ -71,6 +71,7 @@ PROBLEM16: \forall L \in NatList: setEqual(L, rev(L)) = true .
     - PROBLEM9 - LEMMA1
     - PROBLEM7 - LEMMA1
     - PROBLEM4 - LEMMA2
+    - PROBLEM6
     - PROBLEM6 - LEMMA1
     - PROBLEM7
     - PROBLEM14

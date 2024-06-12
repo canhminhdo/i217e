@@ -2,13 +2,14 @@ in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- PROBLEM16: \forall L \in NatList: setEqual(L, rev(L)) = true .
--- [require] PROBLEM9 - LEMMA1, PROBLEM7 - LEMMA1, PROBLEM4 - LEMMA2, PROBLEM6 - LEMMA1, PROBLEM7, PROBLEM14, PROBLEM15
+-- [require] PROBLEM9 - LEMMA1, PROBLEM7 - LEMMA1, PROBLEM4 - LEMMA2, PROBLEM6, PROBLEM6 - LEMMA1, PROBLEM7, PROBLEM14, PROBLEM15
 -- ----------------------------------------------------------------------------
 
 select NATLIST
 --> PROOF: PROBLEM13
 --> base case
 open NATLIST .
+    -- base case
     red setEqual(nil, rev(nil)) = true .
 close
 
@@ -34,11 +35,13 @@ open NATLIST .
     -- use PROBLEM6 - LEMMA1
     eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
     -- use PROBLEM7 as a lemma
-    eq diff(l, rev(l)) = nil .
+    eq diff(L1, rev(L1)) = nil .
     -- use PROBLEM15 as a lemma
-    eq diff(rev(l), l) = nil .
+    eq diff(rev(L1), L1) = nil .
     -- use PROBLEM14 as a lemma
-    eq diff(rev(l),(x | l)) = drop(diff(rev(l), l), x) . 
+    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
+    -- use PROBLEM6 as a lemma
+    eq has(l, x) = has(rev(l), x) .
     -- induction case
     red setEqual(x | l, rev(x | l)) = true .
 close
@@ -64,11 +67,13 @@ open NATLIST .
     -- use PROBLEM6 - LEMMA1
     eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
     -- use PROBLEM7 as a lemma
-    eq diff(l, rev(l)) = nil .
+    eq diff(L1, rev(L1)) = nil .
     -- use PROBLEM15 as a lemma
-    eq diff(rev(l), l) = nil .
+    eq diff(rev(L1), L1) = nil .
     -- use PROBLEM14 as a lemma
-    eq diff(rev(l),(x | l)) = drop(diff(rev(l), l), x) . 
+    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
+    -- use PROBLEM6 as a lemma
+    eq has(l, x) = has(rev(l), x) .
     -- induction case
     red setEqual(x | l, rev(x | l)) = true .
 close
