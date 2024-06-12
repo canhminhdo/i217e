@@ -88,3 +88,11 @@ PROBLEM18: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
         - PROBLEM17 - LEMMA1
     - PROBLEM14
     - PROBLEM17 - LEMMA1
+
+PROBLEM19: \forall L \in NatList: diff(L, L) = nil .
+    - PROBLEM14
+
+PROBLEM20: \forall L1 L2 \in NatList: rmDup(L1 @ L2) = rmDup(rmDup(L1) @ rmDup(L2)) .
+    - PROBLEM6 - LEMMA1
+    - PROBLEM17
+    - PROBLEM17 - LEMMA1

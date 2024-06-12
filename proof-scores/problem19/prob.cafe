@@ -1,0 +1,50 @@
+in ../../pgm.cafe
+
+-- ----------------------------------------------------------------------------
+-- PROBLEM19: \forall L \in NatList: diff(L, L) =  nil .
+-- [require] PROBLEM14
+-- ----------------------------------------------------------------------------
+
+select NATLIST
+--> PROOF: PROBLEM19
+--> base case
+open NATLIST .
+    red diff(nil, nil) = nil .
+close
+
+--> induction case
+--> case 1
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    var I : PNat .
+    vars L1 L2 : NatList .
+
+    -- induction hypothesis
+    eq [IH] : diff(l, l) = nil .
+    -- case splitting
+    eq has(l, x) = true .
+    -- use PROBLEM14
+    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
+    -- induction case
+    red diff(x | l, x | l) = nil .
+close
+
+--> case 2
+open NATLIST .
+    op x : -> PNat .
+    op l : -> NatList .
+    
+    var I : PNat .
+    vars L1 L2 : NatList .
+
+    -- induction hypothesis
+    eq [IH] : diff(l, l) = nil .
+    -- case splitting
+    eq has(l, x) = false .
+    -- use PROBLEM14
+    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
+    -- induction case
+    red diff(x | l, x | l) = nil .
+close
