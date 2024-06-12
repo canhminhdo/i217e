@@ -15,7 +15,7 @@ PROBLEM1: \forall L \in NatList: fold*(rev(L)) = fold*(L) .
             - LEMMA7
 
 PROBLEM2: \forall X \in PNat: rev(mkl1(X)) = mkl2(X) .
-    - LEMMA1: \forall X \in PNat, L \in NatList: smkl2(X, L) = smkl2(X, nil) @ L .
+    - LEMMA1: \forall X \in PNat, \forall L \in NatList: smkl2(X, L) = smkl2(X, nil) @ L .
         - LEMMA2 [assoc@]: \forall L1 L2 L3 \in NatList: (L1 @ L2) @ L3 = L1 @ (L2 @ L3) . 
 
 PROBLEM3: \forall X \in PNat: fact(X) = fold*(mkl2(X)) .
@@ -33,7 +33,7 @@ PROBLEM5: \forall L \in NatList: size(L) = size(rev(L)) .
     - LEMMA2: \forall X \in PNat: s(X) = X + s(0) .
         - PROBLEM1 - LEMMA5
 
-PROBLEM6: \forall X \in PNat, L \in NatList: has(L, X) = has(rev(L), X) .
+PROBLEM6: \forall X \in PNat, \forall L \in NatList: has(L, X) = has(rev(L), X) .
     - LEMMA1: \forall X \in PNAT, \forall L1 L2 \in NatList: has(L1 @ L2, X) = (has(L1, X) or has(L2, X)) .
 
 PROBLEM7: \forall L \in NatList: diff(L, rev(L)) = nil .
@@ -49,16 +49,16 @@ PROBLEM9: \forall L1 L2 \in NatList: diff(L1, L2) = rev(diff(rev(L1), L2)) .
     - PROBLEM4 - LEMMA1
     - PROBLEM4 - LEMMA2
 
-PROBLEM10: \forall X \in PNat, L \in NatList: drop(L, X) = rev(drop(rev(L), X)) .
-    - LEMMA1 : \forall X \in PNat, L1 L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
+PROBLEM10: \forall X \in PNat, \forall L \in NatList: drop(L, X) = rev(drop(rev(L), X)) .
+    - LEMMA1 : \forall X \in PNat, \forall L1 L2 \in NatList: drop(L1 @ L2, X) = drop(L1, X) @ drop(L2, X) .
 
-PROBLEM11: \forall X \in PNat, L \in NatList: has(drop(L, X), X) = false .
+PROBLEM11: \forall X \in PNat, \forall L \in NatList: has(drop(L, X), X) = false .
 
 PROBLEM12: \forall L \in NatList: sum(L) = sum(rev(L)) .
     - LEMMA1: \forall L1 L2 \in NatList: sum(L1 @ L2) = sum(L1) + sum(L2) .
     - PROBLEM1 - LEMMA5
 
-PROBLEM13: \forall X \in PNat, L \in NatList: count(L, X) = count(rev(L), X) .
+PROBLEM13: \forall X \in PNat, \forall L \in NatList: count(L, X) = count(rev(L), X) .
     - LEMMA1: \forall X \in PNat \forall L1 L2 \in NatList: count(L1 @ L2) = count(L1, X) + count(L2, X) .
     - PROBLEM1 - LEMMA5
 
@@ -79,8 +79,8 @@ PROBLEM16: \forall L \in NatList: setEqual(L, rev(L)) = true .
     - PROBLEM15
 
 PROBLEM17: \forall L \in NatList: rmDup(rmDup(L)) = rmDup(L) .
-    - LEMMA1: \forall X \in PNat, L \in NatList: has(L, X) = has(rmDup(L), X) .
-        - LEMMA2: \forall X Y \in PNat, L \in NatList: ((not has(L, X)) and has(L, Y)) implies not (X = Y) .
+    - LEMMA1: \forall X \in PNat, \forall L \in NatList: has(L, X) = has(rmDup(L), X) .
+        - LEMMA2: \forall X Y \in PNat, \forall L \in NatList: ((not has(L, X)) and has(L, Y)) implies not (X = Y) .
 
 PROBLEM18: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
     - LEMMA1: \forall L \in NatList: diff(rmDup(L), L) = nil .

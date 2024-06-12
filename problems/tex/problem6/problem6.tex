@@ -120,7 +120,7 @@
 \maketitle
 
 \begin{problem}
-$\forall X \in \mathtt{PNat}, L \in \mathtt{NatList}, \rmx{has}(L, X) = \rmx{has}(\rmx{rev}(L), X)$.
+$\forall X \in \mathtt{PNat}, \forall L \in \mathtt{NatList}, \rmx{has}(L, X) = \rmx{has}(\rmx{rev}(L), X)$.
 \end{problem}
 \begin{proof}
 By structural induction on $L$.
@@ -162,7 +162,7 @@ where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
 
 \begin{lemma}
 \label{lm1}
-$\forall X \in \mathtt{PNat}, L1, L2 \in \mathtt{NatList}, \rmx{has}(L1 \rel{@} L2, X) = \rmx{has}(L1, X) \rel{\rmx{or}} \rmx{has}(L2, X)$.
+$\forall X \in \mathtt{PNat}, \forall L1, L2 \in \mathtt{NatList}, \rmx{has}(L1 \rel{@} L2, X) = \rmx{has}(L1, X) \rel{\rmx{or}} \rmx{has}(L2, X)$.
 \end{lemma}
 \begin{proof}
 By structural induction on $L1$.

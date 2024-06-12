@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM13: \forall I \in PNat, L \in NatList: count(L, I) = count(rev(L), I) .
+-- PROBLEM13: \forall I \in PNat, \forall L \in NatList: count(L, I) = count(rev(L), I) .
 -- [require] LEMMA1, PROBLEM1 - LEMMA5
 -- ----------------------------------------------------------------------------
 

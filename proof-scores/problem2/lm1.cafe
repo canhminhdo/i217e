@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA1: \forall X \in PNat, L \in NatList: smkl2(X, L) = smkl2(X, nil) @ L .
+-- LEMMA1: \forall X \in PNat, \forall L \in NatList: smkl2(X, L) = smkl2(X, nil) @ L .
 -- [require] LEMMA2
 -- ----------------------------------------------------------------------------
 

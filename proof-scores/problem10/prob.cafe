@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM10: \forall X \in PNat, L \in NatList: drop(L, X) = rev(drop(rev(L), X)) .
+-- PROBLEM10: \forall X \in PNat, \forall L \in NatList: drop(L, X) = rev(drop(rev(L), X)) .
 -- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 

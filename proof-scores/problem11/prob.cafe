@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM11: \forall X \in PNat, L \in NatList: has(drop(L, X), X) = false .
+-- PROBLEM11: \forall X \in PNat, \forall L \in NatList: has(drop(L, X), X) = false .
 -- [require]
 -- ----------------------------------------------------------------------------
 

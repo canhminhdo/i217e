@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA2: \forall X Y \in PNat, L \in NatList: ((not has(L, X)) and has(L, Y)) implies not (X = Y) .
+-- LEMMA2: \forall X Y \in PNat, \forall L \in NatList: ((not has(L, X)) and has(L, Y)) implies not (X = Y) .
 -- [require]
 -- ----------------------------------------------------------------------------
 

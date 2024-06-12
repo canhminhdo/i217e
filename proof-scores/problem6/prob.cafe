@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM6: \forall X \in PNat, L \in NatList: has(L, X) = has(rev(L), X) .
+-- PROBLEM6: \forall X \in PNat, \forall L \in NatList: has(L, X) = has(rev(L), X) .
 -- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 

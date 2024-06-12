@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA1: \forall X \in PNat, L \in NatList: has(L, X) = has(rmDup(L), X) .
+-- LEMMA1: \forall X \in PNat, \forall L \in NatList: has(L, X) = has(rmDup(L), X) .
 -- [require] LEMMA2
 -- ----------------------------------------------------------------------------
 

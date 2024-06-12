@@ -1,7 +1,7 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA1: \forall I \in PNat, L1 L2 \in NatList: count(L1 @ L2, I) = count(L1, I) + count(L2, I) .
+-- LEMMA1: \forall I \in PNat, \forall L1 L2 \in NatList: count(L1 @ L2, I) = count(L1, I) + count(L2, I) .
 -- [require]
 -- ----------------------------------------------------------------------------
 
