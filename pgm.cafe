@@ -57,7 +57,7 @@ mod! LIST (E :: TRIV) {
   eq [drop2] : drop(E1 | L1, E) = if (E1 = E) then drop(L1, E) else (E1 | drop(L1, E)) fi .
   eq [diff1] : diff(nil, L2) = nil .
   eq [diff2] : diff(E1 | L1, L2) = if has(L2, E1) then diff(L1, L2) else E1 | diff(L1, L2) fi .
-  eq [setEqual] : setEqual(L1, L2) = if (diff(L1, L2) = nil) and diff(L2, L1) = nil then true else false fi .
+  eq [setEq] : setEqual(L1, L2) = ((diff(L1, L2) = nil) and diff(L2, L1) = nil) .
   eq [rmDup1] : rmDup(nil) = nil .
   eq [rmDup2] : rmDup(E1 | L1) = if has(L1, E1) then rmDup(L1) else (E1 | rmDup(L1)) fi .
   eq [if1] : if true then L1 else L2 fi = L1 .
@@ -89,5 +89,3 @@ mod! NATLIST {
   eq [cnt1] : count(nil, Y) = 0 .
   eq [cnt2] : count(X | L, Y) = if (X = Y) then s(count(L, Y)) else count(L, Y) fi .
 }
-
--- set trace on
