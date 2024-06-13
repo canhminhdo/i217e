@@ -112,7 +112,7 @@
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
 
-\title{Problem 15}
+\title{Problem 16}
 \date{\vspace{-5ex}}
 
 \begin{document}
@@ -138,21 +138,17 @@ What to show: $\quad \rmx{diff}(\rmx{rev}(nil), nil) = nil$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{diff}(\rmx{rev}(x \mid l), x \mid l) = nil$ \\
 Induction hypothesis: $\quad \rmx{diff}(\rmx{rev}(l), l) = nil$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
-We use case splitting for our proofs as follows: \\
-\textbf{Case 1}: $has(l, x) = true$
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
 \begin{align*}
 %%% LHS
 \rmx{diff}(\under{\rmx{rev}(x \mid l)}, x \mid l)
-	&\larrow \rmx{diff}(\rmx{rev}(l) \rel{@} (x \mid l), x \mid l) \tag{by rev2} \\
-	&\larrow \rmx{diff}(\rmx{rev}(l), x \mid l) \rel{@} \rmx{diff}(x \mid l, x \mid l) \tag{by Problem 9 - Lemma 1} \\
-\end{align*}
-
-\textbf{Case 2}: $has(l, x) = false$
-\begin{align*}
-%%% LHS
-\rmx{diff}(\rmx{rev}(x \mid l), x \mid l)
-	&\larrow \tag{by diff2} \\
+	&\larrow \under{\rmx{diff}(\rmx{rev}(l) \rel{@} (x \mid l), x \mid l)} \tag{by rev2} \\
+	&\larrow \rmx{diff}(\rmx{rev}(l), x \mid l) \rel{@} \under{\rmx{diff}(x \mid l, x \mid l)} \tag{by Problem 9 - Lemma 1} \\
+	&\larrow \under{\rmx{diff}(\rmx{rev}(l), x \mid l) \rel{@} nil} \tag{by Problem 15} \\
+	&\larrow \under{\rmx{diff}(\rmx{rev}(l), x \mid l)} \tag{by Problem 4 - Lemma 2} \\
+	&\larrow \rmx{drop}(\under{\rmx{diff}(\rmx{rev}(l), l)}, x) \tag{by Problem 14} \\
+	&\larrow \under{\rmx{drop}(nil, x)} \tag{by IH} \\
+	&\larrow nil \tag{by drop1}
 \end{align*}
 \end{description}
 
