@@ -71,7 +71,24 @@ PROBLEM16: \forall L \in NatList : diff(rev(L), L) = nil .
     - PROBLEM9 - LEMMA1
     - PROBLEM14
 
-PROBLEM17: \forall L \in NatList: setEqual(L, rev(L)) = true .
+PROBLEM17: \forall L \in NatList: rmDup(rmDup(L)) = rmDup(L) .
+    - LEMMA1: \forall X \in PNat, \forall L \in NatList: has(L, X) = has(rmDup(L), X) .
+
+PROBLEM18: \forall L1 L2 \in NatList: rmDup(L1 @ L2) = rmDup(rmDup(L1) @ rmDup(L2)) .
+    - PROBLEM6 - LEMMA1
+    - PROBLEM17
+    - PROBLEM17 - LEMMA1
+
+PROBLEM19: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
+    - LEMMA1: \forall L \in NatList: diff(rmDup(L), L) = nil .
+        - PROBLEM14
+    - LEMMA2: \forall L \in NatList: diff(L, rmDup(L)) = nil .
+        - PROBLEM14
+        - PROBLEM17 - LEMMA1
+    - PROBLEM14
+    - PROBLEM17 - LEMMA1
+
+PROBLEM20: \forall L \in NatList: setEqual(L, rev(L)) = true .
     - PROBLEM9 - LEMMA1
     - PROBLEM7 - LEMMA1
     - PROBLEM4 - LEMMA2
@@ -80,21 +97,3 @@ PROBLEM17: \forall L \in NatList: setEqual(L, rev(L)) = true .
     - PROBLEM7
     - PROBLEM14
     - PROBLEM16
-
-PROBLEM18: \forall L \in NatList: rmDup(rmDup(L)) = rmDup(L) .
-    - LEMMA1: \forall X \in PNat, \forall L \in NatList: has(L, X) = has(rmDup(L), X) .
-        - LEMMA2: \forall X Y \in PNat, \forall L \in NatList: ((not has(L, X)) and has(L, Y)) implies not (X = Y) .
-
-PROBLEM19: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
-    - LEMMA1: \forall L \in NatList: diff(rmDup(L), L) = nil .
-        - PROBLEM14
-    - LEMMA2: \forall L \in NatList: diff(L, rmDup(L)) = nil .
-        - PROBLEM14
-        - PROBLEM18 - LEMMA1
-    - PROBLEM14
-    - PROBLEM18 - LEMMA1
-
-PROBLEM20: \forall L1 L2 \in NatList: rmDup(L1 @ L2) = rmDup(rmDup(L1) @ rmDup(L2)) .
-    - PROBLEM6 - LEMMA1
-    - PROBLEM18
-    - PROBLEM18 - LEMMA1

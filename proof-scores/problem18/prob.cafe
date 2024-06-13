@@ -1,46 +1,60 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM17: \forall L \in NatList: rmDup(rmDup(L))) = rmDup(L) .
--- [require] LEMMA1
+-- PROBLEM18: \forall L1 L2 \in NatList: rmDup(L1 @ L2) = rmDup(rmDup(L1) @ rmDup(L2)) .
+-- [require] PROBLEM6 - LEMMA1, PROBLEM17, PROBLEM17 - LEMMA1
 -- ----------------------------------------------------------------------------
 
 select NATLIST
---> PROOF: PROBLEM17
+--> PROOF: PROBLEM18
 --> base case
 open NATLIST .
+    op l2 : -> NatList .
+    
+    var L1 : NatList .
+
+    -- use PROBLEM17
+    eq rmDup(rmDup(L1)) = rmDup(L1) .
     -- base case
-    red rmDup(rmDup(nil)) = rmDup(nil) .
+    red rmDup(nil @ l2) = rmDup(rmDup(nil) @ rmDup(l2)) .
 close
 
 --> induction case
 --> case 1
 open NATLIST .
     op x : -> PNat .
-    op l : -> NatList .
+    ops l1 l2 : -> NatList .
+    
+    var I : PNat .
+    vars L1 L2 : NatList .
 
     -- induction hypothesis
-    eq [IH] : rmDup(rmDup(l)) = rmDup(l) .
+    eq [IH] : rmDup(l1 @ l2) = rmDup(rmDup(l1) @ rmDup(l2)) .
     -- case splitting
-    eq has(l, x) = true .
+    eq has(l1, x) = true .
+    -- use PROBLEM6 - LEMMA1
+    eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
     -- induction case
-    red rmDup(rmDup(x | l)) = rmDup(x | l) .
+    red rmDup((x | l1) @ l2) = rmDup(rmDup(x | l1) @ rmDup(l2)) .
 close
 
---> case 2
+--> case 2.1
 open NATLIST .
     op x : -> PNat .
-    op l : -> NatList .
-
-    var I : PNat .
-    var L1 : NatList .
+    ops l1 l2 : -> NatList .
     
+    var I : PNat .
+    vars L1 L2 : NatList .
+
     -- induction hypothesis
-    eq [IH] : rmDup(rmDup(l)) = rmDup(l) .
+    eq [IH] : rmDup(l1 @ l2) = rmDup(rmDup(l1) @ rmDup(l2)) .
     -- case splitting
-    eq has(l, x) = false .
-    -- use LEMMA1
+    eq has(l1, x) = false .
+    eq has(l2, x) = true .
+    -- use PROBLEM6 - LEMMA1
+    eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
+    -- use PROBLEM17 - LEMMA1
     eq has(rmDup(L1), I) = has(L1, I) .
     -- induction case
-    red rmDup(rmDup(x | l)) = rmDup(x | l) .
+    red rmDup((x | l1) @ l2) = rmDup(rmDup(x | l1) @ rmDup(l2)) .
 close

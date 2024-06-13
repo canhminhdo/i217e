@@ -1,60 +1,79 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM19: \forall L1 L2 \in NatList: rmDup(L1 @ L2) = rmDup(rmDup(L1) @ rmDup(L2)) .
--- [require] PROBLEM6 - LEMMA1, PROBLEM17, PROBLEM17 - LEMMA1
+-- PROBLEM17: \forall L \in NatList: setEqual(L, rev(L)) = true .
+-- [require] PROBLEM9 - LEMMA1, PROBLEM7 - LEMMA1, PROBLEM4 - LEMMA2, PROBLEM6, PROBLEM6 - LEMMA1, PROBLEM7, PROBLEM14, PROBLEM15
 -- ----------------------------------------------------------------------------
 
 select NATLIST
---> PROOF: PROBLEM19
+--> PROOF: PROBLEM17
 --> base case
 open NATLIST .
-    op l2 : -> NatList .
-    
-    var L1 : NatList .
-
-    -- use PROBLEM17
-    eq rmDup(rmDup(L1)) = rmDup(L1) .
     -- base case
-    red rmDup(nil @ l2) = rmDup(rmDup(nil) @ rmDup(l2)) .
+    red setEqual(nil, rev(nil)) = true .
 close
 
 --> induction case
 --> case 1
 open NATLIST .
     op x : -> PNat .
-    ops l1 l2 : -> NatList .
+    op l : -> NatList .
     
     var I : PNat .
-    vars L1 L2 : NatList .
+    vars L1 L2 L3 : NatList .
 
     -- induction hypothesis
-    eq [IH] : rmDup(l1 @ l2) = rmDup(rmDup(l1) @ rmDup(l2)) .
+    eq [IH] : setEqual(l, rev(l)) = true .
     -- case splitting
-    eq has(l1, x) = true .
+    eq has(rev(l), x) = true .
+    -- use PROBLEM9 - LEMMA1
+    eq diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
+    -- use PROBLEM7 - LEMMA1
+    eq diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
+    -- use PROBLEM4 - LEMMA2
+    eq L1 @ nil = L1 .
     -- use PROBLEM6 - LEMMA1
     eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
+    -- use PROBLEM7 as a lemma
+    eq diff(L1, rev(L1)) = nil .
+    -- use PROBLEM15 as a lemma
+    eq diff(rev(L1), L1) = nil .
+    -- use PROBLEM14 as a lemma
+    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
+    -- use PROBLEM6 as a lemma
+    eq has(l, x) = has(rev(l), x) .
     -- induction case
-    red rmDup((x | l1) @ l2) = rmDup(rmDup(x | l1) @ rmDup(l2)) .
+    red setEqual(x | l, rev(x | l)) = true .
 close
 
---> case 2.1
+--> case 2
 open NATLIST .
     op x : -> PNat .
-    ops l1 l2 : -> NatList .
+    op l : -> NatList .
     
     var I : PNat .
-    vars L1 L2 : NatList .
+    vars L1 L2 L3 : NatList .
 
     -- induction hypothesis
-    eq [IH] : rmDup(l1 @ l2) = rmDup(rmDup(l1) @ rmDup(l2)) .
+    eq [IH] : setEqual(l, rev(l)) = true .
     -- case splitting
-    eq has(l1, x) = false .
-    eq has(l2, x) = true .
+    eq has(rev(l), x) = false .
+    -- use PROBLEM9 - LEMMA1
+    eq diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
+    -- use PROBLEM7 - LEMMA1
+    eq diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
+    -- use PROBLEM4 - LEMMA2
+    eq L1 @ nil = L1 .
     -- use PROBLEM6 - LEMMA1
     eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
-    -- use PROBLEM17 - LEMMA1
-    eq has(rmDup(L1), I) = has(L1, I) .
+    -- use PROBLEM7 as a lemma
+    eq diff(L1, rev(L1)) = nil .
+    -- use PROBLEM15 as a lemma
+    eq diff(rev(L1), L1) = nil .
+    -- use PROBLEM14 as a lemma
+    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
+    -- use PROBLEM6 as a lemma
+    eq has(l, x) = has(rev(l), x) .
     -- induction case
-    red rmDup((x | l1) @ l2) = rmDup(rmDup(x | l1) @ rmDup(l2)) .
+    red setEqual(x | l, rev(x | l)) = true .
 close

@@ -1,16 +1,16 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM16: \forall L \in NatList: setEqual(L, rev(L)) = true .
--- [require] PROBLEM9 - LEMMA1, PROBLEM7 - LEMMA1, PROBLEM4 - LEMMA2, PROBLEM6, PROBLEM6 - LEMMA1, PROBLEM7, PROBLEM14, PROBLEM15
+-- PROBLEM17: \forall L \in NatList: rmDup(rmDup(L))) = rmDup(L) .
+-- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 
 select NATLIST
---> PROOF: PROBLEM13
+--> PROOF: PROBLEM17
 --> base case
 open NATLIST .
     -- base case
-    red setEqual(nil, rev(nil)) = true .
+    red rmDup(rmDup(nil)) = rmDup(nil) .
 close
 
 --> induction case
@@ -18,62 +18,29 @@ close
 open NATLIST .
     op x : -> PNat .
     op l : -> NatList .
-    
-    var I : PNat .
-    vars L1 L2 L3 : NatList .
 
     -- induction hypothesis
-    eq [IH] : setEqual(l, rev(l)) = true .
+    eq [IH] : rmDup(rmDup(l)) = rmDup(l) .
     -- case splitting
-    eq has(rev(l), x) = true .
-    -- use PROBLEM9 - LEMMA1
-    eq diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
-    -- use PROBLEM7 - LEMMA1
-    eq diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
-    -- use PROBLEM4 - LEMMA2
-    eq L1 @ nil = L1 .
-    -- use PROBLEM6 - LEMMA1
-    eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
-    -- use PROBLEM7 as a lemma
-    eq diff(L1, rev(L1)) = nil .
-    -- use PROBLEM15 as a lemma
-    eq diff(rev(L1), L1) = nil .
-    -- use PROBLEM14 as a lemma
-    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
-    -- use PROBLEM6 as a lemma
-    eq has(l, x) = has(rev(l), x) .
+    eq has(l, x) = true .
     -- induction case
-    red setEqual(x | l, rev(x | l)) = true .
+    red rmDup(rmDup(x | l)) = rmDup(x | l) .
 close
 
 --> case 2
 open NATLIST .
     op x : -> PNat .
     op l : -> NatList .
-    
-    var I : PNat .
-    vars L1 L2 L3 : NatList .
 
+    var I : PNat .
+    var L1 : NatList .
+    
     -- induction hypothesis
-    eq [IH] : setEqual(l, rev(l)) = true .
+    eq [IH] : rmDup(rmDup(l)) = rmDup(l) .
     -- case splitting
-    eq has(rev(l), x) = false .
-    -- use PROBLEM9 - LEMMA1
-    eq diff(L1 @ L2, L3) = diff(L1, L3) @ diff(L2, L3) .
-    -- use PROBLEM7 - LEMMA1
-    eq diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
-    -- use PROBLEM4 - LEMMA2
-    eq L1 @ nil = L1 .
-    -- use PROBLEM6 - LEMMA1
-    eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
-    -- use PROBLEM7 as a lemma
-    eq diff(L1, rev(L1)) = nil .
-    -- use PROBLEM15 as a lemma
-    eq diff(rev(L1), L1) = nil .
-    -- use PROBLEM14 as a lemma
-    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
-    -- use PROBLEM6 as a lemma
-    eq has(l, x) = has(rev(l), x) .
+    eq has(l, x) = false .
+    -- use LEMMA1
+    eq has(rmDup(L1), I) = has(L1, I) .
     -- induction case
-    red setEqual(x | l, rev(x | l)) = true .
+    red rmDup(rmDup(x | l)) = rmDup(x | l) .
 close

@@ -2,7 +2,7 @@ in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- LEMMA1: \forall X \in PNat, \forall L \in NatList: has(L, X) = has(rmDup(L), X) .
--- [require] LEMMA2
+-- [require]
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -55,10 +55,8 @@ open NATLIST .
     eq has(l, y) = true .
     eq has(rmDup(l), x) = false .
     eq (y = x) = false .
-    -- induction case: using LEMMA2 as antecedent
-    red 
-        (((not has(l, x)) and (has(l, y))) implies (not (x = y))) implies
-        (has(y | l, x) = has(rmDup(y | l), x)) .
+    -- induction case
+    red (has(y | l, x) = has(rmDup(y | l), x)) .
 close
 
 --> case 2

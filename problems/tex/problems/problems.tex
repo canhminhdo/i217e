@@ -202,12 +202,12 @@ $\forall L \in \mathtt{NatList} \colon \rmx{diff}(\rmx{rev}(L), L) = nil$.
 
 %%% Problem 17
 \begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{setEqual}(L, \rmx{rev}(L)) = true$.
+$\forall L \in \mathtt{NatList} \colon \rmx{rmDup}(\rmx{rmDup}(L)) = \rmx{rmDup}(L)$.
 \end{problem}
 
 %%% Problem 18
 \begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{rmDup}(\rmx{rmDup}(L)) = \rmx{rmDup}(L)$.
+$\forall L1, L2 \in \mathtt{NatList} \colon \rmx{rmDup}(L1 \rel{@} L2) = \rmx{rmDup}(\rmx{rmDup}(L1) \rel{@} \rmx{rmDup}(L2))$.
 \end{problem}
 
 %%% Problem 19
@@ -217,7 +217,7 @@ $\forall L \in \mathtt{NatList} \colon \rmx{setEqual}(L, \rmx{rmDup}(L)) = true$
 
 %%% Problem 20
 \begin{problem}
-$\forall L1, L2 \in \mathtt{NatList} \colon \rmx{rmDup}(L1 \rel{@} L2) = \rmx{rmDup}(\rmx{rmDup}(L1) \rel{@} \rmx{rmDup}(L2))$.
+$\forall L \in \mathtt{NatList} \colon \rmx{setEqual}(L, \rmx{rev}(L)) = true$.
 \end{problem}
 
 %%%% Problem 13
