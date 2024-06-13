@@ -89,3 +89,5 @@ mod! NATLIST {
   eq [cnt1] : count(nil, Y) = 0 .
   eq [cnt2] : count(X | L, Y) = if (X = Y) then s(count(L, Y)) else count(L, Y) fi .
 }
+
+-- set trace on

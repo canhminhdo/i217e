@@ -50,7 +50,6 @@ open NATLIST .
     eq [IH] : rmDup(l1 @ l2) = rmDup(rmDup(l1) @ rmDup(l2)) .
     -- case splitting
     eq has(l1, x) = false .
-    eq has(l2, x) = true .
     -- use PROBLEM6 - LEMMA1
     eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
     -- use PROBLEM17 - LEMMA1
