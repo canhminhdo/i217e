@@ -9,10 +9,10 @@ select NATLIST
 --> PROOF: LEMMA1
 --> base case
 open NATLIST .
-    op y : -> PNat .
+    op x : -> PNat .
     ops l1 l2 : -> NatList .
     -- base case
-    red count(nil @ l2, y) = (count(nil, y) + count(l2, y)) .
+    red count(nil @ l2, x) = (count(nil, x) + count(l2, x)) .
 close
 
 --> induction case
@@ -22,11 +22,11 @@ open NATLIST .
     ops l1 l2 : -> NatList .
 
     -- induction hypothesis
-    eq [IH] : count(l1 @ l2, y) = count(l1, y) + count(l2, y) .
+    eq [IH] : count(l1 @ l2, x) = count(l1, x) + count(l2, x) .
     -- case splitting
-    eq x = y .
+    eq y = x .
     -- induction case
-    red count((x | l1) @ l2, y) = count((x | l1), y) + count(l2, y) .
+    red count((y | l1) @ l2, x) = count((y | l1), x) + count(l2, x) .
 close
 
 --> case 2
@@ -35,9 +35,9 @@ open NATLIST .
     ops l1 l2 : -> NatList .
 
     -- induction hypothesis
-    eq [IH] : count(l1 @ l2, y) = count(l1, y) + count(l2, y) .
+    eq [IH] : count(l1 @ l2, x) = count(l1, x) + count(l2, x) .
     -- case splitting
-    eq (x = y) = false .
+    eq (y = x) = false .
     -- induction case
-    red count((x | l1) @ l2, y) = count((x | l1), y) + count(l2, y) .
+    red count((y | l1) @ l2, x) = count((y | l1), x) + count(l2, x) .
 close

@@ -127,7 +127,6 @@ $\forall X \in \mathtt{PNat}, \forall L \in \mathtt{NatList}, \rmx{count}(L, X) 
 \end{problem}
 \begin{proof}
 By structural induction on $L$.
-
 \begin{description}
 \item[(1) Base case]~\\
 \noindent
@@ -146,16 +145,15 @@ where $x \in \mathtt{PNat}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{count}(y \mid l, x) = \rmx{count}(\rmx{rev}(y \mid l), x)$ \\
 Induction hypothesis: $\quad \rmx{count}(l, x) = \rmx{count}(\rmx{rev}(l, x)$  \\
-where $x,y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
-
+where $x,y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $y = x$
 \begin{align*}
 %%% LHS
 \rmx{count}(\under{y} \mid l, x)
-	&\larrow \rmx{count}(x \mid l, x) \tag{by case splitting} \\
+	&\larrow \under{\rmx{count}(x \mid l, x)} \tag{by case splitting} \\
 	&\larrow\ \rel{\rmx{if}} \under{(x = x)} \rel{\rmx{then}} s(\rmx{count}(l, x)) \rel{\rmx{else}} \rmx{count}(l, x) \rel{\rmx{fi}} \tag{by cnt2} \\
-	&\larrow\ \under{\rel{\rmx{if}} true \rel{\rmx{then}} s(\rmx{count}(l, x)) \rel{\rmx{else}} \rmx{count}(l, x) \rel{\rmx{fi}}} \tag{by equality} \\
+	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} s(\rmx{count}(l, x)) \rel{\rmx{else}} \rmx{count}(l, x) \rel{\rmx{fi}}} \tag{by equality} \\
 	&\larrow s(\under{\rmx{count}(l, x)}) \tag{by if1} \\
 	&\larrow s(\rmx{count}(\rmx{rev}(l), x)) \tag{by IH} \\
 %%% RHS
@@ -164,9 +162,9 @@ We use case splitting for our proofs as follows: \\
 	&\larrow \under{\rmx{count}(\rmx{rev}(l) \rel{@} (x \mid nil), x)} \tag{by rev2} \\
 	&\larrow \rmx{count}(\rmx{rev}(l), x) + \under{\rmx{count}(x \mid nil, x)} \tag{by Lemma~\ref{lm1}} \\
 	&\larrow \rmx{count}(\rmx{rev}(l), x) + \rel{\rmx{if}} \under{(x = x)} \rel{\rmx{then}} s(\rmx{count}(nil,x)) \\
-	&\quad \quad \rel{\rmx{else}} \rmx{count}(nil,x) \rel{\rmx{fi}} \tag{by cn2} \\
+	&\quad \quad \rel{\rmx{else}} \rmx{count}(nil,x) \rel{\rmx{fi}} \tag{by cnt2} \\
 	&\larrow \rmx{count}(\rmx{rev}(l), x) + \under{\rel{\rmx{if}} true \rel{\rmx{then}} s(\rmx{count}(nil,x))} \\
-	&\quad \quad \under{\rel{\rmx{else}} \rmx{count}(nil,x) \rel{\rmx{fi}}} \tag{by equality} \\
+	&\quad \quad\ \under{\rel{\rmx{else}} \rmx{count}(nil,x) \rel{\rmx{fi}}} \tag{by equality} \\
 	&\larrow \rmx{count}(\rmx{rev}(l), x) + s(\under{\rmx{count}(nil,x)}) \tag{by if1} \\
 	&\larrow \under{\rmx{count}(\rmx{rev}(l), x) + s(0)} \tag{by cnt1} \\
 	&\larrow \under{s(0) + \rmx{count}(\rmx{rev}(l), x)} \tag{by comm+} \\
@@ -174,20 +172,26 @@ We use case splitting for our proofs as follows: \\
 	&\larrow s(\rmx{count}(\rmx{rev}(l), x)) \tag{by +1}
 \end{align*}
 
-TODO: HERE
-%\rel{\rmx{if}}
-%\rel{\rmx{then}}
-%\rel{\rmx{else}}
-%\rel{\rmx{fi}}
-
 \textbf{Case 2}: $(y = x) = false$
 \begin{align*}
 %%% LHS
-\rmx{count}(y \mid l, x)
-	&\larrow \tag{by sum2} \\
+\under{\rmx{count}(y \mid l, x)}
+	&\larrow\ \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} s(\rmx{count}(l, x)) \rel{\rmx{else}} \rmx{count}(l, x) \rel{\rmx{fi}} \tag{by cnt2} \\
+	&\larrow \under{\rel{\rmx{if}} false \rel{\rmx{then}} s(\rmx{count}(l, x)) \rel{\rmx{else}} \rmx{count}(l, x) \rel{\rmx{fi}}} \tag{by case splitting} \\
+	&\larrow \under{\rmx{count}(l, x)} \tag{by if2} \\
+	&\larrow \rmx{count}(\rmx{rev}(l), x) \tag{by IH} \\
 %%% RHS
-\rmx{count}(\rmx{rev}(y \mid l), x)
-	&\larrow \tag{by rev2} \\
+\rmx{count}(\under{\rmx{rev}(y \mid l)}, x)
+	&\larrow \under{\rmx{count}(\rmx{rev}(l) \rel{@} (y \mid nil), x)} \tag{by rev2} \\
+	&\larrow \rmx{count}(\rmx{rev}(l), x) +  \under{\rmx{count}(y \mid nil, x)} \tag{by Lemma~\ref{lm1}} \\
+	&\larrow \rmx{count}(\rmx{rev}(l), x) + \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} s(\rmx{count}(nil, x)) \\
+	&\quad \quad \rel{\rmx{else}} \rmx{count}(nil, x) \rel{\rmx{fi}} \tag{by cnt2} \\
+	&\larrow \rmx{count}(\rmx{rev}(l), x) + \under{\rel{\rmx{if}} false \rel{\rmx{then}} s(\rmx{count}(nil, x))} \\
+	&\quad \quad\ \under{\rel{\rmx{else}} \rmx{count}(nil, x) \rel{\rmx{fi}}} \tag{by case splitting} \\
+	&\larrow \rmx{count}(\rmx{rev}(l), x) + \under{\rmx{count}(nil, x)} \tag{by if2} \\
+	&\larrow \under{\rmx{count}(\rmx{rev}(l), x) + 0} \tag{by cnt1} \\
+	&\larrow \under{0 + \rmx{count}(\rmx{rev}(l), x)} \tag{by comm+} \\
+	&\larrow \rmx{count}(\rmx{rev}(l), x) \tag{by +1}
 \end{align*}
 \end{description}
 
@@ -195,39 +199,71 @@ TODO: HERE
 
 \begin{lemma}
 \label{lm1}
-$\forall L1, L2 \in \mathtt{NatList}, \rmx{sum}(L1 \rel{@} L2) = \rmx{sum}(L1) + \rmx{sum}(L2)$.
+$\forall X \in \mathtt{PNat}, \forall L1, L2 \in \mathtt{NatList}, \rmx{count}(L1 \rel{@} L2, X) = \rmx{count}(L1, X) + \rmx{count}(L2, X)$.
 \end{lemma}
 \begin{proof}
 By structural induction on $L1$.
-
 \begin{description}
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad \rmx{sum}(nil \rel{@} l2) = \rmx{sum}(nil) + \rmx{sum}(l2)$ \\
-where $l2 \in \mathtt{NatList}$. \\
+What to show: $\quad \rmx{count}(nil \rel{@} l2, x) = \rmx{count}(nil, x) + \rmx{count}(l2, x)$ \\
+where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
 \begin{align*}
 %%% LHS
-\rmx{sum}(\under{nil \rel{@} l2}) 
-	&\larrow \rmx{sum}(l2)  \tag{by @1} \\
+\rmx{count}(\under{nil \rel{@} l2}, x) 
+	&\larrow \rmx{count}(l2, x)  \tag{by @1} \\
 %%% RHS
-\under{\rmx{sum}(nil)} + \rmx{sum}(l2)
-	&\larrow \under{0 + \rmx{sum}(l2)} \tag{by sum1} \\
-	&\larrow 0 \tag{by +1} \\
+\under{\rmx{count}(nil, x)} + \rmx{count}(l2, x)
+	&\larrow \under{0 + \rmx{count}(l2, x)} \tag{by cnt1} \\
+	&\larrow \rmx{count}(l2, x) \tag{by +1}
 \end{align*}
 
 \item[(2) Induction case]~\\
-What to show: $\quad \rmx{sum}((x \mid l1) \rel{@} l2) = \rmx{sum}(x \mid l1) + \rmx{sum}(l2)$ \\
-Induction hypothesis: $\quad \rmx{sum}(l1 \rel{@} l2) = \rmx{sum}(l1) + \rmx{sum}(l2)$  \\
-where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$. \\
+What to show: $\quad \rmx{count}((y \mid l1) \rel{@} l2, x) = \rmx{count}(y \mid l1, x) + \rmx{count}(l2, x)$ \\
+Induction hypothesis: $\quad \rmx{count}(l1 \rel{@} l2, x) = \rmx{count}(l1, x) + \rmx{count}(l2, x)$  \\
+where $x, y \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.\\
+We use case splitting for our proofs as follows: \\
+\textbf{Case 1}: $y = x$
 \begin{align*}
 %%% LHS
-\rmx{sum}(\under{(x \mid l)) \rel{@} l2})
-	&\larrow \under{\rmx{sum}(x \mid (l1 \rel{@} l2))} \tag{by @2} \\
-	&\larrow x + \under{\rmx{sum}(l1 \rel{@} l2)} \tag{by sum2} \\
-	&\larrow \under{x + (\rmx{sum}(l1) + \rmx{sum}(l2))} \tag{by IH} \\
-	&\larrow (x + \rmx{sum}(l1)) + \rmx{sum}(l2) \tag{by assoc+} \\
-\under{\rmx{sum}(x \mid l1)} + \rmx{sum}(l2)
-	&\larrow (x + \rmx{sum}(l1)) + \rmx{sum}(l2) \tag{by sum2}
+\rmx{count}((\under{y} \mid l1) \rel{@} l2, x)
+	&\larrow \rmx{count}(\under{(x \mid l1) \rel{@} l2}, x) \tag{by case splitting} \\
+	&\larrow \under{\rmx{count}(x \mid (l1 \rel{@} l2), x)} \tag{by @2} \\
+	&\larrow\ \rel{\rmx{if}} \under{(x = x)} \rel{\rmx{then}} s(\rmx{count}(l1 \rel{@} l2, x)) \\
+	&\quad \quad \rel{\rmx{else}} \rmx{count}(l1 \rel{@} l2, x) \rel{\rmx{fi}} \tag{by cnt2} \\
+	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} s(\rmx{count}(l1 \rel{@} l2, x))} \\
+	&\quad \quad\ \under{\rel{\rmx{else}} \rmx{count}(l1 \rel{@} l2, x) \rel{\rmx{fi}}} \tag{by equality} \\
+	&\larrow s(\under{\rmx{count}(l1 \rel{@} l2, x)}) \tag{by if1} \\
+	&\larrow s(\rmx{count}(l1, x) + \rmx{count}(l2, x)) \tag{by IH} \\
+%%% RHS
+\rmx{count}(\under{y} \mid l1, x) + \rmx{count}(l2, x)
+	&\larrow \under{\rmx{count}(x \mid l1, x)} + \rmx{count}(l2, x) \tag{by case splitting} \\
+	&\larrow\ \rel{\rmx{if}} \under{(x = x)} \rel{\rmx{then}} s(\rmx{count}(l1, x)) \\
+	&\quad \quad \rel{\rmx{else}} \rmx{count}(l1, x) \rel{\rmx{fi}} + \rmx{count}(l2, x) \tag{by cnt2} \\
+	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} s(\rmx{count}(l1, x))} \\
+	&\quad \quad\ \under{\rel{\rmx{else}} \rmx{count}(l1, x) \rel{\rmx{fi}}} + \rmx{count}(l2, x) \tag{by equality} \\
+	&\larrow \under{s(\rmx{count}(l1, x)) + \rmx{count}(l2, x)} \tag{by if1} \\
+	&\larrow s(\rmx{count}(l1, x) + \rmx{count}(l2, x)) \tag{by +2}
+\end{align*}
+
+\textbf{Case 2}: $(y = x) = false$
+\begin{align*}
+%%% LHS
+\rmx{count}(\under{(y \mid l1) \rel{@} l2}, x)
+	&\larrow \rmx{count}(y \mid (l1 \rel{@} l2), x) \tag{by @2} \\
+	&\larrow\ \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} s(\rmx{count}(l1 \rel{@} l2, x)) \\
+	&\quad \quad \rel{\rmx{else}} \rmx{count}(l1 \rel{@} l2, x) \rel{\rmx{fi}} \tag{by cnt2} \\
+	&\larrow \under{\rel{\rmx{if}} false \rel{\rmx{then}} s(\rmx{count}(l1 \rel{@} l2, x))} \\
+	&\quad \quad\ \under{\rel{\rmx{else}} \rmx{count}(l1 \rel{@} l2, x) \rel{\rmx{fi}}} \tag{by case splitting} \\
+	&\larrow \under{\rmx{count}(l1 \rel{@} l2, x)} \tag{by if2} \\
+	&\larrow \rmx{count}(l1, x) + \rmx{count}(l2, x) \tag{by IH} \\
+%%% RHS
+\under{\rmx{count}(y \mid l1, x)} + \rmx{count}(l2, x)
+	&\larrow\ \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} s(\rmx{count}(l1, x)) \\
+	&\quad \quad \rmx{count}(l1, x) \rel{\rmx{fi}} + \rmx{count}(l2, x) \tag{by cnt2} \\
+	&\larrow \under{\rel{\rmx{if}} false \rel{\rmx{then}} s(\rmx{count}(l1, x))} \\
+	&\quad \quad\ \under{\rmx{count}(l1, x) \rel{\rmx{fi}}} + \rmx{count}(l2, x) \tag{by case splitting} \\
+	&\larrow \rmx{count}(l1, x) + \rmx{count}(l2, x) \tag{by if2}
 \end{align*}
 \end{description}
 \end{proof}
