@@ -112,129 +112,49 @@
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
 
-\title{Problems}
+\title{Problem 15}
 \date{\vspace{-5ex}}
 
 \begin{document}
 
 \maketitle
 
-%%% Problem 1
 \begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{fold*}(\rmx{rev}(L)) = \rmx{fold*}(L)$.
+$\forall L \in \mathtt{NatList}, \rmx{diff}(\rmx{rev}(L), L) = nil$.
 \end{problem}
+\begin{proof}
+By structural induction on $L$.
+\begin{description}
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad \rmx{diff}(\rmx{rev}(nil), nil) = nil$.
+\begin{align*}
+%%% LHS
+\rmx{diff}(\under{\rmx{rev}(nil)}, nil)
+	&\larrow \under{\rmx{diff}(nil, nil)} \tag{by rev1} \\
+	&\larrow nil \tag{by diff1}
+\end{align*}
 
-%%% Problem 2
-\begin{problem}
-$\forall X \in \mathtt{PNat} \colon \rmx{rev}(\rmx{mkl1}(X)) = \rmx{mkl2}(X)$.
-\end{problem}
+\item[(2) Induction case]~\\
+What to show: $\quad \rmx{diff}(\rmx{rev}(x \mid l), x \mid l) = nil$ \\
+Induction hypothesis: $\quad \rmx{diff}(\rmx{rev}(l), l) = nil$  \\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+We use case splitting for our proofs as follows: \\
+\textbf{Case 1}: $has(l, x) = true$
+\begin{align*}
+%%% LHS
+\rmx{diff}(\under{\rmx{rev}(x \mid l)}, x \mid l)
+	&\larrow \rmx{diff}(\rmx{rev}(l) \rel{@} (x \mid l), x \mid l) \tag{by rev2} \\
+	&\larrow \rmx{diff}(\rmx{rev}(l), x \mid l) \rel{@} \rmx{diff}(x \mid l, x \mid l) \tag{by Problem 9 - Lemma 1} \\
+\end{align*}
 
-%%% Problem 3
-\begin{problem}
-$\forall X \in \mathtt{PNat} \colon \rmx{fact}(X) = \rmx{fold*}(\rmx{mkl2}(X))$.
-\end{problem}
+\textbf{Case 2}: $has(l, x) = false$
+\begin{align*}
+%%% LHS
+\rmx{diff}(\rmx{rev}(x \mid l), x \mid l)
+	&\larrow \tag{by diff2} \\
+\end{align*}
+\end{description}
 
-%%% Problem 4
-\begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{rev}(\rmx{rev}(L)) = L$.
-\end{problem}
-
-%%% Problem 5
-\begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{size}(L) = \rmx{size}(\rmx{rev}(L))$.
-\end{problem}
-
-%%% Problem 6
-\begin{problem}
-$\forall X \in \mathtt{PNat}, \forall L \in \mathtt{NatList} \colon \rmx{has}(L, X) = \rmx{has}(\rmx{rev}(L), X)$.
-\end{problem}
-
-%%% Problem 7
-\begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{diff}(L, \rmx{rev}(L)) = nil$.
-\end{problem}
-
-%%% Problem 8
-\begin{problem}
-$\forall L1, L2 \in \mathtt{NatList} \colon \rmx{diff}(L1, L2) = \rmx{diff}(L1, \rmx{rev}(L2))$
-\end{problem}
-
-%%% Problem 9
-\begin{problem}
-$\forall L1, L2 \in \mathtt{NatList} \colon \rmx{diff}(L1, L2) = \rmx{rev}(\rmx{diff}(\rmx{rev}(L1), L2))$.
-\end{problem}
-
-%%% Problem 10
-\begin{problem}
-$\forall X \in \mathtt{PNat}, \forall L \in \mathtt{NatList} \colon \rmx{drop}(L, X) = \rmx{rev}(\rmx{drop}(\rmx{rev}(L), X))$.
-\end{problem}
-
-%%% Problem 11
-\begin{problem}
-$\forall X \in \mathtt{PNat}, \forall L \in \mathtt{NatList} \colon \rmx{has}(\rmx{drop}(L, X), X) = false$.
-\end{problem}
-
-%%% Problem 12
-\begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{sum}(L) = \rmx{sum}(\rmx{rev}(L))$.
-\end{problem}
-
-%%% Problem 13
-\begin{problem}
-$\forall X \in \mathtt{PNat}, \forall L \in \mathtt{NatList} \colon \rmx{count}(L, X) = \rmx{count}(\rmx{rev}(L), X)$.
-\end{problem}
-
-%%% Problem 14
-\begin{problem}
-$\forall X \in \mathtt{PNat}, \forall L1, L2 \in \mathtt{NatList} \colon \rmx{diff}(L1, X \mid L2) = \rmx{drop}(\rmx{diff}(L1, L2), X)$.
-\end{problem}
-
-
-%%% Problem 15
-\begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{diff}(L, L) = nil$.
-\end{problem}
-
-%%% Problem 16
-\begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{diff}(\rmx{rev}(L), L) = nil$.
-\end{problem}
-
-%%% Problem 17
-\begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{setEqual}(L, \rmx{rev}(L)) = true$.
-\end{problem}
-
-%%% Problem 18
-\begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{rmDup}(\rmx{rmDup}(L)) = \rmx{rmDup}(L)$.
-\end{problem}
-
-%%% Problem 19
-\begin{problem}
-$\forall L \in \mathtt{NatList} \colon \rmx{setEqual}(L, \rmx{rmDup}(L)) = true$.
-\end{problem}
-
-%%% Problem 20
-\begin{problem}
-$\forall L1, L2 \in \mathtt{NatList} \colon \rmx{rmDup}(L1 \rel{@} L2) = \rmx{rmDup}(\rmx{rmDup}(L1) \rel{@} \rmx{rmDup}(L2))$.
-\end{problem}
-
-%%%% Problem 13
-%\begin{problem}
-%$\forall L1, L2 \in \mathtt{NatList} \colon \rmx{max}(L1 \rel{@} L2) = \rmx{max}(\rmx{max}(L1), \rmx{max}(L2))$.
-%\end{problem}
-%
-%%%% Problem 14
-%\begin{problem}
-%$\forall L \in \mathtt{NatList} \colon \rmx{max}(L) = \rmx{max}(\rmx{rev}(L))$.
-%\end{problem}
-%
-%%%% Problem 15
-%\begin{problem}
-%$\forall L1, L2 \in \mathtt{NatList} \colon \rmx{max}(L1 \rel{@} L2) = \rmx{max}(L2 \rel{@} L1)$.
-%\end{problem}
-
+\end{proof}
 \end{document}
-
-

@@ -64,11 +64,14 @@ PROBLEM13: \forall X \in PNat, \forall L \in NatList: count(L, X) = count(rev(L)
 
 PROBLEM14: \forall X \in PNat \forall L1 L2 \in NatList: diff(L1, X | L2) = drop(diff(L1, L2), X) .
 
-PROBLEM15: \forall L \in NatList : diff(rev(L), L) = nil .
+PROBLEM15: \forall L \in NatList: diff(L, L) = nil .
+    - PROBLEM14
+
+PROBLEM16: \forall L \in NatList : diff(rev(L), L) = nil .
     - PROBLEM9 - LEMMA1
     - PROBLEM14
 
-PROBLEM16: \forall L \in NatList: setEqual(L, rev(L)) = true .
+PROBLEM17: \forall L \in NatList: setEqual(L, rev(L)) = true .
     - PROBLEM9 - LEMMA1
     - PROBLEM7 - LEMMA1
     - PROBLEM4 - LEMMA2
@@ -76,25 +79,22 @@ PROBLEM16: \forall L \in NatList: setEqual(L, rev(L)) = true .
     - PROBLEM6 - LEMMA1
     - PROBLEM7
     - PROBLEM14
-    - PROBLEM15
+    - PROBLEM16
 
-PROBLEM17: \forall L \in NatList: rmDup(rmDup(L)) = rmDup(L) .
+PROBLEM18: \forall L \in NatList: rmDup(rmDup(L)) = rmDup(L) .
     - LEMMA1: \forall X \in PNat, \forall L \in NatList: has(L, X) = has(rmDup(L), X) .
         - LEMMA2: \forall X Y \in PNat, \forall L \in NatList: ((not has(L, X)) and has(L, Y)) implies not (X = Y) .
 
-PROBLEM18: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
+PROBLEM19: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
     - LEMMA1: \forall L \in NatList: diff(rmDup(L), L) = nil .
         - PROBLEM14
     - LEMMA2: \forall L \in NatList: diff(L, rmDup(L)) = nil .
         - PROBLEM14
-        - PROBLEM17 - LEMMA1
+        - PROBLEM18 - LEMMA1
     - PROBLEM14
-    - PROBLEM17 - LEMMA1
-
-PROBLEM19: \forall L \in NatList: diff(L, L) = nil .
-    - PROBLEM14
+    - PROBLEM18 - LEMMA1
 
 PROBLEM20: \forall L1 L2 \in NatList: rmDup(L1 @ L2) = rmDup(rmDup(L1) @ rmDup(L2)) .
     - PROBLEM6 - LEMMA1
-    - PROBLEM17
-    - PROBLEM17 - LEMMA1
+    - PROBLEM18
+    - PROBLEM18 - LEMMA1

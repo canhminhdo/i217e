@@ -1,53 +1,38 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA2: \forall L \in NatList: diff(L, rmDup(L)) = nil .
--- [require] PROBLEM14, PROBLEM17 - LEMMA1
+-- LEMMA2: \forall X Y \in PNat, \forall L \in NatList: ((not has(L, X)) and has(L, Y)) implies not (X = Y) .
+-- [require]
 -- ----------------------------------------------------------------------------
 
 select NATLIST
 --> PROOF: LEMMA2
 --> base case
 open NATLIST .
+    ops x y : -> PNat .
     -- base case
-    red diff(nil, rmDup(nil)) = nil .
+    red ((not has(nil, x)) and has(nil, y)) implies (not (x = y)) .
 close
 
 --> induction case
 --> case 1
 open NATLIST .
-    op x : -> PNat .
+    ops x y z : -> PNat .
     op l : -> NatList .
 
-    var I : PNat .
-    var L1 : NatList .
-
-    -- induction hypothesis
-    eq [IH] : diff(l, rmDup(l)) = nil .
     -- case splitting
-    eq has(l, x) = true .
-    -- use PROBLEM17 - LEMMA1
-    eq has(rmDup(L1), I) = has(L1, I) .
+    eq x = y .
     -- induction case
-    red diff(x | l, rmDup(x | l)) = nil .
+    red ((not has(z | l, x)) and has(z | l, y)) implies (not (x = y)) .
 close
 
 --> case 2
 open NATLIST .
-    op x : -> PNat .
+    ops x y z : -> PNat .
     op l : -> NatList .
 
-    var I : PNat .
-    vars L1 L2 : NatList .
-
-    -- induction hypothesis
-    eq [IH] : diff(l, rmDup(l)) = nil .
     -- case splitting
-    eq has(l, x) = false .
-    -- use PROBELM14 as a lemma
-    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
-    -- use PROBLEM17 - LEMMA1
-    eq has(rmDup(L1), I) = has(L1, I) .
+    eq (x = y) = false .
     -- induction case
-    red diff(x | l, rmDup(x | l)) = nil .
+    red ((not has(z | l, x)) and has(z | l, y)) implies (not (x = y)) .
 close

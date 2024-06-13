@@ -1,16 +1,16 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- PROBLEM18: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
--- [require] LEMMA1, LEMMA2, PROBLEM14, PROBLEM17 - LEMMA1
+-- PROBLEM17: \forall L \in NatList: rmDup(rmDup(L))) = rmDup(L) .
+-- [require] LEMMA1
 -- ----------------------------------------------------------------------------
 
 select NATLIST
---> PROOF: PROBLEM18
+--> PROOF: PROBLEM17
 --> base case
 open NATLIST .
     -- base case
-    red setEqual(nil, rmDup(nil)) = true .
+    red rmDup(rmDup(nil)) = rmDup(nil) .
 close
 
 --> induction case
@@ -18,46 +18,29 @@ close
 open NATLIST .
     op x : -> PNat .
     op l : -> NatList .
-    
-    var I : PNat .
-    vars L1 L2 : NatList .
 
     -- induction hypothesis
-    eq [IH] : setEqual(l, rmDup(l)) = true .
+    eq [IH] : rmDup(rmDup(l)) = rmDup(l) .
     -- case splitting
     eq has(l, x) = true .
-    -- use PROBLEM14 as a lemma
-    eq diff (L1, I | L2) = drop(diff (L1, L2), I ) .
-    -- use LEMMA1
-    eq diff(rmDup(L1), L1) = nil .
-    -- use LEMMA2
-    eq diff(L1, rmDup(L1)) = nil .
-    -- use PROBLEM17 - LEMMA1
-    eq has(rmDup(L1), I) = has(L1, I) .
     -- induction case
-    red setEqual(x | l, rmDup(x | l)) = true .
+    red rmDup(rmDup(x | l)) = rmDup(x | l) .
 close
 
 --> case 2
 open NATLIST .
     op x : -> PNat .
     op l : -> NatList .
-    
-    var I : PNat .
-    vars L1 L2 : NatList .
 
+    var I : PNat .
+    var L1 : NatList .
+    
     -- induction hypothesis
-    eq [IH] : setEqual(l, rmDup(l)) = true .
+    eq [IH] : rmDup(rmDup(l)) = rmDup(l) .
     -- case splitting
     eq has(l, x) = false .
-    -- use PROBLEM14 as a lemma
-    eq diff (L1, I | L2) = drop(diff (L1, L2), I ) .
     -- use LEMMA1
-    eq diff(rmDup(L1), L1) = nil .
-    -- use LEMMA2
-    eq diff(L1, rmDup(L1)) = nil .
-    -- use PROBLEM17 - LEMMA1
     eq has(rmDup(L1), I) = has(L1, I) .
     -- induction case
-    red setEqual(x | l, rmDup(x | l)) = true .
+    red rmDup(rmDup(x | l)) = rmDup(x | l) .
 close

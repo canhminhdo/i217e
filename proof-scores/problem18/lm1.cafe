@@ -1,51 +1,75 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA1: \forall L \in NatList: diff(rmDup(L), L) = nil .
--- [require] PROBLEM14
+-- LEMMA1: \forall X \in PNat, \forall L \in NatList: has(L, X) = has(rmDup(L), X) .
+-- [require] LEMMA2
 -- ----------------------------------------------------------------------------
 
 select NATLIST
 --> PROOF: LEMMA1
 --> base case
 open NATLIST .
+    op x : -> PNat .
     -- base case
-    red diff(rmDup(nil), nil) = nil .
+    red has(nil, x) = has(rmDup(nil), x) .
 close
 
 --> induction case
---> case 1
+--> case 1.1
 open NATLIST .
-    op x : -> PNat .
+    ops x y : -> PNat .
     op l : -> NatList .
 
-    var I : PNat .
-    vars L1 L2 : NatList .
+    -- induction hypothesis
+    eq [IH] : has(l, x) = has(rmDup(l), x) .
+    -- case splitting
+    eq has(l, y) = true .
+    eq has(rmDup(l), x) = true .
+    -- induction case
+    red has(y | l, x) = has(rmDup(y | l), x) .
+close
+
+--> case 1.2.1
+open NATLIST .
+    ops x y : -> PNat .
+    op l : -> NatList .
 
     -- induction hypothesis
-    eq [IH] : diff(rmDup(l), l) = nil .
+    eq [IH] : has(l, x) = has(rmDup(l), x) .
     -- case splitting
-    eq has(l, x) = true .
-    -- use PROBELM14 as a lemma
-    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
+    eq has(l, y) = true .
+    eq has(rmDup(l), x) = false .
+    eq y = x .
     -- induction case
-    red diff(rmDup(x | l), x | l) = nil .
+    red has(y | l, x) = has(rmDup(y | l), x) .
+close
+
+--> case 1.2.2
+open NATLIST .
+    ops x y : -> PNat .
+    op l : -> NatList .
+
+    -- induction hypothesis
+    eq [IH] : has(l, x) = has(rmDup(l), x) .
+    -- case splitting
+    eq has(l, y) = true .
+    eq has(rmDup(l), x) = false .
+    eq (y = x) = false .
+    -- induction case: using LEMMA2 as antecedent
+    red 
+        (((not has(l, x)) and (has(l, y))) implies (not (x = y))) implies
+        (has(y | l, x) = has(rmDup(y | l), x)) .
 close
 
 --> case 2
 open NATLIST .
-    op x : -> PNat .
+    ops x y : -> PNat .
     op l : -> NatList .
 
-    var I : PNat .
-    vars L1 L2 : NatList .
-
     -- induction hypothesis
-    eq [IH] : diff(rmDup(l), l) = nil .
+    eq [IH] : has(l, x) = has(rmDup(l), x) .
     -- case splitting
-    eq has(l, x) = false .
-    -- use PROBELM14 as a lemma
-    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
+    eq has(l, y) = false .
     -- induction case
-    red diff(rmDup(x | l), x | l) = nil .
+    red has(y | l, x) = has(rmDup(y | l), x) .
 close
