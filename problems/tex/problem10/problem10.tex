@@ -111,6 +111,7 @@
 \newcommand{\rmx}[1]{\mathrm{#1}}
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
+\allowdisplaybreaks
 
 \title{Problem 10}
 \date{\vspace{-5ex}}
@@ -164,7 +165,7 @@ We use case splitting for our proofs as follows:\\
 	&\quad \quad \under{(\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (x \rel{|} \rmx{drop}(nil, x)) \rel{\rmx{fi}})}) \tag{by equality} \\
 	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x) \rel{@} \under{\rmx{drop}(nil, x)}) \tag{by if1} \\
 	&\larrow \rmx{rev}(\under{\rmx{drop}(\rmx{rev}(l), x) \rel{@} nil}) \tag{by drop1} \\
-	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)) \tag{by Lemma 2 from Problem 4} \\
+	&\larrow \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x)) \tag{by Lemma 2 from Problem 4}
 \end{align*}
 
 \textbf{Case 2}: $(y = x) = false$
@@ -227,7 +228,7 @@ where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
 %%%
 \under{\rmx{drop}(nil, x)} \rel{@} \rmx{drop}(l2, x)
 	&\larrow \under{nil \rel{@} \rmx{drop}(l2, x)} \tag{by drop1} \\
-	&\larrow \rmx{drop}(l2, x) \tag{by @1} \\
+	&\larrow \rmx{drop}(l2, x) \tag{by @1} 
 \end{align*}
 
 \item[(2) Induction case]~\\
@@ -258,7 +259,7 @@ We use case splitting for our proofs as follows: \\
 	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{drop}(l1, x) \rel{\rmx{else}} (x \rel{|} \rmx{drop}(l1, x)) \rel{\rmx{fi}}} \\
 	&\quad \quad \rel{@} \rmx{drop}(l2, x) \tag{by equality} \\
 	%%%
-	&\larrow \rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x) \tag{by if1} \\
+	&\larrow \rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x) \tag{by if1}
 	%%%
 \end{align*}
 

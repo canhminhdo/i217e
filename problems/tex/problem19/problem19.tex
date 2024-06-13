@@ -111,6 +111,7 @@
 \newcommand{\rmx}[1]{\mathrm{#1}}
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
+\allowdisplaybreaks
 
 \title{Problem 19}
 \date{\vspace{-5ex}}
@@ -196,7 +197,71 @@ We use case splitting for our proofs as follows: \\
 \begin{align*}
 %%% LHS
 \rmx{setEqual}(x \mid l, \rmx{rmDup}(x \mid l))
-	&\larrow  \tag{by IH} \\
+	&\larrow \rmx{setEqual}(x \mid l, \\
+	&\quad \quad \rel{\rmx{if}} \under{\rmx{has}(l, x)} \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}) \tag{by rmDup2} \\
+	%%
+	&\larrow \rmx{setEqual}(x \mid l, \\
+	&\quad \quad \under{\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}}) \tag{by case splitting} \\
+	%%
+	&\larrow \under{\rmx{setEqual}(x \mid l, x \mid \rmx{rmDup}(l))} \tag{by if2} \\
+	%%
+	&\larrow (\under{\rmx{diff}(x \mid l, x \mid \rmx{rmDup}(l))} = nil) \rel{and} \\
+	&\quad \quad (\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil) \tag{by setEq} \\
+	%%
+	&\larrow ((\rel{\rmx{if}} \under{\rmx{has}(x \mid \rmx{rmDup}(l), x)} \rel{\rmx{then}} \rmx{diff}(l, x \mid \rmx{rmDup}(l)) \\
+	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{diff}(l, x \mid \rmx{rmDup}(l))) \rel{\rmx{fi}}) = nil) \rel{and} \\
+	&\quad \quad (\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil) \tag{by diff2} \\
+	%%
+	&\larrow ((\rel{\rmx{if}} \under{(x = x)} \rel{or} \rmx{has}(\rmx{rmDup}(l), x) \\
+	&\quad \quad \rel{\rmx{then}} \rmx{diff}(l, x \mid \rmx{rmDup}(l)) \\
+	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{diff}(l, x \mid \rmx{rmDup}(l))) \rel{\rmx{fi}}) = nil) \rel{and} \\
+	&\quad \quad (\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil) \tag{by has2} \\
+	%%
+	&\larrow ((\rel{\rmx{if}} \under{true \rel{or} \rmx{has}(\rmx{rmDup}(l), x)} \\
+	&\quad \quad \rel{\rmx{then}} \rmx{diff}(l, x \mid \rmx{rmDup}(l)) \\
+	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{diff}(l, x \mid \rmx{rmDup}(l))) \rel{\rmx{fi}}) = nil) \rel{and} \\
+	&\quad \quad (\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil) \tag{by equality} \\
+	%%
+	&\larrow (\under{(\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{diff}(l, x \mid \rmx{rmDup}(l))} \\
+	&\quad \quad\ \under{\rel{\rmx{else}} (x \mid \rmx{diff}(l, x \mid \rmx{rmDup}(l))) \rel{\rmx{fi}})} = nil) \rel{and} \\
+	&\quad \quad (\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil) \tag{by or} \\
+	%%
+	&\larrow (\under{\rmx{diff}(l, x \mid \rmx{rmDup}(l))} = nil) \rel{and} \\
+	&\quad \quad (\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil) \tag{by if1} \\
+	%%
+	&\larrow (\rmx{drop}(\under{\rmx{diff}(l, \rmx{rmDup}(l))}, x) = nil) \rel{and} \\
+	&\quad \quad (\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil) \tag{by Problem 14} \\
+	%%
+	&\larrow (\under{\rmx{drop}(nil, x)} = nil) \rel{and} \\
+	&\quad \quad (\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil) \tag{by Lemma~\ref{lm1}} \\
+	%%
+	&\larrow \under{(nil = nil)} \rel{and} \\
+	&\quad \quad (\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil) \tag{by drop1} \\
+	%%
+	&\larrow true \rel{and} \\
+	&\quad \quad (\under{\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l)} = nil) \tag{by equality} \\
+	%%
+	&\larrow \rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil \tag{by and} \\
+	%%
+	&\larrow (\rel{\rmx{if}} \under{\rmx{has}(x \mid l, x)} \rel{\rmx{then}} \rmx{diff}(\rmx{rmDup}(l), x \mid l) \\
+	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{diff}(\rmx{rmDup}(l), x \mid l)) \rel{\rmx{fi}}) = nil \tag{by diff2} \\
+	%%
+	&\larrow (\rel{\rmx{if}} \under{(x = x)} \rel{or} \rmx{has}(l, x) \rel{\rmx{then}} \rmx{diff}(\rmx{rmDup}(l), x \mid l) \\
+	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{diff}(\rmx{rmDup}(l), x \mid l)) \rel{\rmx{fi}}) = nil \tag{by has2} \\
+	%%
+	&\larrow (\rel{\rmx{if}} \under{true \rel{or} \rmx{has}(l, x)} \rel{\rmx{then}} \rmx{diff}(\rmx{rmDup}(l), x \mid l) \\
+	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{diff}(\rmx{rmDup}(l), x \mid l)) \rel{\rmx{fi}}) = nil \tag{by equality} \\
+	%%
+	&\larrow \under{(\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{diff}(\rmx{rmDup}(l), x \mid l)} \\
+	&\quad \quad\ \under{\rel{\rmx{else}} (x \mid \rmx{diff}(\rmx{rmDup}(l), x \mid l)) \rel{\rmx{fi}})} = nil \tag{by or} \\
+	%%
+	&\larrow \under{\rmx{diff}(\rmx{rmDup}(l), x \mid l)} = nil \tag{by if1} \\
+	%%
+	&\larrow \rmx{drop}(\under{\rmx{diff}(\rmx{rmDup}(l), l)}, x) = nil \tag{by Problem 14} \\
+	%%
+	&\larrow \under{\rmx{drop}(nil, x)} = nil \tag{by Lemma~\ref{lm2}} \\
+	&\larrow \under{nil = nil} \tag{by drop1} \\
+	&\larrow true \tag{by equality}
 \end{align*}
 \end{description}
 \end{proof}

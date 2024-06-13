@@ -111,6 +111,7 @@
 \newcommand{\rmx}[1]{\mathrm{#1}}
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
+\allowdisplaybreaks
 
 \title{Problem 9}
 \date{\vspace{-5ex}}
@@ -256,7 +257,7 @@ We use case splitting for our proofs as follows: \\
 	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{diff}(l1, l3) \rel{\rmx{else}} (x \rel{|} \rmx{diff}(l1, l3)) \rel{\rmx{fi}}} \\
 	&\quad \quad \under{\rel{@} \rmx{diff}(l2, l3)} \tag{by case splitting} \\
 	%%%
-	&\larrow \rmx{diff}(l1, l3) \rel{@} \rmx{diff}(l2, l3) \tag{by if1} \\
+	&\larrow \rmx{diff}(l1, l3) \rel{@} \rmx{diff}(l2, l3) \tag{by if1}
 	%%%
 \end{align*}
 

@@ -111,6 +111,7 @@
 \newcommand{\rmx}[1]{\mathrm{#1}}
 \newcommand{\larrow}{\longrightarrow}
 \newcommand{\under}{\underline}
+\allowdisplaybreaks
 
 \title{Problem 18}
 \date{\vspace{-5ex}}
@@ -221,7 +222,7 @@ We use case splitting for our proofs as follows: \\
 	%%
 	&\larrow\ \rel{\rmx{if}} \rmx{has}(l2, x)  \\
 	&\quad \quad \rel{\rmx{then}} \rmx{rmDup}(\rmx{rmDup}(l1) \rel{@} \rmx{rmDup}(l2)) \\
-	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{rmDup}(\rmx{rmDup}(l1) \rel{@} \rmx{rmDup}(l2))) \rel{\rmx{fi}} \tag{by Problem 17 - Lemma 1} \\
+	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{rmDup}(\rmx{rmDup}(l1) \rel{@} \rmx{rmDup}(l2))) \rel{\rmx{fi}} \tag{by Problem 17 - Lemma 1}
 \end{align*}
 \end{description}
 \end{proof}
