@@ -80,11 +80,11 @@ PROBLEM18: \forall L1 L2 \in NatList: rmDup(L1 @ L2) = rmDup(rmDup(L1) @ rmDup(L
     - PROBLEM17 - LEMMA1
 
 PROBLEM19: \forall L \in NatList: setEqual(L, rmDup(L)) = true .
-    - LEMMA1: \forall L \in NatList: diff(rmDup(L), L) = nil .
-        - PROBLEM14
-    - LEMMA2: \forall L \in NatList: diff(L, rmDup(L)) = nil .
+    - LEMMA1: \forall L \in NatList: diff(L, rmDup(L)) = nil .
         - PROBLEM14
         - PROBLEM17 - LEMMA1
+    - LEMMA2: \forall L \in NatList: diff(rmDup(L), L) = nil .
+        - PROBLEM14
     - PROBLEM14
     - PROBLEM17 - LEMMA1
 
@@ -93,7 +93,6 @@ PROBLEM20: \forall L \in NatList: setEqual(L, rev(L)) = true .
     - PROBLEM7 - LEMMA1
     - PROBLEM4 - LEMMA2
     - PROBLEM6
-    - PROBLEM6 - LEMMA1
     - PROBLEM7
     - PROBLEM14
     - PROBLEM16

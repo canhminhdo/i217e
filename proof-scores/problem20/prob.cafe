@@ -2,7 +2,7 @@ in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
 -- PROBLEM17: \forall L \in NatList: setEqual(L, rev(L)) = true .
--- [require] PROBLEM9 - LEMMA1, PROBLEM7 - LEMMA1, PROBLEM4 - LEMMA2, PROBLEM6, PROBLEM6 - LEMMA1, PROBLEM7, PROBLEM14, PROBLEM15
+-- [require] PROBLEM9 - LEMMA1, PROBLEM7 - LEMMA1, PROBLEM4 - LEMMA2, PROBLEM6, PROBLEM7, PROBLEM14, PROBLEM16
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -32,11 +32,9 @@ open NATLIST .
     eq diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
     -- use PROBLEM4 - LEMMA2
     eq L1 @ nil = L1 .
-    -- use PROBLEM6 - LEMMA1
-    eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
     -- use PROBLEM7 as a lemma
     eq diff(L1, rev(L1)) = nil .
-    -- use PROBLEM15 as a lemma
+    -- use PROBLEM16 as a lemma
     eq diff(rev(L1), L1) = nil .
     -- use PROBLEM14 as a lemma
     eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
@@ -64,11 +62,9 @@ open NATLIST .
     eq diff(L1, L2 @ L3) = diff(diff(L1, L2), L3) .
     -- use PROBLEM4 - LEMMA2
     eq L1 @ nil = L1 .
-    -- use PROBLEM6 - LEMMA1
-    eq has(L1 @ L2, I) = (has(L1, I) or has(L2, I)) .
     -- use PROBLEM7 as a lemma
     eq diff(L1, rev(L1)) = nil .
-    -- use PROBLEM15 as a lemma
+    -- use PROBLEM16 as a lemma
     eq diff(rev(L1), L1) = nil .
     -- use PROBLEM14 as a lemma
     eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
