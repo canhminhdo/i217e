@@ -129,7 +129,7 @@ By structural induction on $L1$.
 \item[(1) Base case]~\\
 \noindent
 What to show: $\quad \rmx{rmDup}(nil \rel{@} l2) = \rmx{rmDup}(\rmx{rmDup}(nil) \rel{@} \rmx{rmDup}(l2))$\\
-where $l2 \in \mathtt{NatList}$.
+where $l2 \in \mathtt{NatList}$. Note that $l2$ is a fresh constant\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 %%% LHS
 \rmx{rmDup}(\under{nil \rel{@} l2})
@@ -144,7 +144,9 @@ where $l2 \in \mathtt{NatList}$.
 \item[(2) Induction case]~\\
 What to show: $\rmx{rmDup}((x \mid l1) \rel{@} l2) = \rmx{rmDup}(\rmx{rmDup}(x \mid l1) \rel{@} \rmx{rmDup}(l2))$\\
 Induction hypothesis: $\rmx{rmDup}(l1 \rel{@} l2) = \rmx{rmDup}(\rmx{rmDup}(l1) \rel{@} \rmx{rmDup}(l2))$  \\
-where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.\\
+where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.
+Note that $x, l1, l2$ are fresh constants.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(l1, x) = true$.
 \begin{align*}

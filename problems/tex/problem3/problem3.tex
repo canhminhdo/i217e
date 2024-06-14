@@ -128,7 +128,7 @@ By direct proof.
 
 \noindent
 What to show: $\quad\rmx{fact}(x) = \rmx{fold*}(\rmx{mkl2}(x))$ \\
-where $x \in \mathtt{PNat}$ .
+where $x \in \mathtt{PNat}$. Note that $x$ is a fresh constant\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \under{\rmx{fact}(x)}
 	&\larrow \under{\rmx{fold*}(\rmx{mkl1}(x))} \tag{by Lemma~\ref{lm1}} \\
@@ -160,7 +160,7 @@ What to show: $\quad\rmx{fact}(0) = \rmx{fold*}(\rmx{mkl1}(0))$.
 \item[(2) Induction case]~\\
 What to show: $\quad\rmx{fact}(\rmx{s}(x)) = \rmx{fold*}(\rmx{mkl1}(\rmx{s}(x)))$ \\
 Induction hypothesis: $\quad\rmx{fact}(x) = \rmx{fold*}(\rmx{mkl1}(x))$  \\
-where $x \in \mathtt{PNat}$.
+where $x \in \mathtt{PNat}$. Note that $x$ is a fresh constant.
 \begin{align*}
 \under{\rmx{fact}(\rmx{s}(x))} 
 	&\larrow \under{\rmx{s}(x) \rel{*} \rmx{fact}(x)} \tag{by fact2} \\

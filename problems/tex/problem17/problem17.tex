@@ -142,7 +142,9 @@ What to show: $\quad \rmx{rmDup}(\rmx{rmDup}(nil)) = \rmx{rmDup}(nil)$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{rmDup}(\rmx{rmDup}(x \mid l)) = \rmx{rmDup}(x \mid l)$\\
 Induction hypothesis: $\quad \rmx{rmDup}(\rmx{rmDup}(l)) = \rmx{rmDup}(l)$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, l$ are fresh constants\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(l, x) = true$.
 \begin{align*}
@@ -196,7 +198,7 @@ By structural induction on $L$.
 \item[(1) Base case]~\\
 \noindent
 What to show: $\quad \rmx{has}(nil, x) = \rmx{has}(\rmx{rmDup}(nil), x)$ \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+where $x \in \mathtt{PNat}$. Note that $x$ is a fresh constant.
 \begin{align*}
 %%% LHS
 \under{\rmx{has}(nil, x)}
@@ -210,7 +212,9 @@ where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{has}(y \mid l, x) = \rmx{has}(\rmx{rmDup}(y \mid l), x)$ \\
 Induction hypothesis: $\quad \rmx{has}(l, x) = \rmx{has}(\rmx{rmDup}(l), x)$  \\
-where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, y, l$ are fresh constants.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1.1}: $\rmx{has}(l, y) = true$, $\rmx{has}(\rmx{rmDup}(l), x) = true$.
 \begin{align*}

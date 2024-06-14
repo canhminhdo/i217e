@@ -128,8 +128,7 @@ By structural induction on $L$.
 \begin{description}
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad \rmx{setEqual}(nil, \rmx{rev}(nil)) = true$\\
-where $l \in \mathtt{NatList}$.
+What to show: $\quad \rmx{setEqual}(nil, \rmx{rev}(nil)) = true$.
 \begin{align*}
 %%% LHS
 \rmx{setEqual}(nil, \under{\rmx{rev}(nil)})
@@ -139,13 +138,15 @@ where $l \in \mathtt{NatList}$.
 	&\larrow \under{true \rel{and} (\rmx{diff}(nil, nil) = nil)} \tag{by equality} \\
 	&\larrow \under{\rmx{diff}(nil, nil)} = nil \tag{by and} \\
 	&\larrow \under{nil = nil} \tag{by diff1} \\
-	&\larrow true \tag{by equality} \\	
+	&\larrow true \tag{by equality} 
 \end{align*}
 
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{setEqual}(x \mid l, \rmx{rev}(x \mid l)) = true$\\
 Induction hypothesis: $\quad \rmx{setEqual}(l, \rmx{rev}(l)) = true$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, l$ are fresh constants\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(\rmx{rev}(l), x) = true$.
 \begin{align*}

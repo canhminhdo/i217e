@@ -141,7 +141,7 @@ What to show: $\quad \rmx{size}(nil) = \rmx{size}(\rmx{rev}(nil))$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{size}(x \rel{|} l) = \rmx{size}(\rmx{rev}(x \rel{|} l))$ \\
 Induction hypothesis: $\quad \rmx{size}(l) = \rmx{size}(\rmx{rev}(l))$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$. Note that $x, l$ are fresh constants\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \under{\rmx{size}(x \rel{|} l)}
 	&\larrow \rmx{s}(\under{\rmx{size}(l)}) \tag{by size2} \\
@@ -171,7 +171,7 @@ By structural induction on $L1$.
 \item[(1) Base case]~\\
 \noindent
 What to show: $\quad \rmx{size}(nil \rel{@} l2) = \rmx{size}(nil) \rel{+} \rmx{size}(l2)$ \\
-where $l2 \in \mathtt{NatList}$.
+where $l2 \in \mathtt{NatList}$. Note that $l2$ is a fresh constant.
 \begin{align*}
 \rmx{size}(\under{nil \rel{@} l2})
 	&\larrow \rmx{size}(l2) \tag{by @1} \\
@@ -183,7 +183,7 @@ where $l2 \in \mathtt{NatList}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{size}((x \rel{|} l1) \rel{@} l2) = \rmx{size}(x \rel{|} l1) \rel{+} \rmx{size}(l2)$ \\
 Induction hypothesis: $\quad \rmx{size}(l1 \rel{@} l2) = \rmx{size}(l1) \rel{+} \rmx{size}(l2)$  \\
-where $x \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
+where $x \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$. Note that $x, l1, l2$ are fresh constants.
 \begin{align*}
 \rmx{size}(\under{(x \rel{|} l1) \rel{@} l2})
 	&\larrow \under{\rmx{size}(x \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
@@ -218,7 +218,7 @@ What to show: $\quad \rmx{s}(0) = 0 \rel{+} \rmx{s}(0)$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{s}(\rmx{s}(x)) = \rmx{s}(x) \rel{+} \rmx{s}(0)$ \\
 Induction hypothesis: $\quad \rmx{s}(x) = x \rel{+} \rmx{s}(0)$  \\
-where $x \in \mathtt{PNat}$.
+where $x \in \mathtt{PNat}$. Note that $x$ is a fresh constant.
 \begin{align*}
 \under{\rmx{s}(x) \rel{+} \rmx{s}(0)}
 	&\larrow \rmx{s}(\under{x + s(0)}) \tag{by +2} \\

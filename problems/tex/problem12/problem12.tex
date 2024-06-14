@@ -141,6 +141,7 @@ What to show: $\quad \rmx{sum}(nil) = \rmx{sum}(\rmx{rev}(nil))$.
 What to show: $\quad \rmx{sum}(x \mid l) = \rmx{sum}(\rmx{rev}(x \mid l))$ \\
 Induction hypothesis: $\quad \rmx{sum}(l) = \rmx{sum}(\rmx{rev}(l))$  \\
 where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, l$ are fresh constants\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 %%% LHS
 \under{\rmx{sum(x \mid l)}}
@@ -170,7 +171,8 @@ By structural induction on $L1$.
 \item[(1) Base case]~\\
 \noindent
 What to show: $\quad \rmx{sum}(nil \rel{@} l2) = \rmx{sum}(nil) + \rmx{sum}(l2)$ \\
-where $l2 \in \mathtt{NatList}$. \\
+where $l2 \in \mathtt{NatList}$.
+Note that $l2$ is a fresh constant.
 \begin{align*}
 %%% LHS
 \rmx{sum}(\under{nil \rel{@} l2}) 
@@ -184,7 +186,8 @@ where $l2 \in \mathtt{NatList}$. \\
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{sum}((x \mid l1) \rel{@} l2) = \rmx{sum}(x \mid l1) + \rmx{sum}(l2)$ \\
 Induction hypothesis: $\quad \rmx{sum}(l1 \rel{@} l2) = \rmx{sum}(l1) + \rmx{sum}(l2)$  \\
-where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$. \\
+where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.
+Note that $x, l1, l2$ are fresh constants.
 \begin{align*}
 %%% LHS
 \rmx{sum}(\under{(x \mid l)) \rel{@} l2})

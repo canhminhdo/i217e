@@ -138,7 +138,9 @@ What to show: $\quad \rmx{diff}(nil, nil) = nil$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{diff}(x \mid l, x \mid l) = nil$ \\
 Induction hypothesis: $\quad \rmx{diff}(l, l) = nil$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, l$ are fresh constants\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(l, x) = true$
 \begin{align*}

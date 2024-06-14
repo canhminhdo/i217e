@@ -139,7 +139,7 @@ What to show: $\quad\rmx{rev}(\rmx{rev}(nil)) = nil$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{rev}(\rmx{rev}(x \rel{|} l)) = x \rel{|} l$ \\
 Induction hypothesis: $\quad \rmx{rev}(\rmx{rev}(l)) = l$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$. Note that $x, l$ are fresh constants\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \rmx{rev}(\under{\rmx{rev}(x \rel{|} l)})
 	&\larrow \under{\rmx{rev}(\rmx{rev}(l) \rel{@} (x \rel{|} nil))} \tag{by rev2} \\
@@ -168,7 +168,8 @@ By structural induction on $L1$.
 
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad \rmx{rev}(nil \rel{@} l2) = \rmx{rev}(l2) \rel{@} \rmx{rev}(nil)$.
+What to show: $\quad \rmx{rev}(nil \rel{@} l2) = \rmx{rev}(l2) \rel{@} \rmx{rev}(nil)$\\
+where $l2 \in \mathtt{NatList}$. Note that $l2$ is a fresh constant.
 \begin{align*}
 \under{\rmx{rev}(nil \rel{@} l2)}
 	&\larrow \rmx{rev}(l2) \tag{by @1} \\
@@ -180,7 +181,7 @@ What to show: $\quad \rmx{rev}(nil \rel{@} l2) = \rmx{rev}(l2) \rel{@} \rmx{rev}
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{rev}((x \rel{|} l1) \rel{@} l2) = \rmx{rev}(l2) \rel{@} \rmx{rev}(x \rel{|} l1)$ \\
 Induction hypothesis: $\quad \rmx{rev}(l1 \rel{@} l2) = \rmx{rev}(l2) \rel{@} \rmx{rev}(l1)$  \\
-where $x \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
+where $x \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$. Note that $x, l1, l2$ are fresh constants.
 \begin{align*}
 \rmx{rev}(\under{(x \rel{|} l1) \rel{@} l2}) 
 	&\larrow \under{\rmx{rev}(x \rel{|} (l1 \rel{@} l2))} \tag{by @2} \\
@@ -214,7 +215,7 @@ What to show: $\quad nil \rel{@} nil = nil$.
 \item[(2) Induction case]~\\
 What to show: $\quad (x \rel{|} l) \rel{@} nil = x \rel{|} l$ \\
 Induction hypothesis: $\quad l \rel{@} nil = l$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$. Note that $x, l$ are fresh constants.
 \begin{align*}
 \under{(x \rel{|} l) \rel{@} nil}
 	&\larrow x \rel{|} \under{(l \rel{@} nil)} \tag{by @2} \\

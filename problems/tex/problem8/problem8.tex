@@ -131,6 +131,7 @@ By structural induction on $L1$.
 \noindent
 What to show: $\quad \rmx{diff}(nil, l2) = \rmx{diff}(nil, \rmx{rev}(l2))$. \\
 where $l2 \in \mathtt{NatList}$.
+Note that $l2$ is a fresh constant\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \under{\rmx{diff}(nil, l2)}
 	&\larrow nil \tag{by diff1} \\
@@ -141,6 +142,7 @@ where $l2 \in \mathtt{NatList}$.
 What to show: $\quad \rmx{diff}(x \rel{|} l1, l2) = \rmx{diff}(x \rel{|} l1, \rmx{rev}(l2))$ \\
 Induction hypothesis: $\quad \rmx{diff}(l1, l2) = \rmx{diff}(l1, \rmx{rev}(l2))$  \\
 where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.
+Note that $x, l1, l2$ are fresh constants.
 \begin{align*}
 \under{\rmx{diff}(x \rel{|} l1, l2)}
 	&\larrow\ \rel{\rmx{if}} \rmx{has}(l2, x) \rel{\rmx{then}} \under{\rmx{diff}(l1, l2)} \rel{\rmx{else}} (x \rel{|} \under{\rmx{diff}(l1, l2))} \rel{\rmx{fi}} \tag{by diff2} \\

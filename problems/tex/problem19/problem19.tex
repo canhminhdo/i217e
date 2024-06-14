@@ -128,8 +128,7 @@ By structural induction on $L$.
 \begin{description}
 \item[(1) Base case]~\\
 \noindent
-What to show: $\quad \rmx{setEqual}(nil, \rmx{rmDup}(nil)) = true$\\
-where $l \in \mathtt{NatList}$.
+What to show: $\quad \rmx{setEqual}(nil, \rmx{rmDup}(nil)) = true$.
 \begin{align*}
 %%% LHS
 \rmx{setEqual}(nil, \under{\rmx{rmDup}(nil)})
@@ -145,7 +144,9 @@ where $l \in \mathtt{NatList}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{setEqual}(x \mid l, \rmx{rmDup}(x \mid l)) = true$\\
 Induction hypothesis: $\quad \rmx{setEqual}(l, \rmx{rmDup}(l)) = true$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, l$ are fresh constants\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(l, x) = true$.
 \begin{align*}
@@ -285,7 +286,9 @@ What to show: $\quad \rmx{diff}(nil, \rmx{rmDup}(nil)) = nil$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{diff}(x \mid l, \rmx{rmDup}(x \mid l)) = nil$\\
 Induction hypothesis: $\quad \rmx{diff}(l, \rmx{rmDup}(l)) = nil$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, l$ are fresh constants.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(l, x) = true$.
 \begin{align*}
@@ -365,7 +368,9 @@ What to show: $\quad \rmx{diff}(\rmx{rmDup}(nil), nil) = nil$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{diff}(\rmx{rmDup}(x \mid l), x \mid l) = nil$\\
 Induction hypothesis: $\quad \rmx{diff}(\rmx{rmDup}(l), l) = nil$  \\
-where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, l$ are fresh constants.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(l, x) = true$.
 \begin{align*}

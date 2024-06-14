@@ -140,6 +140,7 @@ What to show: $\quad \rmx{diff}(\rmx{rev}(nil), nil) = nil$.
 What to show: $\quad \rmx{diff}(\rmx{rev}(x \mid l), x \mid l) = nil$ \\
 Induction hypothesis: $\quad \rmx{diff}(\rmx{rev}(l), l) = nil$  \\
 where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, l$ are fresh constants\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 %%% LHS
 \rmx{diff}(\under{\rmx{rev}(x \mid l)}, x \mid l)

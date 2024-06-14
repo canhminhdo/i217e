@@ -131,6 +131,7 @@ By structural induction on $L$.
 \noindent
 What to show: $\quad \rmx{diff}(nil, l2) = \rmx{rev}(\rmx{diff}(\rmx{rev}(nil), l2))$ \\
 where $l2 \in \mathtt{NatList}$.
+Note that $l2$ is a fresh constant\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \under{\rmx{diff}(nil, l2)}
 	&\larrow nil \tag{by diff1} \\
@@ -143,7 +144,8 @@ where $l2 \in \mathtt{NatList}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{diff}(x \rel{|} l1, l2) = \rmx{rev}(\rmx{diff}(\rmx{rev}(x \rel{|} l1), l2))$ \\
 Induction hypothesis: $\quad \rmx{diff}(l1, l2) = \rmx{rev}(\rmx{diff}(\rmx{rev}(l1), l2))$  \\
-where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$. \\
+where $x \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$. 
+Note that $x, l1, l2$ are fresh constants. \\
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(l2, x) = true$
 \begin{align*}
@@ -221,6 +223,7 @@ By structural induction on $L1$.
 \noindent
 What to show: $\quad \rmx{diff}(nil \rel{@} l2, l3) = \rmx{diff}(nil, l3) \rel{@} \rmx{diff}(l2, l3)$ \\
 where $l2, l3 \in \mathtt{NatList}$.
+Note that $l2, l3$ are fresh constants.
 \begin{align*}
 \rmx{diff}(\under{nil \rel{@} l2}, l3)
 	&\larrow \rmx{diff}(l2, l3) \tag{by @1} \\
@@ -232,7 +235,8 @@ where $l2, l3 \in \mathtt{NatList}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{diff}((x \rel{|} l1) \rel{@} l2, l3) = \rmx{diff}((x \rel{|} l1), l3) \rel{@} \rmx{diff}(l2, l3)$ \\
 Induction hypothesis: $\quad \rmx{diff}(l1 \rel{@} l2, l3) = \rmx{diff}(l1, l3) \rel{@} \rmx{diff}(l2, l3)$  \\
-where $x\in \mathtt{PNat}$, and $l1, l2, l3 \in \mathtt{NatList}$.
+where $x\in \mathtt{PNat}$ and $l1, l2, l3 \in \mathtt{NatList}$.
+Note that $x, l1, l2, l3$ are fresh constants.
 
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(l3, x) = true$

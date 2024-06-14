@@ -130,7 +130,7 @@ By structural induction on $L$.
 \item[(1) Base case]~\\
 \noindent
 What to show: $\quad \rmx{has}(nil, x) = \rmx{has}(\rmx{rev}(nil), x)$ \\
-where $x \in \mathtt{PNat}$ .
+where $x \in \mathtt{PNat}$. Note that $x$ is a fresh constant\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \under{\rmx{has}(nil, x)}
 	&\larrow false \tag{by has1} \\
@@ -142,7 +142,7 @@ where $x \in \mathtt{PNat}$ .
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{has}(y \rel{|} l, x) = \rmx{has}(\rmx{rev}(y \rel{|} l), x)$ \\
 Induction hypothesis: $\quad \rmx{has}(l, x) = \rmx{has}(\rmx{rev}(l), x)$  \\
-where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$. Note that $x, y, l$ are fresh constants.
 \begin{align*}
 \under{\rmx{has}(y \rel{|} l, x)}
 	&\larrow (x = y) \rel{\rmx{or}} \under{\rmx{has}(l, x)}  \tag{by has2} \\
@@ -173,7 +173,7 @@ By structural induction on $L1$.
 \item[(1) Base case]~\\
 \noindent
 What to show: $\quad \rmx{has}(nil \rel{@} l2, x) = (\rmx{has}(nil, x) \rel{\rmx{or}} \rmx{has}(l2, x))$ \\
-where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
+where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$. Note that $x, l2$ are fresh constants.
 \begin{align*}
 \rmx{has}(\under{nil \rel{@} l2}, x)
 	&\larrow \rmx{has}(l2, x) \tag{by @1} \\
@@ -185,7 +185,7 @@ where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{has}((y \rel{|} l1) \rel{@} l2, x) = (\rmx{has}(y \rel{|} l1, x) \rel{\rmx{or}} \rmx{has}(l2, x))$ \\
 Induction hypothesis: $\quad \rmx{has}(l1 \rel{@} l2, x) = (\rmx{has}(l1, x) \rel{\rmx{or}} \rmx{has}(l2, x))$  \\
-where $x, y \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
+where $x, y \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$. Note that $x, y, l1, l2$ are fresh constants.
 \begin{align*}
 \rmx{has}(\under{(y \rel{|} l1) \rel{@} l2}, x)
 	&\larrow \under{\rmx{has}(y \rel{|} (l1 \rel{@} l2), x)} \tag{by @2} \\

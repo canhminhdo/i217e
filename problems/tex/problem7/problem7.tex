@@ -138,6 +138,7 @@ What to show: $\quad \rmx{diff}(nil, \rmx{rev}(nil)) = nil$.
 What to show: $\quad \rmx{diff}(x \rel{|} l, \rmx{rev}(x \rel{|} l)) = nil$ \\
 Induction hypothesis: $\quad \rmx{diff}(l, \rmx{rev}(l)) = nil$  \\
 where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, l$ are fresh constants\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \rmx{diff}(x \rel{|} l, \under{\rmx{rev}(x \rel{|} l)})
 	&\larrow \under{\rmx{diff}(x \rel{|} l, \rmx{rev}(l) \rel{@} (x \rel{|} nil))} \tag{by rev2} \\
@@ -189,6 +190,7 @@ By structural induction on $L1$.
 \noindent
 What to show: $\quad \rmx{diff}(nil, l2 \rel{@} l3) = \rmx{diff}(\rmx{diff}(nil, l2), l3)$ \\
 where $l2, l3 \in \mathtt{NatList}$.
+Note that $l2, l3$ are fresh constants.
 \begin{align*}
 \under{\rmx{diff}(nil, l2 \rel{@} l3)}
 	&\larrow nil \tag{by diff1} \\
@@ -201,6 +203,7 @@ where $l2, l3 \in \mathtt{NatList}$.
 What to show: $\quad \rmx{diff}(x \rel{|} l1, l2 \rel{@} l3) = \rmx{diff}(\rmx{diff}(x \rel{|} l1, l2), l3)$ \\
 Induction hypothesis: $\quad \rmx{diff}(l1, l2 \rel{@} l3) = \rmx{diff}(\rmx{diff}(l1, l2), l3)$  \\
 where $x\in \mathtt{PNat}$, and $l1, l2, l3 \in \mathtt{NatList}$.
+Note that $x, l1, l2, l3$ are fresh constants.
 
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $\rmx{has}(l2, x) = true$

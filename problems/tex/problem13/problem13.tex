@@ -129,7 +129,7 @@ By structural induction on $L$.
 \item[(1) Base case]~\\
 \noindent
 What to show: $\quad \rmx{count}(nil, x) = \rmx{count}(\rmx{rev}(nil), x)$\\
-where $x \in \mathtt{PNat}$.
+where $x \in \mathtt{PNat}$. Note that $x$ is a fresh constant\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 %%% LHS
 \under{\rmx{count}(nil, x)} 
@@ -143,7 +143,9 @@ where $x \in \mathtt{PNat}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{count}(y \mid l, x) = \rmx{count}(\rmx{rev}(y \mid l), x)$ \\
 Induction hypothesis: $\quad \rmx{count}(l, x) = \rmx{count}(\rmx{rev}(l, x)$  \\
-where $x,y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+where $x,y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, y, l$ are fresh constants.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $y = x$
 \begin{align*}
@@ -206,6 +208,7 @@ By structural induction on $L1$.
 \noindent
 What to show: $\quad \rmx{count}(nil \rel{@} l2, x) = \rmx{count}(nil, x) + \rmx{count}(l2, x)$ \\
 where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
+Note that $x, l2$ are fresh constants.
 \begin{align*}
 %%% LHS
 \rmx{count}(\under{nil \rel{@} l2}, x) 
@@ -219,7 +222,9 @@ where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{count}((y \mid l1) \rel{@} l2, x) = \rmx{count}(y \mid l1, x) + \rmx{count}(l2, x)$ \\
 Induction hypothesis: $\quad \rmx{count}(l1 \rel{@} l2, x) = \rmx{count}(l1, x) + \rmx{count}(l2, x)$  \\
-where $x, y \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.\\
+where $x, y \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.
+Note that $x, y, l1, l2$ are fresh constants.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $y = x$
 \begin{align*}

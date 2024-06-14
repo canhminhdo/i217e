@@ -131,6 +131,7 @@ By structural induction on $L$.
 \noindent
 What to show: $\quad \rmx{has}(\rmx{drop}(nil, x), x) = false$ \\
 where $x \in \mathtt{PNat}$.
+Note that $x$ is a fresh constant\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \rmx{has}(\under{\rmx{drop}(nil, x)}, x)
 	&\larrow \under{\rmx{has}(nil, x)} \tag{by drop1} \\
@@ -140,7 +141,9 @@ where $x \in \mathtt{PNat}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{has}(\rmx{drop}(y \rel{|} l, x), x) = false$ \\
 Induction hypothesis: $\quad \rmx{has}(\rmx{drop}(l, x), x) = false$  \\
-where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$. \\
+where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, y, l$ are fresh constants.
+
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $y = x$
 \begin{align*}

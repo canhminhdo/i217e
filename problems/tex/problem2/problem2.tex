@@ -141,7 +141,7 @@ What to show: $\quad\rmx{rev}(\rmx{mkl1}(0)) = \rmx{mkl2}(0)$.
 \item[(2) Induction case]~\\
 What to show: $\quad\rmx{rev}(\rmx{mkl1}(\rmx{s}(x))) = \rmx{mkl2}(\rmx{s}(x))$ \\
 Induction hypothesis: $\quad \rmx{rev}(\rmx{mkl1}(x)) = \rmx{mkl2}(x)$ \\
-where $x \in \mathtt{PNat}$.
+where $x \in \mathtt{PNat}$. Note that $x$ is a fresh constant\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \rmx{rev}(\under{\rmx{mkl1}(\rmx{s}(x))}) 
 	&\larrow \under{\rmx{rev}(\rmx{s}(x) \rel{|} \rmx{mkl1}(x))} \tag{by mkl1-2} \\
@@ -169,7 +169,7 @@ By structural induction on $X$.
 \item[(1) Base case]~\\
 \noindent
 What to show: $\quad\rmx{smkl2}(0, l) = \rmx{smkl2}(0, nil) \rel{@} l$ \\
-where $l \in \mathtt{NatList}$.
+where $l \in \mathtt{NatList}$. Note that $l$ is a fresh constant.
 \begin{align*}
 \under{\rmx{smkl2}(0, l)}
 	&\larrow l \tag{by smkl2-1} \\
@@ -180,8 +180,8 @@ where $l \in \mathtt{NatList}$.
 
 \item[(2) Induction case]~\\
 What to show: $\quad\rmx{smkl2}(\rmx{s}(x), l) = \rmx{smkl2}(\rmx{s}(x), nil) \rel{@} l$ \\
-Induction hypothesis: $\quad\rmx{smkl2}(x, L) = \rmx{smkl2}(x, nil) \rel{@} L$ \\
-where $x \in \mathtt{PNat}$ and $l, L \in \mathtt{NatList}$.
+Induction hypothesis: $\quad\rmx{smkl2}(x, l) = \rmx{smkl2}(x, nil) \rel{@} l$ \\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$. Note that $x, l$ are fresh constants.
 \begin{align*}
 \under{\rmx{smkl2}(\rmx{s}(x), l)} 
 	&\larrow \under{\rmx{smkl2}(x,\ \rmx{s}(x) \rel{|} l)} \tag{by smkl2-2} \\

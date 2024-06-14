@@ -131,6 +131,7 @@ By structural induction on $L$.
 \noindent
 What to show: $\quad \rmx{drop}(nil, x) = \rmx{rev}(\rmx{drop}(\rmx{rev}(nil), x))$ \\
 where $x \in \mathtt{PNat}$.
+Note that $x$ is a fresh constant\footnote{A fresh constant of a sort denotes an arbitrary value of the sort, and has never been used before.}.
 \begin{align*}
 \under{\rmx{drop}(nil, x)}
 	&\larrow nil \tag{by drop1} \\
@@ -143,7 +144,9 @@ where $x \in \mathtt{PNat}$.
 \item[(2) Induction case]~\\
 What to show: $\quad \rmx{drop}(y \rel{|} l, x) = \rmx{rev}(\rmx{drop}(\rmx{rev}(y \rel{|} l), x))$ \\
 Induction hypothesis: $\quad \rmx{drop}(l, x) = \rmx{rev}(\rmx{drop}(\rmx{rev}(l), x))$  \\
-where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$. \\
+where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
+Note that $x, y, l$ are fresh constants.
+
 We use case splitting for our proofs as follows:\\
 \textbf{Case 1}: $y = x$
 \begin{align*}
@@ -222,6 +225,7 @@ By structural induction on $L1$.
 \noindent
 What to show: $\quad \rmx{drop}(nil \rel{@} l2, x) = \rmx{drop}(nil, x) \rel{@} \rmx{drop}(l2, x)$ \\
 where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
+Note that $x, l2$ are fresh constants.
 \begin{align*}
 \rmx{drop}(\under{nil \rel{@} l2}, x)
 	&\larrow \rmx{drop}(l2, x) \tag{by @1} \\
@@ -235,6 +239,7 @@ where $x \in \mathtt{PNat}$ and $l2 \in \mathtt{NatList}$.
 What to show: $\quad \rmx{drop}((y \rel{|} l1) \rel{@} l2, x) = \rmx{drop}(y \rel{|} l1, x) \rel{@} \rmx{drop}(l2, x)$ \\
 Induction hypothesis: $\quad \rmx{drop}(l1 \rel{@} l2, x) = \rmx{drop}(l1, x) \rel{@} \rmx{drop}(l2, x)$ \\
 where $x, y \in \mathtt{PNat}$, and $l1, l2 \in \mathtt{NatList}$.
+Note that $x, y, l1, l2$ are fresh constants.
 
 We use case splitting for our proofs as follows: \\
 \textbf{Case 1}: $y = x$
