@@ -1,8 +1,8 @@
 in ../../pgm.cafe
 
 -- ----------------------------------------------------------------------------
--- LEMMA2: \forall L \in NatList: diff(L, rmDup(L)) = nil .
--- [require] PROBLEM14, PROBLEM17 - LEMMA1
+-- LEMMA2: \forall L \in NatList: diff(rmDup(L), L) = nil .
+-- [require] PROBLEM14
 -- ----------------------------------------------------------------------------
 
 select NATLIST
@@ -10,7 +10,7 @@ select NATLIST
 --> base case
 open NATLIST .
     -- base case
-    red diff(nil, rmDup(nil)) = nil .
+    red diff(rmDup(nil), nil) = nil .
 close
 
 --> induction case
@@ -20,16 +20,16 @@ open NATLIST .
     op l : -> NatList .
 
     var I : PNat .
-    var L1 : NatList .
+    vars L1 L2 : NatList .
 
     -- induction hypothesis
-    eq [IH] : diff(l, rmDup(l)) = nil .
+    eq [IH] : diff(rmDup(l), l) = nil .
     -- case splitting
     eq has(l, x) = true .
-    -- use PROBLEM17 - LEMMA1
-    eq has(rmDup(L1), I) = has(L1, I) .
+    -- use PROBELM14 as a lemma
+    eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
     -- induction case
-    red diff(x | l, rmDup(x | l)) = nil .
+    red diff(rmDup(x | l), x | l) = nil .
 close
 
 --> case 2
@@ -41,13 +41,11 @@ open NATLIST .
     vars L1 L2 : NatList .
 
     -- induction hypothesis
-    eq [IH] : diff(l, rmDup(l)) = nil .
+    eq [IH] : diff(rmDup(l), l) = nil .
     -- case splitting
     eq has(l, x) = false .
     -- use PROBELM14 as a lemma
     eq diff(L1, I | L2) = drop(diff(L1, L2), I) .
-    -- use PROBLEM17 - LEMMA1
-    eq has(rmDup(L1), I) = has(L1, I) .
     -- induction case
-    red diff(x | l, rmDup(x | l)) = nil .
+    red diff(rmDup(x | l), x | l) = nil .
 close

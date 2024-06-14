@@ -196,7 +196,7 @@ We use case splitting for our proofs as follows: \\
 \textbf{Case 2}: $\rmx{has}(l, x) = false$.
 \begin{align*}
 %%% LHS
-\rmx{setEqual}(x \mid l, \rmx{rmDup}(x \mid l))
+\rmx{setEqual}(x \mid l, \under{\rmx{rmDup}(x \mid l)})
 	&\larrow \rmx{setEqual}(x \mid l, \\
 	&\quad \quad \rel{\rmx{if}} \under{\rmx{has}(l, x)} \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}) \tag{by rmDup2} \\
 	%%
@@ -241,7 +241,7 @@ We use case splitting for our proofs as follows: \\
 	&\larrow true \rel{and} \\
 	&\quad \quad (\under{\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l)} = nil) \tag{by equality} \\
 	%%
-	&\larrow \rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil \tag{by and} \\
+	&\larrow \under{\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l) = nil} \tag{by and} \\
 	%%
 	&\larrow (\rel{\rmx{if}} \under{\rmx{has}(x \mid l, x)} \rel{\rmx{then}} \rmx{diff}(\rmx{rmDup}(l), x \mid l) \\
 	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{diff}(\rmx{rmDup}(l), x \mid l)) \rel{\rmx{fi}}) = nil \tag{by diff2} \\
@@ -260,7 +260,9 @@ We use case splitting for our proofs as follows: \\
 	&\larrow \rmx{drop}(\under{\rmx{diff}(\rmx{rmDup}(l), l)}, x) = nil \tag{by Problem 14} \\
 	%%
 	&\larrow \under{\rmx{drop}(nil, x)} = nil \tag{by Lemma~\ref{lm2}} \\
+	%%
 	&\larrow \under{nil = nil} \tag{by drop1} \\
+	%%
 	&\larrow true \tag{by equality}
 \end{align*}
 \end{description}
@@ -271,6 +273,78 @@ We use case splitting for our proofs as follows: \\
 $\forall X \in \mathtt{PNat}, \forall L \in \mathtt{NatList}, \rmx{diff}(L, \rmx{rmDup}(L)) = nil$.
 \end{lemma}
 \begin{proof}
+By structural induction on $L$.
+\begin{description}
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad \rmx{diff}(nil, \rmx{rmDup}(nil)) = nil$.
+\begin{align*}
+\under{\rmx{diff}(nil, \rmx{rmDup}(nil))}
+	&\larrow nil \tag{by diff1}
+\end{align*}
+\item[(2) Induction case]~\\
+What to show: $\quad \rmx{diff}(x \mid l, \rmx{rmDup}(x \mid l)) = nil$\\
+Induction hypothesis: $\quad \rmx{diff}(l, \rmx{rmDup}(l)) = nil$  \\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+We use case splitting for our proofs as follows: \\
+\textbf{Case 1}: $\rmx{has}(l, x) = true$.
+\begin{align*}
+%%% LHS
+\rmx{diff}(x \mid l, \under{\rmx{rmDup}(x \mid l)})
+	&\larrow \rmx{diff}(x \mid l, \rel{\rmx{if}} \under{\rmx{has}(l, x)} \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}) \tag{by rmDup2} \\
+	%%
+	&\larrow \rmx{diff}(x \mid l, \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}}) \tag{by case splitting} \\	
+	%%
+	&\larrow \under{\rmx{diff}(x \mid l, \rmx{rmDup}(l))} \tag{by if1} \\	
+	%%
+	&\larrow\ \rel{\rmx{if}} \under{\rmx{has}(\rmx{rmDup}(l), x)} \rel{\rmx{then}} \rmx{diff}(l, \rmx{rmDup}(l)) \\
+	&\quad \quad \rel{\rmx{else}} ( x \mid \rmx{diff}(l, \rmx{rmDup}(l))) \rel{\rmx{fi}} \tag{by diff2} \\
+	%%
+	&\larrow\ \rel{\rmx{if}} \under{\rmx{has}(l, x)} \rel{\rmx{then}} \rmx{diff}(l, \rmx{rmDup}(l)) \\
+	&\quad \quad \rel{\rmx{else}} ( x \mid \rmx{diff}(l, \rmx{rmDup}(l))) \rel{\rmx{fi}} \tag{by Problem 17 - Lemma 1} \\
+	%%
+	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{diff}(l, \rmx{rmDup}(l))} \\
+	&\quad \quad\ \under{\rel{\rmx{else}} ( x \mid \rmx{diff}(l, \rmx{rmDup}(l))) \rel{\rmx{fi}}} \tag{by case splitting} \\
+	%%
+	&\larrow \under{\rmx{diff}(l, \rmx{rmDup}(l))} \tag{by if1} \\
+	%%
+	&\larrow nil \tag{by IH}
+\end{align*}
+
+\textbf{Case 2}: $\rmx{has}(l, x) = false$.
+\begin{align*}
+%%% LHS
+\rmx{diff}(x \mid l, \under{\rmx{rmDup}(x \mid l)})
+	&\larrow \rmx{diff}(x \mid l, \rel{\rmx{if}} \under{\rmx{has}(l, x)} \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}) \tag{by rmDup2} \\
+	%%
+	&\larrow \rmx{diff}(x \mid l, \under{\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}}) \tag{by case splitting} \\	
+	%%
+	&\larrow \under{\rmx{diff}(x \mid l, x \mid \rmx{rmDup}(l))} \tag{by if2} \\	
+	%%
+	&\larrow \rmx{drop}(\under{\rmx{diff}(x \mid l, \rmx{rmDup}(l))}, x) \tag{by Problem 14} \\	
+	%%
+	&\larrow \rmx{drop}((\rel{\rmx{if}} \under{\rmx{has}(\rmx{rmDup}(l), x)} \rel{\rmx{then}} \rmx{diff}(l, \rmx{rmDup}(l)) \\
+	&\quad \quad \rel{\rmx{else}} ( x \mid \rmx{diff}(l, \rmx{rmDup}(l))) \rel{\rmx{fi}}), x) \tag{by diff2} \\	
+	%%
+	&\larrow \rmx{drop}((\rel{\rmx{if}} \under{\rmx{has}(l, x)} \rel{\rmx{then}} \rmx{diff}(l, \rmx{rmDup}(l)) \\
+	&\quad \quad \rel{\rmx{else}} ( x \mid \rmx{diff}(l, \rmx{rmDup}(l))) \rel{\rmx{fi}}), x) \tag{by Problem 17 - Lemma 1} \\	
+	%%
+	&\larrow \rmx{drop}(\under{(\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{diff}(l, \rmx{rmDup}(l))} \\
+	&\quad \quad\ \under{\rel{\rmx{else}} ( x \mid \rmx{diff}(l, \rmx{rmDup}(l))) \rel{\rmx{fi}})}, x) \tag{by case splitting} \\
+	%%
+	&\larrow \rmx{drop}(x \mid \under{\rmx{diff}(l, \rmx{rmDup}(l))}, x) \tag{by if2} \\
+	%%
+	&\larrow \under{\rmx{drop}(x \mid nil, x)} \tag{by IH} \\
+	%%
+	&\larrow\ \rel{\rmx{if}} \under{x = x} \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (x \mid \rmx{drop}(nil, x)) \rel{\rmx{fi}} \tag{by drop2} \\
+	%%
+	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (x \mid \rmx{drop}(nil, x)) \rel{\rmx{fi}}} \tag{by equality} \\
+	%%
+	&\larrow \under{\rmx{drop}(nil, x)} \tag{by if1} \\
+	%%
+	&\larrow nil \tag{by drop1}
+\end{align*}
+\end{description}
 \end{proof}
 
 \begin{lemma}
@@ -278,6 +352,70 @@ $\forall X \in \mathtt{PNat}, \forall L \in \mathtt{NatList}, \rmx{diff}(L, \rmx
 $\forall X \in \mathtt{PNat}, \forall L \in \mathtt{NatList}, \rmx{diff}(\rmx{rmDup}(L), L) = nil$.
 \end{lemma}
 \begin{proof}
+By structural induction on $L$.
+\begin{description}
+\item[(1) Base case]~\\
+\noindent
+What to show: $\quad \rmx{diff}(\rmx{rmDup}(nil), nil) = nil$.
+\begin{align*}
+\rmx{diff}(\under{\rmx{rmDup}(nil)}, nil)
+	&\larrow \under{\rmx{diff}(nil, nil)} \tag{by rmDup1} \\
+	&\larrow nil \tag{by diff1}	
+\end{align*}
+\item[(2) Induction case]~\\
+What to show: $\quad \rmx{diff}(\rmx{rmDup}(x \mid l), x \mid l) = nil$\\
+Induction hypothesis: $\quad \rmx{diff}(\rmx{rmDup}(l), l) = nil$  \\
+where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
+We use case splitting for our proofs as follows: \\
+\textbf{Case 1}: $\rmx{has}(l, x) = true$.
+\begin{align*}
+%%% LHS
+\rmx{diff}(\under{\rmx{rmDup}(x \mid l)}, x \mid l)
+	&\larrow \rmx{diff}((\rel{\rmx{if}} \under{\rmx{has}(l, x)} \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}), x \mid l) \tag{by rmDup2} \\
+	%%
+	&\larrow \rmx{diff}(\under{(\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}})}, x \mid l) \tag{by case splitting} \\
+	%%
+	&\larrow \under{\rmx{diff}(\rmx{rmDup}(l), x \mid l)} \tag{by if1} \\
+	%%
+	&\larrow \rmx{drop}(\under{\rmx{diff}(\rmx{rmDup}(l), l)}, x) \tag{by Problem 14} \\
+	%%
+	&\larrow \under{\rmx{drop}(nil, x)} \tag{by IH} \\
+	%%
+	&\larrow nil \tag{by drop1}
+\end{align*}
+
+\textbf{Case 2}: $\rmx{has}(l, x) = false$.
+\begin{align*}
+%%% LHS
+\rmx{diff}(\under{\rmx{rmDup}(x \mid l)}, x \mid l)
+	&\larrow \rmx{diff}((\rel{\rmx{if}} \under{\rmx{has}(l, x)} \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}), x \mid l) \tag{by rmDup2} \\
+	%%
+	&\larrow \rmx{diff}(\under{(\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (x \mid \rmx{rmDup}(l)) \rel{\rmx{fi}})}, x \mid l) \tag{by case splitting} \\
+	%%
+	&\larrow \under{\rmx{diff}(x \mid \rmx{rmDup}(l), x \mid l)} \tag{by if2} \\
+	%%
+	&\larrow \rmx{drop}(\under{\rmx{diff}(x \mid \rmx{rmDup}(l), l)}, x) \tag{by Problem 14} \\
+	%%
+	&\larrow \rmx{drop}((\rel{\rmx{if}} \under{\rmx{has}(l, x)} \rel{\rmx{then}} \rmx{diff}(\rmx{rmDup}(l), l) \\ 
+	&\quad \quad\ \rel{\rmx{else}} (x \mid \rmx{diff}(\rmx{rmDup}(l), l)) \rel{\rmx{fi}}), x) \tag{by diff2} \\
+	%%
+	%%
+	&\larrow \rmx{drop}(\under{(\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{diff}(\rmx{rmDup}(l), l)} \\ 
+	&\quad \quad \under{\rel{\rmx{else}} (x \mid \rmx{diff}(\rmx{rmDup}(l), l)) \rel{\rmx{fi}})}, x) \tag{by case splitting} \\
+	%%
+	&\larrow \rmx{drop}(x \mid \under{\rmx{diff}(\rmx{rmDup}(l), l))}, x) \tag{by if2} \\
+	%%
+	&\larrow \under{\rmx{drop}(x \mid nil, x)} \tag{by IH} \\
+	%%
+	&\larrow\ \rel{\rmx{if}} \under{x = x} \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (x \mid \rmx{drop}(nil, x)) \rel{\rmx{fi}} \tag{by drop2} \\
+	%%
+	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{drop}(nil, x) \rel{\rmx{else}} (x \mid \rmx{drop}(nil, x)) \rel{\rmx{fi}}} \tag{by equality} \\
+	%%
+	&\larrow \under{\rmx{drop}(nil, x)} \tag{by if1} \\
+	%%
+	&\larrow nil \tag{by drop1}
+\end{align*}
+\end{description}
 \end{proof}
 
 \end{document}
