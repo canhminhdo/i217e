@@ -131,7 +131,7 @@ By structural induction on $L$.
 What to show: $\quad \rmx{diff}(nil, nil) = nil$.
 \begin{align*}
 %%% LHS
-\rmx{diff}(nil, nil)
+\under{\rmx{diff}(nil, nil)}
 	&\larrow nil \tag{by diff1}
 \end{align*}
 
@@ -140,7 +140,7 @@ What to show: $\quad \rmx{diff}(x \mid l, x \mid l) = nil$ \\
 Induction hypothesis: $\quad \rmx{diff}(l, l) = nil$  \\
 where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.\\
 We use case splitting for our proofs as follows: \\
-\textbf{Case 1}: $has(l, x) = true$
+\textbf{Case 1}: $\rmx{has}(l, x) = true$
 \begin{align*}
 %%% LHS
 \under{\rmx{diff}(x \mid l, x \mid l)}
@@ -152,7 +152,7 @@ We use case splitting for our proofs as follows: \\
 	&\larrow nil \tag{by drop1} \\
 \end{align*}
 
-\textbf{Case 2}: $has(l, x) = false$
+\textbf{Case 2}: $\rmx{has}(l, x) = false$
 \begin{align*}
 %%% LHS
 %%% LHS

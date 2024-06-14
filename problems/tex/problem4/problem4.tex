@@ -147,7 +147,7 @@ where $x \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
 	&\larrow (\under{\rmx{rev}(nil)} \rel{@} (x \rel{|} nil)) \rel{@} \rmx{rev}(\rmx{rev}(l)) \tag{by rev2} \\
 	&\larrow \under{(nil \rel{@} (x \rel{|} nil))} \rel{@} \rmx{rev}(\rmx{rev}(l)) \tag{by rev1} \\
 	&\larrow \under{(x \rel{|} nil) \rel{@} \rmx{rev}(\rmx{rev}(l))} \tag{by @1} \\
-	&\larrow x \rel{|} (nil \rel{@} \rmx{rev}(\rmx{rev}(l))) \tag{by @2} \\
+	&\larrow x \rel{|} \under{(nil \rel{@} \rmx{rev}(\rmx{rev}(l)))} \tag{by @2} \\
 	&\larrow x \rel{|} \under{\rmx{rev}(\rmx{rev}(l))} \tag{by @1} \\
 	&\larrow x \rel{|} l \tag{by IH}
 \end{align*}

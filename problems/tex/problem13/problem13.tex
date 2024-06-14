@@ -248,7 +248,7 @@ We use case splitting for our proofs as follows: \\
 \begin{align*}
 %%% LHS
 \rmx{count}(\under{(y \mid l1) \rel{@} l2}, x)
-	&\larrow \rmx{count}(y \mid (l1 \rel{@} l2), x) \tag{by @2} \\
+	&\larrow \under{\rmx{count}(y \mid (l1 \rel{@} l2), x)} \tag{by @2} \\
 	&\larrow\ \rel{\rmx{if}} \under{(y = x)} \rel{\rmx{then}} s(\rmx{count}(l1 \rel{@} l2, x)) \\
 	&\quad \quad \rel{\rmx{else}} \rmx{count}(l1 \rel{@} l2, x) \rel{\rmx{fi}} \tag{by cnt2} \\
 	&\larrow \under{\rel{\rmx{if}} false \rel{\rmx{then}} s(\rmx{count}(l1 \rel{@} l2, x))} \\

@@ -136,7 +136,7 @@ where $l2 \in \mathtt{NatList}$.
 	&\larrow nil \tag{by diff1} \\
 \rmx{rev}(\rmx{diff}(\under{\rmx{rev}(nil)}, l2))
 	&\larrow \rmx{rev}(\under{\rmx{diff}(nil, l2)}) \tag{by rev1} \\
-	&\larrow \rmx{rev}(nil) \tag{by diff1} \\
+	&\larrow \under{\rmx{rev}(nil)} \tag{by diff1} \\
 	&\larrow nil \tag{by rev1}
 \end{align*}
 

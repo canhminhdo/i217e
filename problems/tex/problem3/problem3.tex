@@ -164,11 +164,12 @@ where $x \in \mathtt{PNat}$.
 \begin{align*}
 \under{\rmx{fact}(\rmx{s}(x))} 
 	&\larrow \under{\rmx{s}(x) \rel{*} \rmx{fact}(x)} \tag{by fact2} \\
-	&\larrow (x \rel{*} \under{\rmx{fact}(x)}) \rel{+} \under{\rmx{fact}(x)} \tag{by *2} \\
+	&\larrow (x \rel{*} \under{\rmx{fact}(x)}) \rel{+} \rmx{fact}(x) \tag{by *2} \\
+	&\larrow (x \rel{*} \rmx{fold*}(\rmx{mkl1}(x))) \rel{+} \under{\rmx{fact}(x)}) \tag{by IH} \\
 	&\larrow (x \rel{*} \rmx{fold*}(\rmx{mkl1}(x))) \rel{+} \rmx{fold*}(\rmx{mkl1}(x)) \tag{by IH} \\
 \rmx{fold*}(\under{\rmx{mkl1}(\rmx{s}(x))})
 	&\larrow \under{\rmx{fold*}(\rmx{s}(x) \rel{|} \rmx{mkl1}(x))} \tag{by mkl1-2} \\
-	&\larrow \rmx{s}(x) \rel{*} \rmx{fold*}(\rmx{mkl1}(x)) \tag{by fold*-2} \\
+	&\larrow \under{\rmx{s}(x) \rel{*} \rmx{fold*}(\rmx{mkl1}(x))} \tag{by fold*-2} \\
 	&\larrow (x \rel{*} \rmx{fold*}(\rmx{mkl1}(x))) \rel{+} \rmx{fold*}(\rmx{mkl1}(x)) \tag{by *2}
 \end{align*}
 

@@ -145,7 +145,7 @@ What to show: $\quad \rmx{diff}(y \mid l1, x \mid l2) = \rmx{drop}(\rmx{diff}(y 
 Induction hypothesis: $\quad \rmx{diff}(l1, x \mid l2) = \rmx{drop}(\rmx{diff}(l1, l2), x)$  \\
 where $x,y \in \mathtt{PNat}$ and $l1, l2 \in \mathtt{NatList}$.\\
 We use case splitting for our proofs as follows: \\
-\textbf{Case 1}: $has(l2, y) = true$
+\textbf{Case 1}: $\rmx{has}(l2, y) = true$
 \begin{align*}
 %%% LHS
 \under{\rmx{diff}(y \mid l1, x \mid l2)}
@@ -168,7 +168,7 @@ We use case splitting for our proofs as follows: \\
 	&\larrow \rmx{drop}(\rmx{diff}(l1, l2), x) \tag{by if1}
 \end{align*}
 
-\textbf{Case 2}: $has(l2, y) = false$
+\textbf{Case 2}: $\rmx{has}(l2, y) = false$
 \begin{align*}
 %%% LHS
 \under{\rmx{diff}(y \mid l1, x \mid l2)}

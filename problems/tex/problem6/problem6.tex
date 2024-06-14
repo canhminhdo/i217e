@@ -152,7 +152,7 @@ where $x, y \in \mathtt{PNat}$ and $l \in \mathtt{NatList}$.
 	&\larrow \rmx{has}(\rmx{rev}(l), x) \rel{\rmx{or}} \under{\rmx{has}(y \rel{|} nil, x)} \tag{by Lemma~\ref{lm1}} \\
 	&\larrow \rmx{has}(\rmx{rev}(l), x) \rel{\rmx{or}} ((x = y) \rel{\rmx{or}} \under{\rmx{has}(nil, x)}) \tag{by has2} \\
 	&\larrow \rmx{has}(\rmx{rev}(l), x) \rel{\rmx{or}} \under{((x = y) \rel{\rmx{or}} false)} \tag{by has1} \\
-	&\larrow \rmx{has}(\rmx{rev}(l), x) \rel{\rmx{or}} (x = y) \tag{by or} \\
+	&\larrow \under{\rmx{has}(\rmx{rev}(l), x) \rel{\rmx{or}} (x = y)} \tag{by or} \\
 	&\larrow (x = y) \rel{\rmx{or}} \rmx{has}(\rmx{rev}(l), x) \tag{by comm-or}
 \end{align*}
 

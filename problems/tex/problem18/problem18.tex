@@ -160,7 +160,9 @@ We use case splitting for our proofs as follows: \\
 	&\larrow \under{\rel{\rmx{if}} true \rel{\rmx{then}} \rmx{rmDup}(l1 \rel{@} l2)} \\
 	&\quad \quad\ \under{\rel{\rmx{else}} (x \mid \rmx{rmDup}(l1 \rel{@} l2)) \rel{\rmx{fi}}} \tag{by or} \\
 	&\larrow \under{\rmx{rmDup}(l1 \rel{@} l2)} \tag{by if1} \\
-	&\larrow \rmx{rmDup}(\rmx{rmDup}(l1) \rel{@} \rmx{rmDup}(l2)) \tag{by IH} \\
+	&\larrow \rmx{rmDup}(\rmx{rmDup}(l1) \rel{@} \rmx{rmDup}(l2)) \tag{by IH}
+\end{align*}
+\begin{align*}
 %%% RHS
 \rmx{rmDup}(\under{\rmx{rmDup}(x \mid l1)} \rel{@} \rmx{rmDup}(l2))
 	&\larrow \rmx{rmDup}((\rel{\rmx{if}} \under{\rmx{has}(l1, x)} \rel{\rmx{then}} \rmx{rmDup}(l1) \\
@@ -189,7 +191,7 @@ We use case splitting for our proofs as follows: \\
 	&\quad \quad \rel{\rmx{else}} (x \mid \under{\rmx{rmDup}(l1 \rel{@} l2)}) \rel{\rmx{fi}} \tag{by IH} \\
 	%%
 	&\larrow\ \rel{\rmx{if}} \rmx{has}(l2, x) \rel{\rmx{then}} \rmx{rmDup}(\rmx{rmDup}(l1) \rel{@} \rmx{rmDup}(l2)) \\
-	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{rmDup}(\rmx{rmDup}(l1) \rel{@} \rmx{rmDup}(l2))) \rel{\rmx{fi}} \tag{by IH} \\
+	&\quad \quad \rel{\rmx{else}} (x \mid \rmx{rmDup}(\rmx{rmDup}(l1) \rel{@} \rmx{rmDup}(l2))) \rel{\rmx{fi}} \tag{by IH}
 \end{align*}
 \begin{align*}
 %%% RHS

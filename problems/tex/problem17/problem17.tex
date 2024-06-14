@@ -275,7 +275,7 @@ We use case splitting for our proofs as follows: \\
 \rmx{has}(\under{\rmx{rmDup}(y \mid l)}, x)
 	&\larrow \rmx{has}(\rel{\rmx{if}} \under{\rmx{has}(l, y)} \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (y \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}, x) \tag{by rmDup2} \\
 	&\larrow \rmx{has}(\under{\rel{\rmx{if}} false \rel{\rmx{then}} \rmx{rmDup}(l) \rel{\rmx{else}} (y \mid \rmx{rmDup}(l)) \rel{\rmx{fi}}}, x) \tag{by case splitting} \\
-	&\larrow \rmx{has}(y \mid \rmx{rmDup}(l), x) \tag{by if2} \\
+	&\larrow \under{\rmx{has}(y \mid \rmx{rmDup}(l), x)} \tag{by if2} \\
 	&\larrow (x = y) \rel{or} \rmx{has}(\rmx{rmDup}(l), x) \tag{by has2}
 \end{align*}
 \end{description}
